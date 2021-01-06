@@ -1,0 +1,7 @@
+header,section,footer,aside,nav,article,figure,figcaption,hgroup{display:block;}
+body{text-align:center}
+#agrupar{width:auto; margin:0px; text-align:left; }
+#seccion{float:left; width:460px; margin:12px; padding:0;}
+#columna{float:left; width:700px; margin:12px 0px; padding:0; }
+article{background:#FFF; border:1px solid #FFF; padding:10px; margin:0px; }
+

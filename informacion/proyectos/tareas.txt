@@ -1,0 +1,35 @@
+concepto pago : codigo 35 -> inversion (editable)
+
+
+Mostrar vigencia de regalias activa
+
+
+Suprimir campo de nomina
+
+
+Agregar unidad ejecutora al excel 
+
+
+Regalias solo aparece si se filtra
+
+
+Cambiar campos a autocompletado en parametrizacion de cuenta
+
+
+
+
+arreglar radicado de documento
+
+
+
+SE ACTUALIZO EN CUBARALL
+
+RETENCION IVA AUTOMATICAMENTE A LIQUIDACION (SI LLEVA IVA)
+
+
+REVISAR ANULAR SOLICITUD DE ADQUISICION PARA LIBERAR PLAN
+
+
+
+
+

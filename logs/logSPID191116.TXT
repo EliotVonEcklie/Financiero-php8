@@ -1,0 +1,11 @@
+10:06:46  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+11:11:32  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+11:47:10  <->HUM<->V<->SPID           <->INGRESO MODULO DE GESTION HUMANA                  <->::1
+11:47:12  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+11:47:18  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+11:47:40  <->HUM<->V<->SPID           <->INGRESO BUSCAR RETENCIONES FUNCIONARIOS           <->::1
+11:47:46  <->HUM<->V<->SPID           <->INGRESO CREAR RETENCION FUNCIONARIOS              <->::1
+11:47:58  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+11:48:24  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+13:55:36  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+15:06:09  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->192.168.0.17

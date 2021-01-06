@@ -1,0 +1,180 @@
+@import "global.css";
+.navmenu
+{
+    color: white;
+}
+.navmenu li:hover ul li a
+{
+    line-height:25px;
+    width: 280px !important;
+    padding-right: 26px !important;
+}
+.select
+{
+    font-size: 8pt;   
+    font-family : verdana,arial,helvetica; 
+}
+.navmenu li:hover ul.subsmenu
+{
+	height: auto;
+	width: 180px;
+	padding-left: 10px !important;
+	padding-right: 0px !important;
+}
+.barra--titulo
+{
+    background: rgb(91, 160, 240);
+    height: 28px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 6px 4px 8px / 4px 6px;
+}
+.barra--titulo__h4
+{
+    color: white;
+    font-size: 18px;
+    padding: 2px 0px 2px 20px;
+}
+.subtitulos--label__movimiento
+{
+    padding: 1.5px;
+}
+.subtitulos--label
+{
+    padding: 2px;
+    padding-left: 2px;
+}
+.subtitulos--label__fecha
+{
+    margin-left: 10px;
+}
+.form-group
+{
+    background: rgb(255, 255, 255);
+    width: 100%;
+    margin-left: 0px;
+    border-radius: 6px 4px 8px / 4px 6px;
+}
+.label1
+{
+    font-weight: bold;
+    background: rgb(211, 231, 253);
+    border-radius: 6px 4px 8px / 4px 6px;
+    font-size: 12.8px;
+    margin-left: 2px;
+    padding: 2px 14px;
+    height: 26px;
+    width: 96%;
+}
+.label23
+{
+    font-weight: bold;
+    background: rgb(211, 231, 253);
+    border-radius: 6px 4px 8px / 4px 6px;
+    font-size: 12.8px;
+    margin-left: 20px;
+    padding: 2px 14px;
+    height: 26px;
+    width: 96%;
+}
+.labelLarge
+{
+    width: 100%;
+    padding-right: 0px;
+}
+.movimiento
+{
+    margin-bottom: -14px;
+}
+.label1--movimiento
+{
+    font-weight: bold;
+    background: rgb(211, 231, 253);
+    border-radius: 6px 4px 8px / 4px 6px;
+    padding: 2px 14px;
+    font-size: 12.8px;
+    width: 96%;
+}
+.container--crear
+{
+    padding: 0px;
+}
+.container--crear__datos
+{
+    padding: 1px 0px;
+}
+.container--crear__datos_1
+{
+    width: 90%;
+}
+.input__num
+{
+    width: 80%;
+    text-align: center;
+}
+.input__num1
+{
+    width: 100%;
+    text-align: center;
+}
+.containerBotonAtras
+{
+    padding: 2px 0px;
+}
+
+.containerCenter
+{
+    padding-right: 2px;
+    padding-top: 2px;
+}
+.containerBotonAdelante
+{
+    padding: 2px 0px;
+}
+
+input[readonly]
+{
+    background-color: #e7eeee !important;
+}
+.imput--fecha
+{
+    width: 100%;
+}
+.container--crear__datos--a
+{
+    padding: 2px 0px;
+}
+.container--crear__datos--a img
+{
+    width: 70% !important;
+    height: 22px !important;
+}
+.form-control
+{
+    height: calc(1em + 0.5rem + 3px);
+    padding: 0.2rem 0.75rem;
+}
+.container
+{
+    max-width: 100%;
+}
+.mover--derecha
+{
+    margin-left: 9.65%;
+}
+.botonflecha
+{
+    top: 5px !important;
+}
+.input-valor
+{
+    text-align: right;
+}
+
+#tablaGastosBancarios
+{
+    width: 99.98% !important;
+}
+#divGastosBancarios
+{
+    max-height: 48%;
+}

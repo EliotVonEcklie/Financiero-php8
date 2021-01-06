@@ -1,0 +1,5 @@
+ALTER TABLE `almactodonacionesent` ADD `cc` VARCHAR(5) NOT NULL AFTER `estado`;
+
+ALTER TABLE `almactoajusteentarticu` ADD `codigo` VARCHAR(20) NOT NULL AFTER `idacto`;
+
+ALTER TABLE `almactoajusteent` ADD `valorsaldo` DOUBLE NOT NULL AFTER `otrosdetalles`;

@@ -1,0 +1,2 @@
+16:18:08  <->PRI<->V<->IDEALSAS       <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+16:44:50  <->PRI<->V<->IDEALSAS       <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

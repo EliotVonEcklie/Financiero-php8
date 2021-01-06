@@ -1,0 +1,41 @@
+/*CSS para definición de objetos globales*/
+
+.section-header-gb{
+	border: 2px solid rgb(255, 255, 255);
+	border-radius: 6px 4px 8px / 4px 6px;
+}
+
+.section-body-gb{
+	border: 2px solid rgb(255, 255, 255);
+	border-radius: 6px 4px 8px / 4px 6px;
+}
+
+.titulo-gb{
+	background: rgb(91, 160, 240);
+}
+
+.titulo-gb > div > span, .titulo-gb > span{
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.boton-cierre-gb{
+	width: 100%;
+}
+
+.etiqueta-gb{
+    font-weight: bold;
+	background: rgb(211, 231, 253);
+	border-radius: 6px 4px 8px / 4px 6px;
+	font-size: 12.8px;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}

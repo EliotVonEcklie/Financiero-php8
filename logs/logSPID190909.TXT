@@ -1,0 +1,7 @@
+07:35:27  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+09:13:54  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->192.168.0.11
+09:51:01  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+11:06:08  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+11:47:52  <->HUM<->V<->SPID           <->INGRESO MODULO DE GESTION HUMANA                  <->::1
+11:47:54  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+16:26:22  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

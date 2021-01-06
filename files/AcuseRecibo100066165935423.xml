@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<doc cf="10006" id="100066165935423" n_r="1" vf="6"><dsig:Signature Id="Signature001" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"><dsig:SignedInfo><dsig:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><dsig:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><dsig:Reference URI=""><dsig:Transforms><dsig:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></dsig:Transforms><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><dsig:DigestValue>GKxh8xnkLx68xhB5vq2Lm5tEQV0=</dsig:DigestValue></dsig:Reference><dsig:Reference URI="#KeyInfo001"><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><dsig:DigestValue>9N6Fa6B2UodrqzOP0EF5+8hsbPs=</dsig:DigestValue></dsig:Reference></dsig:SignedInfo><dsig:SignatureValue>lYvIgDOPRIrt18QYl5JWYyow+90gXf9X7xKTVUjjhM0XOz01pJ2xAQaDseDKoHlnuOco282SDfOSzGCADQDrvGvxou5RyoS64IlalxJdIZJ+cdAJ58MxmPSrwT9/jG2EO/f0nXu8xM3sowmIATz52kGdyU36i6vPwY9OMw9n+xMNpb86k76lgj0G7/CRpq0CgLLuVT0Oz1It3/3LO7Nj6dVGSMayfcCkoD5GA+M5jfnd8zU/FqLS2o/zQIE+3Ulca6YyMSGcGwABp3Lo4+UtFki17QqLBYqwr9UFlrwFbPfOjGkv1AsF6hNMdbHBjVYfSiVjX9U1wRttwzBt6QlA4w==</dsig:SignatureValue><dsig:KeyInfo Id="KeyInfo001"><dsig:X509Data><dsig:X509Certificate>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</dsig:X509Certificate></dsig:X509Data></dsig:KeyInfo><dsig:Object><dsig:SignatureProperties><dsig:SignatureProperty Id="TimestampId" Target="Signature001"><wsu:Timestamp xmlns:wsu="http://schemas.xmlsoap.org/ws/2002/07/utility"><wsu:Created>2016-05-20T17:46:01</wsu:Created></wsu:Timestamp></dsig:SignatureProperty></dsig:SignatureProperties></dsig:Object></dsig:Signature>
+  <gr id="1">
+    <oc id="1">
+      <cs id="2" v="1"/>
+      <cs id="4" v="100066165935423"/>
+      <cs id="24" v="24961823"/>
+      <cs id="25" v="10910094"/>
+      <cs id="26" v="86039358"/>
+      <cs id="27" v="SUAREZ"/>
+      <cs id="28" v="SANCHEZ"/>
+      <cs id="29" v="LUIS"/>
+      <cs id="30" v="ALFONSO"/>
+      <cs id="33" v=""/>
+      <cs id="34" v="69082"/>
+      <cs id="35" v="MUNICIPIO DE PUERTO RICO"/>
+      <cs id="37" v=""/>
+      <cs id="38" v="1"/>
+      <cs id="39" v="DIRECCION DE IMPUESTOS Y ADUANAS NACIONALES"/>
+      <cs id="40" v="1001"/>
+      <cs id="41" v="9"/>
+      <cs id="42" v="1"/>
+      <cs id="43" v="2015"/>
+      <cs id="44" v="1"/>
+      <cs id="45" v="14310471"/>
+      <cs id="46" v="Dmuisca_010100109201600000001.xml"/>
+      <cs id="47" v="1"/>
+      <cs id="48" v="182"/>
+      <cs id="49" v=""/>
+      <cs id="52" v=""/>
+      <cs id="60" v=""/>
+      <cs id="61" v=""/>
+      <cs id="984" v=""/>
+      <cs id="985" v=""/>
+      <cs id="997" v="20160520174414"/>
+    </oc>
+  </gr>
+  <gr id="2">
+    <oc id="1">
+      <cs id="4" v=""/>
+      <cc id="50">
+        <it id="1" v="1"/>
+      </cc>
+      <cc id="51">
+        <it id="1" v="13424932"/>
+      </cc>
+      <cc id="53"/>
+      <cc id="54"/>
+    </oc>
+  </gr>
+</doc>

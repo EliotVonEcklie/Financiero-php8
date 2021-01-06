@@ -1,0 +1,1 @@
+11:04:40  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

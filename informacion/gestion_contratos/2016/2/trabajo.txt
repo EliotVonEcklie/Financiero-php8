@@ -1,0 +1,23 @@
+teso-buscaconcecontablesingssf.php
+teso-concecongastosban.php
+teso-editaconcecontablescausa.php
+Sistem@s2016
+26608362201,73 ----> 4 inversion forzosa
+1345246184,13 -----> R
+3640895218,23 -----> 2 gastos funcionamiento
+
+2375188592,23
+3202229404
+demarjay smith
+
+teso-buscaconcecontablesgassf.php
+teso-editaconcecontablesgassf.php
+teso-concecontablesgassf.php
+presu-buscaconcecontablespag.php
+presu-editaconcecontablespag.php
+presu-concecontablespag.php
+presu-buscaconcecontablescausa.php
+presu-editaconcecontablescausa.php
+presu-concecontablescausa.php
+presu-buscaconcecontablesconpes.php
+presu-editaconcecontablesconpes.php

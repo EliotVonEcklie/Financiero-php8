@@ -1,0 +1,4 @@
+08:22:52  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+09:37:38  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->192.168.0.12
+18:04:21  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+18:12:52  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

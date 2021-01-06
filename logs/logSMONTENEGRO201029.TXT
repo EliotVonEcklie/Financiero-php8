@@ -1,0 +1,1 @@
+14:18:38  <->PRI<->V<->SMONTENEGRO    <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

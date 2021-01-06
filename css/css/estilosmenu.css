@@ -1,0 +1,11 @@
+.modal-content.distancia {
+  padding: 25px;
+}
+
+body{
+  background-color: #fff;
+}
+
+label.DistanciaRadioCliente {
+  margin-left: 25px !important;
+}

@@ -1,0 +1,100 @@
+alter table pptocdp drop primary key,add primary key(id_cdp,vigencia,consvigencia),add tipo_mov VARCHAR(3) NOT NULL;
+
+
+
+alter table pptocdp_detalle add tipo_mov VARCHAR(3) NOT NULL;
+
+
+alter table pptorp drop primary key,add primary key(vigencia,consvigencia,detalle),add tipo_mov VARCHAR(3) NOT NULL,add detalle VARCHAR(100),add user VARCHAR(50);
+
+
+alter table pptorp_detalle add tipo_mov VARCHAR(3);
+
+
+ALTER TABLE  tesoordenpago DROP PRIMARY KEY ,
+ADD PRIMARY KEY (  id_orden ,  tipo_mov ),add tipo_mov VARCHAR(3),add user VARCHAR(100) ;
+
+ALTER TABLE tesoordenpago_det add tipo_mov VARCHAR(3), add vigencia VARCHAR(4),add fuente varchar(100);
+
+ALTER TABLE  tesoegresos DROP PRIMARY KEY ,
+ADD PRIMARY KEY (  id_egreso ,  tipo_mov ),add tipo_mov VARCHAR(3) NOT NUll,add user VARCHAR(100);
+
+ALTER TABLE  tesoegresos_det add tipo_mov VARCHAR(3);
+
+ALTER TABLE  tesoegresos_det_r add tipo_mov VARCHAR(3);
+
+UPDATE pptocdp SET tipo_mov='201';
+UPDATE pptocdp_detalle SET tipo_mov='201';
+UPDATE pptorp SET tipo_mov='201';
+UPDATE pptorp_detalle SET tipo_mov='201';
+/////////////////////////////
+UPDATE tesoordenpago SET tipo_mov='201';
+UPDATE tesoordenpago_det SET tipo_mov='201';
+////////////////////////////
+UPDATE tesoordenpago SET tipo_mov='401' WHERE estado='R';
+UPDATE tesoordenpago_det SET tipo_mov='401' WHERE estado='R';
+///////////////////////////
+UPDATE tesoegresos SET tipo_mov='201';
+UPDATE tesoegresos_det SET tipo_mov='201';
+/////////////////////////////
+UPDATE tesoegresos SET tipo_mov='401' WHERE estado='R';
+UPDATE tesoegresos_det SET tipo_mov='401' WHERE estado='R';
+/////////////////////////////////////
+UPDATE tesoegresos_det_r SET tipo_mov='401';
+
+INSERT INTO pptocdp (vigencia, consvigencia,fecha,valor,estado,solicita,objeto,saldo,tipo_mov)
+       SELECT 
+          vigencia,consvigencia,fechadoc,'0','R',user,detalle,'0',tipo_mov
+       FROM  pptocdp_cab_r;
+
+
+INSERT INTO pptocdp_detalle(vigencia, consvigencia,cuenta,fuente,valor,estado,saldo,saldo_liberado,tipo_mov)       SELECT vigencia,consvigencia,cuenta,fuente,valor,estado,saldo,saldo_liberado,tipo_mov FROM pptocdp_det_r;
+
+
+
+INSERT INTO pptorp (vigencia, consvigencia,idcdp,fecha,detalle,user,tipo_mov)
+       SELECT 
+          vigencia,consvigencia,idcdp,fechadoc,detalle,user,tipo_mov
+       FROM pptorp_cab_r;
+
+
+
+INSERT INTO pptorp_detalle(vigencia, consvigencia,cuenta,fuente,valor,estado,saldo,saldo_liberado,tipo_mov)
+SELECT vigencia,consvigencia,cuenta,fuente,valor,estado,saldo,saldo_liberado,tipo_mov FROM pptorp_det_r
+
+
+
+
+INSERT INTO tesoordenpago (id_orden,fecha,vigencia,id_rp,conceptorden,user,tipo_mov)
+       SELECT 
+          id_orden,fecha,vigencia,id_rp,detalle,user,'401'
+       FROM tesoordenpago_cab_r
+
+
+
+INSERT INTO tesoordenpago_det (id_orden,cuentap,valor,vigencia,fuente,tipo_mov)
+       SELECT 
+          id_orden,cuenta,valor,vigencia,fuente,'401'
+       FROM tesoordenpago_det_r
+
+
+INSERT INTO tesoegresos (id_egreso, id_orden ,fecha,vigencia,concepto,user,tipo_mov)
+       SELECT 
+          id_egreso,id_orden,fecha,vigencia,detalle,user,'401'
+       FROM tesoegresos_cab_r;
+
+
+INSERT INTO tesoegresos_det (id_egreso,vigencia,cuenta,fuente,valor,tipo_mov)
+       SELECT 
+          id_egreso,vigencia,cuenta,fuente,valor,'401'
+       FROM tesoegresos_det_r;
+
+
+/////////////////////////////////////
+UPDATE pptocdp SET tipo_mov='' WHERE estado='N';
+UPDATE pptocdp_detalle SET tipo_mov='' WHERE estado='N';
+UPDATE pptorp SET tipo_mov='' WHERE estado='N';
+UPDATE pptorp_detalle SET tipo_mov='' WHERE estado='N';
+UPDATE tesoordenpago SET tipo_mov='' WHERE estado='N';
+UPDATE tesoordenpago_det SET tipo_mov='' WHERE estado='N';
+UPDATE tesoegresos SET tipo_mov='' WHERE estado='N';

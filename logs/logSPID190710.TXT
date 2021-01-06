@@ -1,0 +1,10 @@
+07:43:09  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+10:52:27  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+11:38:13  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+14:26:47  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+14:52:29  <->INV<->V<->SPID           <->INGRESO MENU DE ACTOS                             <->::1
+15:16:08  <->HUM<->V<->SPID           <->INGRESO MODULO DE GESTION HUMANA                  <->::1
+15:16:18  <->HUM<->V<->SPID           <->INGRESO BUSCAR TERCEROS NOMINA                    <->::1
+15:16:24  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+15:16:47  <->HUM<->V<->SPID           <->INGRESO MENU DE NOMINA                            <->::1
+16:18:31  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

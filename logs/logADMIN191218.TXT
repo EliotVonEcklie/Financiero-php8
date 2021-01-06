@@ -1,0 +1,1 @@
+09:37:06  <->PRI<->V<->ADMIN          <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

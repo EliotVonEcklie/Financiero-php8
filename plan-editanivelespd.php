@@ -1,0 +1,203 @@
+<?php //V 1000 12/12/16 ?> 
+<?php
+	require"comun.inc";
+	require"funciones.inc";
+	session_start();
+	$linkbd=conectar_bd();	
+	cargarcodigopag($_GET[codpag],$_SESSION["nivel"]);
+	header("Cache-control: private"); // Arregla IE 6
+	date_default_timezone_set("America/Bogota");
+	$scroll=$_GET['scrtop'];
+	$totreg=$_GET['totreg'];
+	$idcta=$_GET['idcta'];
+	$altura=$_GET['altura'];
+	$filtro="'".$_GET['filtro']."'";
+?>
+<!DOCTYPE >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+	<head>
+	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+		<title>:: Spid - Planeacion Estrategica</title>
+        <link href="css/css2.css" rel="stylesheet" type="text/css" />
+		<link href="css/css3.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="css/programas.js"></script>
+		<script>
+			function guardar()
+			{
+				var validacion01=document.getElementById('codigo').value
+				var validacion02=document.getElementById('nombre').value
+				if (validacion01.trim()!='' && validacion02.trim()!=''){despliegamodalm('visible','4','Esta Seguro de Modificar','1');}
+			  	else
+			  	{
+					despliegamodalm('visible','2','Faltan datos para Modificar el registro');
+					document.form2.nombre.focus();document.form2.nombre.select();
+			  	}
+			}
+			function despliegamodalm(_valor,_tip,mensa,pregunta)
+			{
+				document.getElementById("bgventanamodalm").style.visibility=_valor;
+				if(_valor=="hidden"){document.getElementById('ventanam').src="";}
+				else
+				{
+					switch(_tip)
+					{
+						case "1":
+							document.getElementById('ventanam').src="ventana-mensaje1.php?titulos="+mensa;break;
+						case "2":
+							document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;break;
+						case "3":
+							document.getElementById('ventanam').src="ventana-mensaje2.php?titulos="+mensa;break;
+						case "4":
+							document.getElementById('ventanam').src="ventana-consulta1.php?titulos="+mensa+"&idresp="+pregunta;break;	
+					}
+				}
+			}
+			function funcionmensaje(){document.location.href = "plan-nivelespd.php";}
+			function respuestaconsulta(pregunta)
+			{
+				switch(pregunta)
+				{
+					case "1":	document.getElementById('oculto').value='2';document.form2.submit();break;
+				}
+			}
+		</script>
+		<script>
+			function adelante(scrtop, numpag, limreg, filtro, totreg, next){
+				document.getElementById('oculto').value='1';
+				document.getElementById('codigo').value=next;
+				var idcta=document.getElementById('codigo').value;
+				totreg++;
+				document.form2.action="plan-editanivelespd.php?idcta="+idcta+"&scrtop="+scrtop+"&numpag="+numpag+"&limreg="+limreg+"&totreg="+totreg+"&filtro="+filtro;
+				document.form2.submit();
+			}
+		
+			function atrasc(scrtop, numpag, limreg, filtro, totreg, prev){
+				document.getElementById('oculto').value='1';
+				document.getElementById('codigo').value=prev;
+				var idcta=document.getElementById('codigo').value;
+				totreg--;
+				document.form2.action="plan-editanivelespd.php?idcta="+idcta+"&scrtop="+scrtop+"&numpag="+numpag+"&limreg="+limreg+"&totreg="+totreg+"&filtro="+filtro;
+				document.form2.submit();
+			}
+
+			function iratras(scrtop, numpag, limreg){
+				var idcta=document.getElementById('codigo').value;
+				location.href="plan-buscanivelespd.php?idcta="+idcta+"&scrtop="+scrtop+"&numpag="+numpag+"&limreg="+limreg;
+			}
+		</script>
+		<?php titlepag();?>
+	</head>
+	<body>
+        <IFRAME src="alertas.php" name="alertas" id="alertas" style="display:none"></IFRAME>
+        <span id="todastablas2"></span>
+        <?php
+		$numpag=$_GET[numpag];
+		$limreg=$_GET[limreg];
+		$scrtop=26*$totreg;
+		?>
+        <table>
+            <tr><script>barra_imagenes("plan");</script><?php cuadro_titulos();?></tr>	 
+            <tr><?php menu_desplegable("plan");?></tr>
+            <tr>
+  				<td colspan="3" class="cinta">
+					<a href="plan-nivelespd.php" class="mgbt"><img src="imagenes/add.png" title="Nuevo"/></a>
+					<a href="#" onClick="guardar()" class="mgbt"><img src="imagenes/guarda.png" title="Guardar" /></a>
+					<a href="plan-buscanivelespd.php" class="mgbt"><img src="imagenes/busca.png" title="Buscar"/></a>
+					<a href="#" onClick="mypop=window.open('plan-principal.php','','');mypop.focus();" class="mgbt"><img src="imagenes/nv.png" title="Nueva ventana"></a><a href="#" onClick="iratras(<?php echo $scrtop; ?>, <?php echo $numpag; ?>, <?php echo $limreg; ?>)" class="mgbt"><img src="imagenes/iratras.png" title="Atr&aacute;s"></a>
+				</td>
+       		</tr>
+    	</table>
+        <div id="bgventanamodalm" class="bgventanamodalm">
+            <div id="ventanamodalm" class="ventanamodalm">
+                <IFRAME src="" name="ventanam" marginWidth=0 marginHeight=0 frameBorder=0 id="ventanam" frameSpacing=0 style=" width:700px; height:130px; top:200; overflow:hidden;"> 
+                </IFRAME>
+            </div>
+        </div>
+ 		<form name="form2" method="post"> 
+ 		<?php
+			if ($_GET[idnivel]!=""){echo "<script>document.getElementById('codrec').value=$_GET[idnivel];</script>";}
+			$sqlr="Select * from plannivelespd ORDER BY codigo DESC";
+			$res=mysql_query($sqlr,$linkbd);
+			$r=mysql_fetch_row($res);
+			$_POST[maximo]=$r[0];
+			if($_POST[oculto]==""){
+				if ($_POST[codrec]!="" || $_GET[idnivel]!=""){
+					if($_POST[codrec]!=""){
+						$sqlr="Select * from plannivelespd where codigo='$_POST[codrec]'";
+					}
+					else{
+						$sqlr="Select * from plannivelespd where codigo ='$_GET[idnivel]'";
+					}
+				}
+				else{
+					$sqlr="Select * from plannivelespd ORDER BY codigo DESC";
+				}
+				$res=mysql_query($sqlr,$linkbd);
+				$row=mysql_fetch_row($res);
+			   	$_POST[codigo]=$row[0];
+			}
+ 			if($_POST[oculto]!="2")
+			{
+				$sqlr="Select * from plannivelespd where codigo=$_POST[codigo] ";
+				$resp = mysql_query($sqlr,$linkbd);
+				while ($row =mysql_fetch_row($resp))
+				{
+					$_POST[codigo]=$row[0];
+					$_POST[nivel]=$row[1];					
+					$_POST[nombre]=$row[2];		
+					$_POST[vigenciai]=$row[5];				
+					$_POST[vigenciaf]=$row[6];				
+				}
+			}
+			//NEXT
+			$sqln="Select * from plannivelespd where codigo > '$_POST[codigo]' ORDER BY codigo ASC LIMIT 1";
+			$resn=mysql_query($sqln,$linkbd);
+			$row=mysql_fetch_row($resn);
+			$next=$row[0];
+			//PREV
+			$sqlp="Select * from plannivelespd where codigo < '$_POST[codigo]' ORDER BY codigo DESC LIMIT 1";
+			$resp=mysql_query($sqlp,$linkbd);
+			$row=mysql_fetch_row($resp);
+			$prev=$row[0];
+ 		?>
+			<table class="inicio" >
+				<tr>
+                  	<td class="titulos" colspan="8">Crear Anexos</td>
+                  	<td class="cerrar" style='width:7%'><a href="plan-principal.php">Cerrar</a></td></tr>
+               	<tr>
+					<td class="saludo1" style='width:5%'>Codigo:</td>
+                    <td style='width:10%'>
+	        	    	<a href="#" onClick="atrasc(<?php echo $scrtop; ?>, <?php echo $numpag; ?>, <?php echo $limreg; ?>, <?php echo $filtro; ?>, <?php echo $totreg; ?>, <?php echo $prev; ?>)"><img src="imagenes/back.png" alt="anterior" align="absmiddle"></a> 
+                    	<input type="text" name="codigo" id="codigo" value="<?php echo $_POST[codigo]?>" style='width:30%'>
+	    	            <a onClick="adelante(<?php echo $scrtop; ?>, <?php echo $numpag; ?>, <?php echo $limreg; ?>, <?php echo $filtro; ?>, <?php echo $totreg; ?>, <?php echo $next; ?>)"  style='cursor:pointer;'><img src="imagenes/next.png" alt="siguiente" align="absmiddle"></a> 
+						<input type="hidden" value="<?php echo $_POST[maximo]?>" name="maximo">
+						<input type="hidden" value="<?php echo $_POST[codrec]?>" name="codrec" id="codrec">
+                   	</td>
+                    <td class="saludo1" style='width:5%'>Nivel:</td>
+                    <td style='width:5%'>
+						<input type="text" name="nivel" id="nivel" value="<?php echo $_POST[nivel]?>" style='width:80%; text-align:center;' readonly="readonly">
+					</td>
+                    <td class="saludo1" style='width:5%'>Nombre</td>
+                    <td style='width:48%'>
+						<input type="text" name="nombre" id="nombre" value="<?php echo $_POST[nombre]?>" style='width:90%'>
+					</td>
+   					<td class="saludo1" style='width:5%'>Estado</td>
+                    <td style='width:10%'> 
+						<input type="text" name="vigenciai" id="vigenciai" value="<?php echo $_POST[vigenciai]?>" style='width:40%' readonly> - 
+						<input type="text" name="vigenciaf" id="vigenciaf" value="<?php echo $_POST[vigenciaf]?>" style='width:40%' readonly> 
+                    </td>
+   				</tr>
+			</table>
+            <input type="hidden" name="oculto" id="oculto" value="1">
+			<?php  
+ 				if($_POST[oculto]=="2") //********guardar
+				{
+					$sqlr="update plannivelespd set nombre='$_POST[nombre]',estado ='$_POST[estado]' where codigo=$_POST[codigo]  ";	
+					if (!mysql_query($sqlr,$linkbd)){echo"<script>despliegamodalm('visible','2','ERROR EN LA ACTUALIZACION DEL NIVEL PD');</script>";}
+		 			else {echo"<script>despliegamodalm('visible','1','Se ha Modificado el NIVEL PD con Exito');</script>";}
+				}
+			?>
+		</form>       
+	</body>
+</html>

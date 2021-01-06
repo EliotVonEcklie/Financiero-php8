@@ -1,0 +1,2 @@
+14:39:32  <->PRI<->V<->JMURCIA        <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
+15:00:20  <->PRI<->V<->JMURCIA        <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
