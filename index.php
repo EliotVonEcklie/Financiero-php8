@@ -1,6 +1,6 @@
 <?php
-	require 'comun.inc';
-	require 'funciones.inc';
+	require 'include/comun.php';
+	require 'include/funciones.php';
 	session_start();
 	session_destroy();
 ?>

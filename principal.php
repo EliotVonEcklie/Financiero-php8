@@ -1,19 +1,25 @@
 <?php
 	header("Cache-control: no-cache, no-store, must-revalidate");
-	header("Content-Type: text/html;charset=iso-8859-1");
-	require 'comun.inc';
-	require "funciones.inc";
-	session_start();
-	$linkbd=conectar_v7();
-	cargarcodigopag($_GET['codpag'],$_SESSION["nivel"]);
-	date_default_timezone_set("America/Bogota");
-	error_reporting(E_ALL);
-	ini_set('display_errors', '1');
-	$fec=date("d/m/Y");
-	software();
+    header("Content-Type: text/html;charset=iso-8859-1");
+    
+	require 'include/comun.php';
+    require 'include/funciones.php';
+
+    session_start();
+    
+    $linkbd=conectar_v7();
+    
+    date_default_timezone_set("America/Bogota");
+    
+    error_reporting(E_ALL);
+    
+    ini_set('display_errors', '1');
+    
+    $fec = date("d/m/Y");
+    
 	if (!isset($_SESSION['usuario']))
 	{
-		$sqlr="SELECT * FROM parametros WHERE estado='S'";
+		$sqlr='SELECT * FROM parametros WHERE estado=\'S\'';
 		$res=mysqli_query($linkbd,$sqlr);
 		while($r=mysqli_fetch_row($res)){$vigencia=$r[1];}
 		//*** verificar el username y el pass
@@ -41,36 +47,69 @@
 		else
 		{
 			//login correcto
-			$_SESSION['vigencia']=$vigencia;
-			$_SESSION['usuario']=array();
-			$_SESSION['usuario']=$user;
-			$_SESSION['perfil']=$perf;
-			$_SESSION['idusuario']=$idusu;
-			$_SESSION['nickusu']=$nick;
-			$_SESSION['cedulausu']=$cedusu;
-			$_SESSION['nivel']=$niv;
-			$_SESSION['linkmod']=array();
-			if($dirfoto==""){$_SESSION['fotousuario']="imagenes/usuario_on.png"; }
+			$_SESSION['vigencia']   =$vigencia;
+			$_SESSION['usuario']    =array();
+			$_SESSION['usuario']    =$user;
+			$_SESSION['perfil']     =$perf;
+			$_SESSION['idusuario']  =$idusu;
+			$_SESSION['nickusu']    =$nick;
+			$_SESSION['cedulausu']  =$cedusu;
+			$_SESSION['nivel']      =$niv;
+            $_SESSION['linkmod']    =array();
+            
+            if($dirfoto=="")
+            {
+                $_SESSION['fotousuario']="imagenes/usuario_on.png";
+            }
 			else {$_SESSION["fotousuario"]="informacion/fotos_usuarios/$dirfoto";}
 			$corresmensaje="1";
 			$sqlr="SELECT * FROM usuarios_privilegios WHERE id_usu='$idusu'";
-			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+            $row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+            
 			//$_SESSION["prcrear"]=$row[1];
 			//$_SESSION["preditar"]=$row[2];
 			//$_SESSION["prdesactivar"]=$row[3];
-			//$_SESSION["preliminar"]=$row[4];
-			$_SESSION['prcrear']=1;
-			$_SESSION['preditar']=1;
-			$_SESSION['prdesactivar']=1;
-			$_SESSION['preliminar']=1;
-			$sqlr="SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio='SEPARADOR_NUMERICO'";
-			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
-			if($row[0]!=''){$_SESSION['spdecimal']=$row[0];}
-			else {$_SESSION['spdecimal']='.';}
-			if($row[1]!=''){$_SESSION['spmillares']=$row[1];}
-			else {$_SESSION['spmillares']=',';}
-			if($row[2]!=''){$_SESSION['ndecimales']=$row[2];}
-			else {$_SESSION['ndecimales']=2;}
+            //$_SESSION["preliminar"]=$row[4];
+            
+			$_SESSION['prcrear'] = 1;
+			$_SESSION['preditar'] = 1;
+			$_SESSION['prdesactivar'] = 1;
+            $_SESSION['preliminar'] = 1;
+            
+            
+
+            $sqlr = "SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio='SEPARADOR_NUMERICO'";
+
+            $row = mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+            
+            if(isset($row))
+            {
+                if($row[0]!='')
+                {
+                    $_SESSION['spdecimal'] = $row[0];
+                }
+                else
+                {
+                    $_SESSION['spdecimal']='.';
+                }
+                if($row[1]!='')
+                {
+                    $_SESSION['spmillares']=$row[1];
+                }
+                else 
+                {
+                    $_SESSION['spmillares']=',';
+                }
+                if($row[2]!='')
+                {
+                    $_SESSION['ndecimales']=$row[2];
+                }
+                else 
+                {
+                    $_SESSION['ndecimales']=2;
+                }
+            }
+
 			//******************* menuss ************************
 			//***** NUEVO REVISION DE LOS MODULOS ***************
 			$sqlr="SELECT DISTINCT (modulos.nombre),modulos.id_modulo,modulos.libre FROM modulos, modulo_rol WHERE modulo_rol.id_rol=$niv AND modulos.id_modulo=modulo_rol.id_modulo GROUP BY (modulos.nombre),modulos.id_modulo,modulos.libre ORDER BY modulos.id_modulo";

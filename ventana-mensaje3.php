@@ -1,8 +1,8 @@
 <?php 
 	header("Cache-control: no-cache, no-store, must-revalidate");
 	header("Content-Type: text/html;charset=utf8");
-	require "comun.inc";
-	require"funciones.inc";
+	require 'include/comun.php';
+	require 'include/funciones.php';
 	date_default_timezone_set("America/Bogota");
 ?>
 <!DOCTYPE >

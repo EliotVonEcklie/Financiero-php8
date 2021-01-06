@@ -1,8 +1,8 @@
 <?php 
 	header("Cache-control: no-cache, no-store, must-revalidate");
 	header("Content-Type: text/html;charset=utf8");
-	require 'comun.inc';
-	require 'funciones.inc';
+	require 'include/comun.php';
+	require 'include/funciones.php';
 	session_start();
 	session_destroy();
 	date_default_timezone_set("America/Bogota");
@@ -20,12 +20,14 @@
 		<link href="css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
 		<link href="css/cssimagenes.css" rel="stylesheet" type="text/css" />
 		<style>
-			body
-			{
-				/*background:url(imagenes/FONDOAGUA-NEW-1.jpg);
+			/*
+            body {
+				background:url(imagenes/FONDOAGUA-NEW-1.jpg);
 				background-size:cover !important;
-				margin: 0 !important;*/
+				margin: 0 !important;
 			}
+            */
+
 			#myVideo {
 			  position: fixed;
 			  right: 0;
