@@ -16,11 +16,13 @@
 		<script>
 			function recarga()
 			{
-				var pagina="index2.php";
-				location.href=pagina;
+				var pagina = 'login.php';
+				location.href = pagina;
 			} 
-			setTimeout ("recarga()", 3000);
+			setTimeout ('recarga()', 3000);
 		</script>
-		<div style="align-content: center;"><img src="imagenes/FONDO-2.png" align="absmiddle" style="width: 100%;"></div>
+		<div style="align-content: center;">
+            <img src="img/ideal_logo_light.png" align="absmiddle" style="width: 100%;">
+        </div>
 	</body>
 </html>

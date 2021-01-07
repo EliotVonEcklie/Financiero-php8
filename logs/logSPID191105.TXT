@@ -1,3 +1,0 @@
-09:23:39  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-10:34:19  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-15:46:22  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

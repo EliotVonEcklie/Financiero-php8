@@ -15,7 +15,7 @@ ob_end_clean();
  * @return String[] $datin[0]
  */
 function datosiniciales(){
-	$datin[0] = 'cubarral';         // Nombre de la base
+	$datin[0] = 'cubarral';		// Nombre de la base
 	$datin[1] = 'financiero8.test'; // Host
 	$datin[2] = 'financiero8';      // Usuario  
 	$datin[3] = 'financiero8';      // Contraseña

@@ -1,8 +1,0 @@
-Liquidacion - Periodo Pension: 2014-02 - Periodo Salud: 2014-02 - 8429771605 2014/09/11 $205,300
-Liquidacion - Periodo Pension: 2014-03 - Periodo Salud: 2014-03 - 8435644441 2014/09/11 $201,300
-Liquidacion - Periodo Pension: 2014-04 - Periodo Salud: 2014-04 - 8435644509 2014/09/11 $197,200
-Liquidacion - Periodo Pension: 2014-05 - Periodo Salud: 2014-05 - 8435644536 2014/09/11 $192,500 
-Liquidacion - Periodo Pension: 2014-06 - Periodo Salud: 2014-06 - 8435644557 2014/09/11 $188,300
-Liquidacion - Periodo Pension: 2014-07 - Periodo Salud: 2014-07 - 8435644575 2014/09/11 $184,300
-Liquidacion - Periodo Pension: 2014-08 - Periodo Salud: 2014-08 - 8435644589 2014/09/11 $179,700
-Liquidacion - Periodo Pension: 2014-09 - Periodo Salud: 2014-09 - 8435814782 2014/09/11 $175,800 

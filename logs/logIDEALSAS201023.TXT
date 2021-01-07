@@ -1,1 +1,0 @@
-09:20:12  <->PRI<->V<->IDEALSAS       <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

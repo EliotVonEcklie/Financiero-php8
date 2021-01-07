@@ -1,2 +1,0 @@
-09:44:38  <->PRI<->V<->MVILLALBA      <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-10:17:27  <->PRI<->V<->MVILLALBA      <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

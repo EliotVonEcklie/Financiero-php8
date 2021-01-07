@@ -1,5 +1,0 @@
-09:55:29  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-15:31:21  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-15:31:26  <->INV<->V<->SPID           <->INGRESO MENU DE ACTOS                             <->::1
-18:04:48  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-18:06:09  <->INV<->V<->SPID           <->INGRESO MENU DE ACTOS                             <->::1

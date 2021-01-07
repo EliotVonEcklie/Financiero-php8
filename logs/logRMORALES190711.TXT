@@ -1,1 +1,0 @@
-16:31:08  <->PRI<->V<->RMORALES       <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

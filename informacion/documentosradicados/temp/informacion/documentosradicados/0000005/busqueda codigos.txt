@@ -1,1 +1,0 @@
-cargarcodigopag($_GET[codpag],$_SESSION["nivel"]);

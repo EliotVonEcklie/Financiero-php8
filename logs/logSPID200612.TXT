@@ -1,5 +1,0 @@
-07:18:45  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-07:20:07  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-07:29:40  <->HUM<->V<->SPID           <->INGRESO MODULO DE GESTION HUMANA                  <->::1
-07:40:30  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1
-17:24:56  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->::1

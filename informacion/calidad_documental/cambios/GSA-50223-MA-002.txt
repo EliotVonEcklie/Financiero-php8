@@ -1,4 +1,0 @@
-formulario gestion Salud
-1:se modifica el numeral 12 referente chacha
-2:se modifica diseño de marcos
-

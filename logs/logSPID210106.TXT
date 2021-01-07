@@ -1,6 +1,0 @@
-15:18:27  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
-15:28:36  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
-15:29:08  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
-15:30:29  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
-15:38:20  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
-16:13:26  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
