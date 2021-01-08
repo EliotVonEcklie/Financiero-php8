@@ -256,7 +256,7 @@ h1 {
 .titulop{background-color:#FFF;
 margin-left:5px;}
 /*h1 span {
-  background:url(../imagenes/blank.png) repeat-x;
+  background:url(../img/blank.png) repeat-x;
   position: absolute;
   display: block;
   width: 100%;
@@ -265,7 +265,7 @@ margin-left:5px;}
 
 h1 span {
 background: none;
-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=’../imagenes/blank.png’, sizingMethod=’scale’);
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=’../img/blank.png’, sizingMethod=’scale’);
 }
 /*****/
 .saludo1{
@@ -589,7 +589,7 @@ border-radius: 1px;
 position:absolute;
 width:175px;
 background-color:#39C;
-/*background-image:url(../imagenes/hc_barra-menu.png);*/
+/*background-image:url(../img/hc_barra-menu.png);*/
 border:1px solid #eeeeee;
 font:normal 10px Verdana;
 line-height:18px;
@@ -1484,7 +1484,7 @@ background-color:#fff; font-size:36;
 background-color:#eee;
 }
 
-/*Tamaño de las imagenes de los titulos superiores*/
+/*Tamaño de las img de los titulos superiores*/
 .imgtitulos
 {
 	height:80%;

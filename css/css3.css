@@ -2,7 +2,7 @@ html,body {overflow:hidden;}
 
 #bgventanamodal
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -26,7 +26,7 @@ html,body {overflow:hidden;}
 }
 #bgventanamodal2
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -51,7 +51,7 @@ html,body {overflow:hidden;}
 }
 #bgventanamodal3
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -62,7 +62,7 @@ html,body {overflow:hidden;}
 }
 #ventanamodal3
 {
-	background-image: url(../imagenes/fffondo1.jpg);
+	background-image: url(../img/fffondo1.jpg);
 	border: 10px solid #FFF;
 	position: absolute;
 	z-index: 95;
@@ -76,7 +76,7 @@ html,body {overflow:hidden;}
 }
 #bgmodalmensajes
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -390,7 +390,7 @@ div.upload input
 .icomen3n {cursor:default;}
 .bgventanamodal
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -414,7 +414,7 @@ div.upload input
 }
 .bgventanamodalm
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 98;
 	height: 100%;
@@ -439,7 +439,7 @@ div.upload input
 }
 .bgventanamodalm3
 {
-	background-image: url(../imagenes/bgModal.png);
+	background-image: url(../img/bgModal.png);
 	position: fixed;
 	z-index: 98;
 	height: 100%;
@@ -590,7 +590,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:55px;
-	background: url(../imagenes/pin.png)
+	background: url(../img/pin.png)
 }
 .mfoto02
 {
@@ -614,7 +614,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:50px;
-	background: url(../imagenes/pin.png)
+	background: url(../img/pin.png)
 }
 .mfoto03
 {
@@ -638,7 +638,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:50px;
-	background: url(../imagenes/pin.png)
+	background: url(../img/pin.png)
 }
 .subpantallap11
 {
@@ -3446,7 +3446,7 @@ input[type='date'][readonly]
 }
 .botonflecha::before {
 	background-color:#2591b4;
-	background-image:url(../imagenes/right_arrow.png);
+	background-image:url(../img/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";
@@ -3525,7 +3525,7 @@ input[type='date'][readonly]
 }
 .botonflecharoja::before {
 	background-color:#FF0F0D;
-	background-image:url(../imagenes/right_arrow.png);
+	background-image:url(../img/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";
@@ -3604,7 +3604,7 @@ input[type='date'][readonly]
 }
 .botonflechaverde::before {
 	background-color:#00A334;
-	background-image:url(../imagenes/right_arrow.png);
+	background-image:url(../img/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";
