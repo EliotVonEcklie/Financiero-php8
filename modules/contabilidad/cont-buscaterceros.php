@@ -1,11 +1,15 @@
 <?php //V 1000 12/12/16 ?> 
 <!--V 1.0 24/02/2015-->
 <?php
-	require"comun.inc";
-	require"funciones.inc";
+
+	require '../../include/comun.php';
+    require '../../include/funciones.php';
+    
 	session_start();
-	$linkbd=conectar_bd();	
-	cargarcodigopag($_GET[codpag],$_SESSION["nivel"]);
+    $linkbd = conectar_v7();
+    	
+    // cargarcodigopag($_GET['codpag'],$_SESSION["nivel"]);
+    
 	header("Cache-control: private"); // Arregla IE 6
 	date_default_timezone_set("America/Bogota");
 ?>
@@ -14,76 +18,106 @@
 	<head>
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+
 		<title>:: Spid - Contabilidad</title>
-        <link href="css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<link href="css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="jquery-1.11.0.min.js"></script> 
-        <script type="text/javascript" src="css/programas.js"></script>
+
+        <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+        <link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+
+		<script type="text/javascript" src="../../js/JQuery/jquery-1.11.0.min.js"></script> 
+        <script type="text/javascript" src="../../js/programas.js"></script>
+
 		<script>
 			function verUltimaPos(idcta, filas, filtro)
 			{
-				var scrtop=$('#divdet').scrollTop();
-				var altura=$('#divdet').height();
-				var numpag=$('#nummul').val();
-				var limreg=$('#numres').val();
-				if((numpag<=0)||(numpag==""))
-					numpag=0;
-				if((limreg==0)||(limreg==""))
-					limreg=10;
-				numpag++;
-				location.href="cont-editaterceros.php?idter="+idcta+"&scrtop="+scrtop+"&totreg="+filas+"&altura="+altura+"&numpag="+numpag+"&limreg="+limreg+"&filtro="+filtro;
+				var scrtop = $('#divdet').scrollTop();
+				var altura = $('#divdet').height();
+                
+                var numpag = $('#nummul').val();
+				var limreg = $('#numres').val();
+                
+                if((numpag <= 0) || (numpag == ""))
+					numpag = 0;
+				if((limreg == 0) || (limreg == ""))
+					limreg = 10;
+                
+                numpag++;
+                
+                location.href = "cont-editaterceros.php?idter="+idcta+"&scrtop="+scrtop+"&totreg="+filas+"&altura="+altura+"&numpag="+numpag+"&limreg="+limreg+"&filtro="+filtro;
 			}
-			function anulatercero(id,documento)
+			function anulatercero(id, documento)
 			{
-			 	if(confirm("Esta Seguro de Eliminar el Tercero: "+documento))
+			 	if(confirm("Esta Seguro de Eliminar el Tercero: " + documento))
 			  	{
-			  		document.form2.ac.value=2;
-			  		document.form2.cod.value=documento;
-			 		 document.form2.submit();
+			  		document.form2.ac.value = 2;
+			  		document.form2.cod.value = documento;
+			 		document.form2.submit();
 			  	}
 			}
-			function cambioswitch(id,valor)
+			function cambioswitch(id, valor)
 			{
-				document.getElementById('idestado').value=id;
-				if(valor==1){despliegamodalm('visible','4','Desea activar este Tercero','1');}
-				else{despliegamodalm('visible','4','Desea Desactivar este Tercero','2');}
+                document.getElementById('idestado').value = id;
+                
+                if(valor == 1)
+                {
+                    despliegamodalm('visible', '4', 'Desea activar este Tercero', '1');
+                }
+                else
+                {
+                    despliegamodalm('visible', '4', 'Desea Desactivar este Tercero', '2');
+                }
 			}
-			function despliegamodalm(_valor,_tip,mensa,pregunta)
+			function despliegamodalm(_valor, _tip, mensa, pregunta)
 			{
-				document.getElementById("bgventanamodalm").style.visibility=_valor;
-				if(_valor=="hidden"){document.getElementById('ventanam').src="";}
+				document.getElementById("bgventanamodalm").style.visibility = _valor;
+                if(_valor == "hidden")
+                {
+                    document.getElementById('ventanam').src = '';
+                }
 				else
 				{
 					switch(_tip)
 					{
 						case "1":
-							document.getElementById('ventanam').src="ventana-mensaje1.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje1.php?titulos=" + mensa;
+                            break;
 						case "2":
-							document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje3.php?titulos=" + mensa;
+                            break;
 						case "3":
-							document.getElementById('ventanam').src="ventana-mensaje2.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje2.php?titulos=" + mensa;
+                            break;
 						case "4":
-							document.getElementById('ventanam').src="ventana-consulta2.php?titulos="+mensa+"&idresp="+pregunta;break;	
+                            document.getElementById('ventanam').src = "ventana-consulta2.php?titulos=" + mensa + "&idresp=" + pregunta;
+                            break;	
 					}
 				}
 			}
 			function funcionmensaje(){}
 			function respuestaconsulta(estado,pregunta)
 			{
-				if(estado=="S")
+				if(estado == 'S')
 				{
 					switch(pregunta)
 					{
-						case "1":	document.form2.cambioestado.value="1";break;
-						case "2":	document.form2.cambioestado.value="0";break;
+                        case "1":
+                            document.form2.cambioestado.value = '1';
+                            break;
+                        case "2":	
+                            document.form2.cambioestado.value = '0';
+                            break;
 					}
 				}
 				else
 				{
 					switch(pregunta)
 					{
-						case "1":	document.form2.nocambioestado.value="1";break;
-						case "2":	document.form2.nocambioestado.value="0";break;
+                        case "1":	
+                            document.form2.nocambioestado.value = "1";
+                            break;
+                        case "2":	
+                            document.form2.nocambioestado.value = "0";
+                            break;
 					}
 				}
 				document.form2.submit();
@@ -120,46 +154,64 @@
             </div>
         </div>
         <?php
-			if($_POST[oculto]=="")
+			if($_POST['oculto']=="")
 			{
-				$_POST[scrtop]=$_GET['scrtop'];
-				if($_POST[scrtop]==""){$_POST[scrtop]=0;}
-				$_POST[gidcta]=$_GET['idcta'];
-				if(isset($_GET['filtro'])){$_POST[numero]=$_GET['filtro'];}
-			}
-			echo"<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST[scrtop].")}</script>";
-			if($_GET[numpag]!="")
+				$_POST['scrtop'] = $_GET['scrtop'];
+                if($_POST['scrtop'] == "")
+                {
+                    $_POST['scrtop'] = 0;
+                }
+
+                $_POST['gidcta']=$_GET['idcta'];
+                
+                if(isset($_GET['filtro']))
+                {
+                    $_POST['numero'] = $_GET['filtro'];
+                }
+            }
+            
+            echo "<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST['scrtop'].")}</script>";
+            
+			if($_GET['numpag'] != '')
 			{
-				$oculto=$_POST[oculto];
-				if($oculto!=2)
+				$oculto = $_POST['oculto'];
+				if($oculto != 2)
 				{
-					$_POST[numres]=$_GET[limreg];
-					$_POST[numpos]=$_GET[limreg]*($_GET[numpag]-1);
-					$_POST[nummul]=$_GET[numpag]-1;
+					$_POST['numres'] = $_GET['limreg'];
+					$_POST['numpos'] = $_GET['limreg'] * ($_GET['numpag'] - 1);
+					$_POST['nummul'] = $_GET['numpag'] - 1;
 				}
 			}
-			else{if($_POST[nummul]==""){$_POST[numres]=10;$_POST[numpos]=0;$_POST[nummul]=0;}}
+            else
+            {
+                if($_POST['nummul'] == '')
+                {
+                    $_POST['numres'] = 10;
+                    $_POST['numpos'] = 0;
+                    $_POST['nummul'] = 0;
+                }
+            }
 		?>
  		<form name="form2" method="post" action="cont-buscaterceros.php">
  			<?php
-				if($_POST[oculto2]=="")
+				if($_POST['oculto2']=="")
 				{
-					$_POST[oculto2]="0";
-					$_POST[cambioestado]="";
-					$_POST[nocambioestado]="";
+					$_POST['oculto2']="0";
+					$_POST['cambioestado']="";
+					$_POST['nocambioestado']="";
 				}
 				//*****************************************************************
-				if($_POST[cambioestado]!="")
+				if($_POST['cambioestado'] != "")
 				{
-					if($_POST[cambioestado]=="1")
+					if($_POST['cambioestado'] == "1")
 					{
-                        $sqlr="UPDATE terceros SET estado='S' WHERE id_tercero='$_POST[idestado]'";
-                     	mysql_fetch_row(mysql_query($sqlr,$linkbd)); 
+                        $sqlr = 'UPDATE terceros SET estado=\'S\' WHERE id_tercero=\''.$_POST['idestado'].'\'';
+                     	mysql_fetch_row(mysql_query($sqlr, $linkbd)); 
 					}
 					else 
 					{
                         $sqlr="UPDATE terceros SET estado='N' WHERE id_tercero='$_POST[idestado]'";
-                     	mysql_fetch_row(mysql_query($sqlr,$linkbd)); 
+                     	mysql_fetch_row(mysql_query($sqlr, $linkbd)); 
 					}
 					echo"<script>document.form2.cambioestado.value=''</script>";
 				}
@@ -201,9 +253,9 @@
 						$resp=mysql_query($sqlr,$linkbd);
 						if (!$resp) 
 						{	
-	 						echo "<table><tr><td class='saludo1'><center><font color=blue>Manejador de Errores de la Clase BD<br><font size=1></font></font><br><p align=center>No se pudo ejecutar la petición: <br><font color=red><b>$sqlr</b></font></p>";
+	 						echo "<table><tr><td class='saludo1'><center><font color=blue>Manejador de Errores de la Clase BD<br><font size=1></font></font><br><p align=center>No se pudo ejecutar la peticiÃ³n: <br><font color=red><b>$sqlr</b></font></p>";
 							//$e =mysql_error($respquery);
-	 						echo "Ocurrió el siguiente problema:<br>";
+	 						echo "OcurriÃ³ el siguiente problema:<br>";
   	 						//echo htmlentities($e['message']);
   	 						echo "<pre>";
      						//echo htmlentities($e['sqltext']);
