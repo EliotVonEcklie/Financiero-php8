@@ -1,0 +1,7 @@
+
+#   Financiero for PHP 8
+#
+#       .gitignore File
+#
+
+logs/**/*
