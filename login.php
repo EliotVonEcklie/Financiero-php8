@@ -54,8 +54,8 @@
 			}
 		</style>
 
-		<script type='text/javascript' src='include/JQuery/jquery-2.1.4.min.js'></script>
-		<script type="text/javascript" src='include/JQuery/jquery.ripples.js'></script>
+		<script type='text/javascript' src='js/JQuery/jquery-2.1.4.min.js'></script>
+		<script type="text/javascript" src='js/JQuery/jquery.ripples.js'></script>
 
         <script>
             $(document).ready(function() {
@@ -109,7 +109,7 @@
 		</video>
 		<form name="form1" method="post" action="login.php"> 
 			<?php 
-				if(isset($_POST['oculto']))
+				if(!isset($_POST['oculto']))
 				{
 					$_POST['vistab'] = 'hidden';
 					$archivo = '.env';
@@ -138,16 +138,17 @@
 						<td colspan="3" style="padding-bottom:5px; text-align: center;" ><em class="botonflecha" onClick="document.form1.submit();">Aceptar</em></td>
 					</tr>
 				</table>
-				<input type="hidden" name="vistab" id="vistab" value="<?php if(isset($_POST['vistab'])) echo $_POST['vistab'];?>"/>
-				<table class="inicio"  style="visibility:<?php if(isset($_POST['vistab'])) echo $_POST['vistab'];?>;">
+				<input type="hidden" name="vistab" id="vistab" value="<?php if(isset($_POST['vistab'])){ echo $_POST['vistab']; }?>"/>
+				<table class="inicio"  style="visibility: <?php if(isset($_POST['vistab'])){ echo $_POST['vistab']; }?>;">
 					<tr>
 						<td>
 							<select name="basesfun" id="basesfun">
 								<?php
-									$sqlr="SHOW DATABASES";
+                                    $sqlr="SHOW DATABASES";
+                                    
                                     $resp = mysqli_query($linkbd,$sqlr);
-                                    if($resp === false || $resp == null)
-                                        die('aqui');
+
+
 									while ($row = mysqli_fetch_row($resp)) 
 									{
                                         if(isset($_POST['basesfun']))
