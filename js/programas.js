@@ -62,7 +62,7 @@ function tabular(e,obj)
                 tabular(e,frm.elements[i+1]); 
             else { 
                 if (frm.elements[i+1].type=='text') /*VALIDA SI EL CAMPO ES TEXTO*/ 
-                { frm.elements[i+1].select(); };   /* AÑADIR LOS CORCHETES Y ESTA INSTRUCCION */ 
+                { frm.elements[i+1].select(); };   /* Aï¿½ADIR LOS CORCHETES Y ESTA INSTRUCCION */ 
                 frm.elements[i+1].focus(); 
             } 
             return false;  
@@ -122,10 +122,10 @@ function codigover()
 //VALIDADOR DE FECHAS
 
 /**************************************************************
-Máscara de entrada. Script creado por Tunait! (21/12/2004)
-Si quieres usar este script en tu sitio eres libre de hacerlo con la condición de que permanezcan intactas estas líneas, osea, los créditos.
-No autorizo a distribuír el código en sitios de script sin previa autorización
-Si quieres distribuírlo, por favor, contacta conmigo.
+Mï¿½scara de entrada. Script creado por Tunait! (21/12/2004)
+Si quieres usar este script en tu sitio eres libre de hacerlo con la condiciï¿½n de que permanezcan intactas estas lï¿½neas, osea, los crï¿½ditos.
+No autorizo a distribuï¿½r el cï¿½digo en sitios de script sin previa autorizaciï¿½n
+Si quieres distribuï¿½rlo, por favor, contacta conmigo.
 Ver condiciones de uso en http://javascript.tunait.com/
 tunait@yahoo.com 
 ****************************************************************/
@@ -311,7 +311,7 @@ function recalcularegreso()
   	//document.form2.diferencia.value=difs;  
 }
                  
-//Código para colocar 
+//Cï¿½digo para colocar 
 //los indicadores de miles mientras se escribe
 //script por tunait!
 function puntitos(donde,caracter)
@@ -406,9 +406,9 @@ return valorpuntos;
  }
 
 /*****************************************************************************
-Código para colocar los indicadores de miles  y decimales mientras se escribe
+Cï¿½digo para colocar los indicadores de miles  y decimales mientras se escribe
 Script creado por Tunait!
-Si quieres usar este script en tu sitio eres libre de hacerlo con la condición de que permanezcan intactas estas líneas, osea, los créditos.
+Si quieres usar este script en tu sitio eres libre de hacerlo con la condiciï¿½n de que permanezcan intactas estas lï¿½neas, osea, los crï¿½ditos.
 
 http://javascript.tunait.com
 tunait@yahoo.com  27/Julio/03
@@ -475,42 +475,56 @@ if(largo > nmrs && crtr == true)
 	}
 donde.focus()
 }	
-//Creo una función que imprimira en la hoja el valor del porcentanje asi como el relleno de la barra de progreso
+//Creo una funciï¿½n que imprimira en la hoja el valor del porcentanje asi como el relleno de la barra de progreso
 
 //INICIO CARGA BARRA DE IMAGENES
 function barra_imagenes(modulo)
 {
-	var imgmodulo;
-	switch(modulo)
-	{
-		case "plan":
-			imgmodulo="logoplan.png";break;
-		case "acti":
-			imgmodulo="logoacti.png";break;
-		case "adm":
-			imgmodulo="logoadmin.png";break;
-		case "cont":
-			imgmodulo="logoconta.png";break;
-		case "contra":
-			imgmodulo="logocontra.png";break;
-		case "hum":
-			imgmodulo="logohum.png";break;
-		case "presu":
-			imgmodulo="logopresu.png";break;
-		case "inve":
-			imgmodulo="logoalma.png";break;
-		case "meci":
-			imgmodulo="logomeci.png";break;
-		case "serv":
-			imgmodulo="logoserv.png";break;
-		case "teso":
-			imgmodulo="logoteso.png";break;
-		case "ccpet":
-			imgmodulo="logoccpet.png";break;
-		case "ayuda":
-			imgmodulo="logoayuda.png";break;
-	}
-	document.write('<td  style="background:url(imagenes/'+imgmodulo+'); background-repeat:no-repeat; background-position:center; background-size: 100% 95%;height:50px; width:33%;border-radius:4px;"></td>');
+    var imgmodulo;
+    switch(modulo)
+    {
+        case "plan":
+            imgmodulo="logoplan.png";
+            break;
+        case "acti":
+            imgmodulo="logoacti.png";
+            break;
+        case "adm":
+            imgmodulo="logoadmin.png";
+            break;
+        case "cont":
+            imgmodulo="logoconta.png";
+            break;
+        case "contra":
+            imgmodulo="logocontra.png";
+            break;
+        case "hum":
+            imgmodulo="logohum.png";
+            break;
+        case "presu":
+            imgmodulo="logopresu.png";
+            break;
+        case "inve":
+            imgmodulo="logoalma.png";
+            break;
+        case "meci":
+            imgmodulo="logomeci.png";
+            break;
+        case "serv":
+            imgmodulo="logoserv.png";
+            break;
+        case "teso":
+            imgmodulo="logoteso.png";
+            break;
+        case "ccpet":
+            imgmodulo="logoccpet.png";
+            break;
+        case "ayuda":
+            imgmodulo="logoayuda.png";
+            break;
+    }
+
+    document.write('<td style="background: url(../../img/modules/logos/' + imgmodulo + '); background-repeat:no-repeat; background-position:center; background-size: 100% 95%;height:50px; width:33%;border-radius:4px;"></td>');
 }
 //FIN CARGA BARRA DE IMAGENES
 

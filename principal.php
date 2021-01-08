@@ -23,22 +23,34 @@
 	if (!isset($_SESSION['usuario']))
 	{
 		$sqlr = "SELECT * FROM parametros WHERE estado='S'";
-		$res = mysqli_query($linkbd,$sqlr);
-		while($r=mysqli_fetch_row($res)){$vigencia=$r[1];}
-		//*** verificar el username y el pass
-		$users=$_POST['user'];
-		$pass=$_POST['pass'];
-		$sqlr="SELECT U.nom_usu, R.nom_rol, U.id_rol, U.id_usu, U.foto_usu, U.usu_usu, U.cc_usu FROM usuarios U, roles R WHERE U.usu_usu='$users' AND U.pass_usu='$pass' AND U.id_rol=R.id_rol AND U.est_usu='1'";
-		$res=mysqli_query($linkbd,$sqlr);
-		while($r=mysqli_fetch_row($res))
+        
+        $res = mysqli_query($linkbd,$sqlr);
+        
+        while($r=mysqli_fetch_row($res))
+        {
+            $vigencia = $r[1];
+        }
+        
+        
+        //*** verificar el username y el pass
+        
+        $users = $_POST['user'];
+        
+        $pass = $_POST['pass'];
+        
+        $sqlr = "SELECT U.nom_usu, R.nom_rol, U.id_rol, U.id_usu, U.foto_usu, U.usu_usu, U.cc_usu FROM usuarios U, roles R WHERE U.usu_usu='$users' AND U.pass_usu='$pass' AND U.id_rol = R.id_rol AND U.est_usu='1'";
+        
+        $res = mysqli_query($linkbd,$sqlr);
+        
+        while($r = mysqli_fetch_row($res))
 		{
-			$user=$r[0];
-			$perf=$r[1];
-			$niv=$r[2];
-			$idusu=$r[3];
-			$nick=$r[5];
-			$dirfoto=$r[4];
-			$cedusu=$r[6];
+			$user = $r[0];
+			$perf = $r[1];
+			$niv = $r[2];
+			$idusu = $r[3];
+			$nick = $r[5];
+			$dirfoto = $r[4];
+			$cedusu = $r[6];
 		}
 		if ($user == "")
 		{
@@ -50,17 +62,25 @@
 		else
 		{
 			//login correcto
-			$_SESSION['vigencia']=$vigencia;
-			$_SESSION['usuario']=array();
-			$_SESSION['usuario']=$user;
-			$_SESSION['perfil']=$perf;
-			$_SESSION['idusuario']=$idusu;
-			$_SESSION['nickusu']=$nick;
-			$_SESSION['cedulausu']=$cedusu;
-			$_SESSION['nivel']=$niv;
-			$_SESSION['linkmod']=array();
-			if($dirfoto==""){$_SESSION['fotousuario']="img/usuario_on.png"; }
-			else {$_SESSION["fotousuario"]="informacion/fotos_usuarios/$dirfoto";}
+			$_SESSION['vigencia'] = $vigencia;
+			$_SESSION['usuario'] = array();
+			$_SESSION['usuario'] = $user;
+			$_SESSION['perfil'] = $perf;
+			$_SESSION['idusuario'] = $idusu;
+			$_SESSION['nickusu'] = $nick;
+			$_SESSION['cedulausu'] = $cedusu;
+			$_SESSION['nivel'] = $niv;
+            $_SESSION['linkmod'] = array();
+            
+            if($dirfoto == '')
+            {
+                $_SESSION['fotousuario'] = '../../img/icons/usuario_on.png';
+            }
+            else
+            {
+                $_SESSION["fotousuario"] = '../../img/user_profile_photos/'.$dirfoto;
+            }
+
 			$corresmensaje="1";
 			$sqlr="SELECT * FROM usuarios_privilegios WHERE id_usu='$idusu'";
 			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
@@ -71,26 +91,46 @@
 			$_SESSION['prcrear']=1;
 			$_SESSION['preditar']=1;
 			$_SESSION['prdesactivar']=1;
-			$_SESSION['preliminar']=1;
-			$sqlr="SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio='SEPARADOR_NUMERICO'";
-            $row = mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+            $_SESSION['preliminar']=1;
+            
+            $sqlr="SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio='SEPARADOR_NUMERICO'";
+            
+            $row = mysqli_fetch_assoc(mysqli_query($linkbd,$sqlr));
             
             if(isset($row))
             {
-			    if($row[0]!=''){$_SESSION['spdecimal']=$row[0];}
-			    else {$_SESSION['spdecimal']='.';}
-			    if($row[1]!=''){$_SESSION['spmillares']=$row[1];}
-			    else {$_SESSION['spmillares']=',';}
-			    if($row[2]!=''){$_SESSION['ndecimales']=$row[2];}
-			    else {$_SESSION['ndecimales']=2;}
+                if($row[0]!='')
+                {
+                    $_SESSION['spdecimal'] = $row['valor_inicial'];
+                }
+                else 
+                {
+                    $_SESSION['spdecimal'] = '.';
+                }
+                if($row[1]!='')
+                {
+                    $_SESSION['spmillares'] = $row['valor_final'];
+                }
+                else 
+                {
+                    $_SESSION['spmillares'] = ',';
+                }
+                if($row[2]!='')
+                {
+                    $_SESSION['ndecimales'] = $row['descripcion_valor'];
+                }
+                else 
+                {
+                    $_SESSION['ndecimales'] = 2;
+                }
             }
 
             //******************* menuss ************************
 			//***** NUEVO REVISION DE LOS MODULOS ***************
-			$sqlr="SELECT DISTINCT (modulos.nombre),modulos.id_modulo,modulos.libre FROM modulos, modulo_rol WHERE modulo_rol.id_rol=$niv AND modulos.id_modulo=modulo_rol.id_modulo GROUP BY (modulos.nombre),modulos.id_modulo,modulos.libre ORDER BY modulos.id_modulo";
+			$sqlr = "SELECT DISTINCT (modulos.nombre),modulos.id_modulo,modulos.libre FROM modulos, modulo_rol WHERE modulo_rol.id_rol=$niv AND modulos.id_modulo=modulo_rol.id_modulo GROUP BY (modulos.nombre),modulos.id_modulo,modulos.libre ORDER BY modulos.id_modulo";
 			//$linkset[$x]="";
-			$res=mysqli_query($linkbd,$sqlr);
-            while($roww=mysqli_fetch_row($res))
+			$res = mysqli_query($linkbd,$sqlr);
+            while($roww = mysqli_fetch_row($res))
             {
                 @$_SESSION['linkmod'][$roww[1]] .= $roww[2];
             }
@@ -98,12 +138,12 @@
 			//verificaci�n de tipo de caracteres
 			$sqlr="SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio='TIPO_CARACTER_VERPHP'";
 			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
-			$_SESSION['VERCARPHPINI']=$row[0];
-			$_SESSION['VERCARPHPFIN']=$row[1];
+			$_SESSION['VERCARPHPINI'] = $row[0];
+			$_SESSION['VERCARPHPFIN'] = $row[1];
 			$sqlr="SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio='TIPO_CARACTER_VERPDF'";
 			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
-			$_SESSION['VERCARPDFINI']=$row[0];
-			$_SESSION['VERCARPDFFIN']=$row[1];
+			$_SESSION['VERCARPDFINI'] = $row[0];
+			$_SESSION['VERCARPDFFIN'] = $row[1];
 			//registro log
 			$accion="USUARIO INICIA SESION EN EL SISTEMA";
 			$origen=getUserIpAddr();

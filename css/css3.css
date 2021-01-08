@@ -2,7 +2,7 @@ html,body {overflow:hidden;}
 
 #bgventanamodal
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -26,7 +26,7 @@ html,body {overflow:hidden;}
 }
 #bgventanamodal2
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -51,7 +51,7 @@ html,body {overflow:hidden;}
 }
 #bgventanamodal3
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -62,7 +62,7 @@ html,body {overflow:hidden;}
 }
 #ventanamodal3
 {
-	background-image: url(../img/fffondo1.jpg);
+	background-image: url(../imagenes/fffondo1.jpg);
 	border: 10px solid #FFF;
 	position: absolute;
 	z-index: 95;
@@ -76,7 +76,7 @@ html,body {overflow:hidden;}
 }
 #bgmodalmensajes
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -118,16 +118,15 @@ html,body {overflow:hidden;}
 	margin-bottom:1px;
 	margin-top:1px;
 	height:100px;
-    width:390px;
-    border-radius: 2px;
-	-moz-border-radius: 2px;
+	width:390px;
+	-moz-border-radius: 2px;  
 	-webkit-border-radius: 2px;
 	text-align:left;
 }
 .mmensajes1
 {
 	border: 1px none;
-	align: center;
+	align:center;
 	width:350;
 	padding:5px;
 	margin:0 auto 0 auto;
@@ -167,8 +166,7 @@ html,body {overflow:hidden;}
 	border:#CCC;
 	border-style:solid;
 	border-width:thin;
-    box-shadow: 0 0 5px #222;
-    border-radius: 5px;
+	box-shadow: 0 0 5px #222;
 	-webkit-box-shadow: 0 0 5px #222;
 	-moz-box-shadow: 0 0 5px #222;
 	-moz-border-radius: 5px;  
@@ -392,7 +390,7 @@ div.upload input
 .icomen3n {cursor:default;}
 .bgventanamodal
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 90;
 	height: 100%;
@@ -416,7 +414,7 @@ div.upload input
 }
 .bgventanamodalm
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 98;
 	height: 100%;
@@ -441,7 +439,7 @@ div.upload input
 }
 .bgventanamodalm3
 {
-	background-image: url(../img/bgModal.png);
+	background-image: url(../imagenes/bgModal.png);
 	position: fixed;
 	z-index: 98;
 	height: 100%;
@@ -592,7 +590,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:55px;
-	background: url(../img/pin.png)
+	background: url(../imagenes/pin.png)
 }
 .mfoto02
 {
@@ -616,7 +614,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:50px;
-	background: url(../img/pin.png)
+	background: url(../imagenes/pin.png)
 }
 .mfoto03
 {
@@ -640,7 +638,7 @@ div.upload input
 	position:absolute;
 	top:-12px;
 	left:50px;
-	background: url(../img/pin.png)
+	background: url(../imagenes/pin.png)
 }
 .subpantallap11
 {
@@ -3448,7 +3446,7 @@ input[type='date'][readonly]
 }
 .botonflecha::before {
 	background-color:#2591b4;
-	background-image:url(../img/right_arrow.png);
+	background-image:url(../imagenes/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";
@@ -3527,7 +3525,7 @@ input[type='date'][readonly]
 }
 .botonflecharoja::before {
 	background-color:#FF0F0D;
-	background-image:url(../img/right_arrow.png);
+	background-image:url(../imagenes/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";
@@ -3606,7 +3604,7 @@ input[type='date'][readonly]
 }
 .botonflechaverde::before {
 	background-color:#00A334;
-	background-image:url(../img/right_arrow.png);
+	background-image:url(../imagenes/right_arrow.png);
 	background-repeat:no-repeat;
 	background-position:center center;
 	content:"";

@@ -1,10 +1,9 @@
 <?php
 
-$host= $_SERVER["HTTP_HOST"];
-$url= $_SERVER["REQUEST_URI"];
-$url2 =$_SERVER["PHP_SELF"];
+$host = $_SERVER["HTTP_HOST"];
+$url = $_SERVER["REQUEST_URI"];
+$url2 = $_SERVER["PHP_SELF"];
 
-//include "comun.inc";
 //****** BLOQUEOS USUARIO Y PERIODOS
 function generaSuperavit($cuenta,$vigencia,$vigenciaf,$fechaf,$fechaf2){
 	global $linkbd;
@@ -2515,8 +2514,7 @@ function menu_desplegable($modulo)
 		{
 			echo ('
 				<ul class="navmenu">
-					<li><a onClick="location.href=\'principal.php\'" style="cursor:pointer;">Inicio</a>
-					</li>
+					<li><a onClick="location.href=\'../../principal.php\'" style="cursor:pointer;">Inicio</a></li>
 					<li><a style="cursor:pointer;">Archivos Maestros</a>');
 						$estilos=ajustar_menu(@$_SESSION['linksetpl'][1],'pl',1);
 						$filas=str_replace('<li>','<li '.$estilos[1].'>',@$_SESSION['linksetpl'][1]);
@@ -2554,7 +2552,7 @@ function menu_desplegable($modulo)
 		{
 			echo ('
 				<ul class="navmenu">
-					<li><a onClick="location.href=\'principal.php\'" style="cursor:pointer;">Inicio</a></li>
+                    <li><a onClick="location.href=\'../../principal.php\'" style="cursor:pointer;">Inicio</a></li>
 					<li><a style="cursor:pointer;">Sistema</a>');
 						$estilos=ajustar_menu(@$_SESSION['linksetad'][0],'ad',0);
 						$filas=str_replace('<li>','<li '.$estilos[1].'>',@$_SESSION['linksetad'][0]);
@@ -2591,7 +2589,7 @@ function menu_desplegable($modulo)
 		{
 			echo ('
 				<ul class="navmenu">
-					<li><a onClick="location.href=\'principal.php\'" style="cursor:pointer;">Inicio</a></li>
+                    <li><a onClick="location.href=\'../../principal.php\'" style="cursor:pointer;">Inicio</a></li>
 					<li><a style="cursor:pointer;">Archivos Maestros</a>');
 						$estilos=ajustar_menu(@$_SESSION['linksetac'][1],'ac',1);
 						$filas=str_replace('<li>','<li '.$estilos[1].'>',@$_SESSION['linksetac'][1]);
@@ -2626,10 +2624,9 @@ function menu_desplegable($modulo)
 					</ul>');
 		}break;
 		case "cont":
-		{
 			echo ('
 				<ul class="navmenu">
-					<li><a onClick="location.href=\'principal.php\'" style="cursor:pointer;">Inicio</a></li>
+                    <li><a onClick="location.href=\'../../principal.php\'" style="cursor:pointer;">Inicio</a></li>
 					<li><a style="cursor:pointer;">Archivos Maestros</a>');
 						$estilos=ajustar_menu(@$_SESSION['linksetco'][1],'co',1);
 						$filas=str_replace('<li>','<li '.$estilos[1].'>',@$_SESSION['linksetco'][1]);
@@ -2665,15 +2662,24 @@ function menu_desplegable($modulo)
 						<a>'.vigencia_usuarios(@$_SESSION['cedulausu']).'</a>
 					</li>');
 					if($_SESSION["perfil"]=="Superman"){echo('<li><a onClick="alert(\''."Pagina: $nombre_archivo\\nBase: $datin[0]\\nFecha: $fechabackup".'\')" style="cursor:pointer;">Link</a></li>');}
-					echo('<li style="text-align:right; float:right">
-						<img src="imagenes/chat2.png" style="width:30px; height:25px; cursor:pointer;" alt="Chat" title="Chat" onclick="verChat()">
-					</li>
-					<li style="vertical-align:bottom; line-height: 20px; float:right" >
-						<a>Ir a:<input name="atajos" type="search" size="11" style="height:20px" placeholder="Digite atajo..." onkeypress="if(validateEnter(event) == true) {abriratajo(this.value)}"></a>
-					</li>
-				</ul>');
+                    
+                    /*
+                        echo('
+                                <li style="text-align:right; float:right">
+						            <img src="imagenes/chat2.png" style="width:30px; height:25px; cursor:pointer;" alt="Chat" title="Chat" onclick="verChat()">
+					            </li>
+                            ');
+                    */
 
-		}break;
+                    echo('
+                            <li style="vertical-align:bottom; line-height: 20px; float:right" >
+                                <a>Ir a: <input name="atajos" type="search" size="11" style="height:20px; margin-left:5px;" placeholder="Digite atajo..." onkeypress="if(validateEnter(event) == true) {abriratajo(this.value)}"></a>
+                            </li> 
+                        ');
+
+                    echo('</ul>');
+
+            break;
 		case "teso":
 		{
 			echo('
@@ -3019,81 +3025,107 @@ function menu_desplegable($modulo)
 //INICIO CARGA CUADRO DE TITULOS
 function cuadro_titulos()
 {
-	$hora=time();
-	$conexion = conectar_v7();
-	$sqlr="SELECT razonsocial FROM configbasica";
-	$row =mysqli_fetch_row(mysqli_query($conexion,$sqlr));
-	$ttentidad=$row[0];
-	$sqlr="SELECT * FROM interfaz01 ";
-	$resp = mysqli_query($conexion,$sqlr);
-	$ntr = mysqli_num_rows($resp);
-	$row =mysqli_fetch_row($resp);
-	if($ntr==0)
-	{
-		$ttlema="Ingresar Lema de la Entidad";
-		$ttcolor1="#000000";
-		$ttcolor2="#ffffff";
-		$sqlr1="SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='1'";
-		$row1 =mysqli_fetch_row(mysqli_query($conexion,$sqlr1));
-		$ttletra1= $row1[0];
-		$ttflle01="normal";
-		$ttle01="100%";
-		$ttcolorl1="#000000";
-		$sqlr1="SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='1'";
-		$row1 =mysqli_fetch_row(mysqli_query($conexion,$sqlr1));
-		$ttletra2= $row1[0];
-		$ttflle02="normal";
-		$ttle02="100%";
-		$ttcolorl2="#000000";
-	}
-	else
-	{
-		$ttlema=$row[0];
-		$ttcolor1=$row[1];
-		$ttcolor2=$row[2];
-		$sqlr1="SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='$row[3]'";
-		$row1 =mysqli_fetch_row(mysqli_query($conexion,$sqlr1));
-		$ttletra1= $row1[0];
-		$ttflle01=$row[4];
-		$ttle01="$row[5]%";
-		$ttcolorl1=$row[6];
-		$sqlr1="SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='$row[7]'";
-		$row1 =mysqli_fetch_row(mysqli_query($conexion,$sqlr1));
-		$ttletra2= $row1[0];
-		$ttflle02=$row[8];
-		$ttle02="$row[9]%";
-		$ttcolorl2=$row[10];
-	}
-	echo"
-	<td style='height:50px; width:36%;margin-right:0px;padding-right:0px'>
-		<img src='imagenes/escudo.jpg'  style='width:14%;height:131%;float:left;margin-top:1px;'/>
-		<table style='width:85%;height:100%; background: -webkit-linear-gradient($ttcolor1,$ttcolor2);float:left; border-top-right-radius:4px; border-bottom-right-radius:4px;'>
-			<tr>
-				<td style='font-family:$ttletra1;font-style:$ttflle01;text-align:center;font-size:$ttle01;color:$ttcolorl1;'>$ttentidad</td>
-			</tr>
-			<tr>
-				<td style='font-family:$ttletra2;font-style:$ttflle02;text-align:center;font-size:$ttle02;color:$ttcolorl2;'>$ttlema</td>
-			</tr>
-		</table>
-	</td>";
-	echo('
-	<td style="margin-left:0px;padding-left:0px ">
-		<table class="inicio" style="width:100%;margin-left:0px;padding-left:0px">
-			<tr>
-				<td class="saludot"  style="width:1.5cm;" >Usuario: </td>
-				<td>'.substr(ucwords((strtolower(@$_SESSION['usuario']))),0,14).'</td>
-				<td class="saludot" style="width:1.5cm;">Perfil: </td>
-				<td>'.substr(ucwords((strtolower(@$_SESSION["perfil"]))),0,14).'</td>
-				<td rowspan="2"><img class="marco01" id="imagencmS" src="'.@$_SESSION["fotousuario"].'" style="height:57px; width:50px;" /></td>
-			</tr>
-			<tr>
-				<td class="saludot" style="width:1.5cm;">Fecha ingreso:</td>
-				<td>'.' '.$fec=date("d-m-Y").'</td>
-				<td class="saludot" style="width:1.5cm;">Hora Ingreso: </td>
-				<td>'.' '.date ( "h:i:s" , $hora ).'</td>
-			</tr>
-		</table>
-	</td>');
+   
+    $conexion = conectar_v7();
+
+    $sqlr = "SELECT razonsocial FROM configbasica";
+    
+    $row = mysqli_fetch_row(mysqli_query($conexion, $sqlr));
+
+    $ttentidad = $row[0];
+    
+    $sqlr = "SELECT * FROM interfaz01";
+    
+    $resp = mysqli_query($conexion, $sqlr);
+    $ntr = mysqli_num_rows($resp);
+    $row = mysqli_fetch_row($resp);	
+    
+    if($ntr == 0)
+    {
+        $ttlema = "Ingresar Lema de la Entidad";
+        $ttcolor1 = "#000000";
+        $ttcolor2 = "#ffffff";
+        
+        $sqlr1 = "SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='1'";
+        
+        $row1 = mysqli_fetch_row(mysqli_query($conexion, $sqlr1));
+        
+        $ttletra1 = $row1[0];
+        
+        $ttflle01 = "normal";
+        $ttle01 = "100%";
+        $ttcolorl1 = "#000000";
+        
+        $sqlr1 = "SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPOS_DE_LETRA' AND valor_inicial='1'";
+        
+        $row1 = mysqli_fetch_row(mysqli_query($conexion, $sqlr1));
+        
+        $ttletra2 = $row1[0];
+        
+        $ttflle02 ="normal";
+        $ttle02 = "100%";
+        $ttcolorl2 = "#000000";
+    }
+    else
+    {
+        $ttlema = $row[0];
+        $ttcolor1 = $row[1];
+        $ttcolor2 = $row[2];
+        
+        $sqlr1 = 'SELECT descripcion_valor FROM dominios WHERE nombre_dominio=\'TIPOS_DE_LETRA\' AND valor_inicial=\''.$row[3].'\'';
+        
+        $row1 = mysqli_fetch_row(mysqli_query($conexion, $sqlr1));
+        
+        $ttletra1 = $row1[0];
+        $ttflle01 = $row[4];
+        $ttle01 = $row[5].'%';
+        $ttcolorl1 = $row[6];
+        
+        $sqlr1 = 'SELECT descripcion_valor FROM dominios WHERE nombre_dominio=\'TIPOS_DE_LETRA\' AND valor_inicial=\''.$row[7].'\'';
+        
+        $row1 = mysqli_fetch_row(mysqli_query($conexion, $sqlr1));
+        
+        $ttletra2 = $row1[0];
+        $ttflle02 = $row[8];
+        $ttle02 = $row[9].'%';
+        $ttcolorl2 = $row[10];
+    }
+
+    // New Entity Table
+
+    $sqlr = 'SELECT uuid_municipios.uuid, uuid_municipios.name, uuid_municipios.slogan FROM uuid_municipios WHERE id=\'1\';';
+
+    $entity = mysqli_fetch_assoc(mysqli_query($conexion, $sqlr));
+
+    echo '
+    <td style="height:50px; width:36%;margin-right:0px;padding-right:0px">
+        <img src="../../img/shields/'.$entity['uuid'].'.jpg"  style="width:14%;height:131%;float:left;margin-top:1px;"/>
+        <table style="width:85%;height:100%; background: -webkit-linear-gradient('.$ttcolor1.','.$ttcolor2.');float:left; border-top-right-radius:4px; border-bottom-right-radius:4px;">
+            <tr>
+                <td style="font-family:'.$ttletra1.';font-style:'.$ttflle01.';text-align:center;font-size:'.$ttle01.';color:'.$ttcolorl1.';">'.$entity['name'].'</td>
+            </tr>
+            <tr>
+                <td style="font-family:'.$ttletra2.';font-style:'.$ttflle02.';text-align:center;font-size:'.$ttle02.';color:'.$ttcolorl2.';">'.$entity['slogan'].'</td>
+            </tr>
+        </table>
+    </td>
+    <td style="margin-left:0px;padding-left:0px ">
+        <table class="inicio" style="width:100%;margin-left:0px;padding-left:0px">
+            <tr>
+                <td class="saludot" style="width:1.5cm;" >Usuario: </td>
+                <td>'.substr(ucwords((strtolower($_SESSION['usuario']))),0,14).'</td>
+                <td class="saludot" style="width:1.5cm;">Perfil: </td>
+                <td>'.substr(ucwords((strtolower($_SESSION['perfil']))),0,14).'</td>
+                <td rowspan="2"><img class="marco01" id="imagencmS" src="'.$_SESSION['fotousuario'].'" style="height:57px; width:50px;"/></td>
+            </tr>
+            <tr>
+                <td class="saludot" style="width:1.5cm;">Fecha ingreso:</td>
+                <td> '.date("d-m-Y").'</td>
+                <td class="saludot" style="width:1.5cm;">Hora Ingreso: </td>
+                <td> '.date('h:i:s').'</td>
+            </tr>
+        </table>
+    </td>';
 }
 //FIN CARGA CUADRO DE TITULOS
 //****BUSQUEDA RECURSIVA
@@ -3935,101 +3967,137 @@ function buscapagotercero_detalle($codpago,$mes,$vigencia)
 }
 function cargarcodigopag($cod,$nivel)
 {//header ("location: http://servidor/financiero/principal.php");
-	if ($cod!="")
+	if ($cod != "")
 	{
-		$datin=datosiniciales();
-		if(!($conexion=mysql_connect($datin[1],$datin[2],$datin[3])))
-		die("no se puede conectar");
-		if(!mysql_select_db($datin[0]))
-		die("no se puede seleccionar bd");
-		$cod=strtoupper($cod);
-		$sqlr="SELECT id_opcion,ruta_opcion FROM opciones WHERE comando='".$cod."'";
-		$r=mysql_fetch_row(mysql_query($sqlr,$conexion));
-		$opsi=$r[0];
+        $datin=datosiniciales();
+        
+        if(!($conexion=mysql_connect($datin[1],$datin[2],$datin[3])))
+        
+        die("no se puede conectar");
+        
+        if(!mysql_select_db($datin[0]))
+        
+        die("no se puede seleccionar bd");
+        
+        $cod = strtoupper($cod);
+        
+        $sqlr="SELECT id_opcion,ruta_opcion FROM opciones WHERE comando='".$cod."'";
+        
+        $r=mysql_fetch_row(mysql_query($sqlr,$conexion));
+        
+        $opsi=$r[0];
+        
 		if ($opsi!="")
 		{
-			$sqln="SELECT id_opcion FROM rol_priv WHERE id_rol='".$nivel."' AND id_opcion='".$opsi."'";
-			$niv=mysql_fetch_row(mysql_query($sqln,$conexion));
-			$supnivel=$niv[0];
-			if($supnivel!="")
+            $sqln = "SELECT id_opcion FROM rol_priv WHERE id_rol='".$nivel."' AND id_opcion='".$opsi."'";
+            
+            $niv = mysql_fetch_row(mysql_query($sqln,$conexion));
+            
+            $supnivel = $niv[0];
+            
+			if($supnivel != "")
 			{
-				cargainfomenus(strtoupper(substr($cod,0,2)),$nivel);
-				$pagina=$r[1];
-				if($pagina!=""){$pagina="location: http://servidor/financiero/".$pagina;header ($pagina);}
-				else{echo '<script >alert(" C\xf3digo de P\xe1gina Incorrecto");</script>';}
+                cargainfomenus(strtoupper(substr($cod,0,2)),$nivel);
+                
+                $pagina=$r[1];
+                
+                if($pagina!="")
+                {
+                    $pagina="location: http://servidor/financiero/".$pagina;header ($pagina);
+                }
+                else
+                {
+                    echo '<script >alert("Código de Página Incorrecto");</script>';
+                }
 			}
 			else
-			{echo '<script >alert("No tiene los privilegios para abrir esta p\xe1gina");</script>';}
+			{
+                echo '<script>alert("No tiene los privilegios para abrir esta página");</script>';
+            }
 		}
-		else{echo '<script >alert(" C\xf3digo de P\xe1gina Incorrecto");</script>';}
+        else
+        {
+            echo '<script>alert("Código de Página Incorrecto");</script>';
+        }
 	}
 }
-function cargainfomenus($cod,$nivel)
-{
-	$datin=datosiniciales();
-	if(!($conexion=mysql_connect($datin[1],$datin[2],$datin[3])))
-	die("no se puede conectar");
-	if(!mysql_select_db($datin[0]))
-	die("no se puede seleccionar bd");
+function cargainfomenus($cod, $nivel)
+{ 
+    $conexion = conectar_v7();
+    
 	switch ($cod)
 	{
 		case "PE":
-			$marcalink="linksetpl";
-			$opcion="9";
+			$marcalink = "linksetpl";
+			$opcion = "9";
 			break;
 		case "AD":
-			$marcalink="linksetad";
-			$opcion="0";
+			$marcalink = "linksetad";
+			$opcion = "0";
 			break;
 		case "AF":
-			$marcalink="linksetac";
-			$opcion="6";
+			$marcalink = "linksetac";
+			$opcion = "6";
 			break;
 		case "CO":
-			$marcalink="linksetco";
-			$opcion="1";
+			$marcalink = "linksetco";
+			$opcion = "1";
 			break;
 		case "TE":
-			$marcalink="linksette";
-			$opcion="4";
+			$marcalink = "linksette";
+			$opcion = "4";
 			break;
 		case "CT":
-			$marcalink="linksetct";
-			$opcion="8";
+			$marcalink = "linksetct";
+			$opcion = "8";
 			break;
 		case "PR":
-			$marcalink="linksetpr";
-			$opcion="3";
+			$marcalink = "linksetpr";
+			$opcion = "3";
 			break;
 		case "SP":
-			$marcalink="linksetser";
-			$opcion="10";
+			$marcalink = "linksetser";
+			$opcion = "10";
 			break;
 		case "GH":
-			$marcalink="linksethu";
-			$opcion="2";
+			$marcalink = "linksethu";
+			$opcion = "2";
 			break;
 		case "ME":
-			$marcalink="linkset";
-			$opcion="7";
+			$marcalink = "linkset";
+			$opcion = "7";
 			break;
 		case "AL":
-			$marcalink="linksetin";
-			$opcion="5";
+			$marcalink = "linksetin";
+			$opcion = "5";
 			break;
 		case "CC":
-			$marcalink="linksetccp";
-			$opcion="11";
+			$marcalink = "linksetccp";
+			$opcion = "11";
 			break;
-	}
-	$_SESSION[$marcalink]=array();
-	$sqlrw="Select DISTINCT (opciones.nom_opcion),opciones.ruta_opcion, opciones.niv_opcion,opciones.comando  from rol_priv, opciones where rol_priv.id_rol=$nivel and opciones.id_opcion=rol_priv.id_opcion and opciones.modulo='$opcion' group by (opciones.nom_opcion), opciones.ruta_opcion, opciones.niv_opcion,opciones.comando  order by opciones.orden";
-	$resw=mysql_query($sqlrw,$conexion);
-	while($roww=mysql_fetch_row($resw))
+    }
+    
+    $_SESSION[$marcalink] = array();
+
+    $sqlrw = 'SELECT DISTINCT opciones.niv_opcion FROM rol_priv, opciones WHERE rol_priv.id_rol=\''.$nivel.'\' AND opciones.id_opcion=rol_priv.id_opcion AND opciones.modulo=\''.$opcion.'\' ORDER BY opciones.orden';
+
+    $resw = mysqli_query($conexion, $sqlrw);
+
+    while($roww = mysqli_fetch_assoc($resw))
     {
-	 	$_SESSION[$marcalink][$roww[2]].='<li> <a href="'.$roww[1].'">'.$roww[0].' <span style="float:right">'.$roww[3].'</span></a></li>';
-	}
+	 	$_SESSION[$marcalink][$roww['niv_opcion']] = null;
+    }
+    
+    $sqlrw = 'SELECT DISTINCT (opciones.nom_opcion), opciones.ruta_opcion, opciones.niv_opcion, opciones.comando FROM rol_priv, opciones WHERE rol_priv.id_rol=\''.$nivel.'\' AND opciones.id_opcion=rol_priv.id_opcion AND opciones.modulo=\''.$opcion.'\' GROUP BY (opciones.nom_opcion), opciones.ruta_opcion, opciones.niv_opcion,opciones.comando  ORDER BY opciones.orden';
+
+    $resw = mysqli_query($conexion, $sqlrw);
+    
+    while($roww = mysqli_fetch_row($resw))
+    {
+	 	$_SESSION[$marcalink][$roww[2]] .= '<li><a href="'.$roww[1].'">'.$roww[0].' <span style="float:right">'.$roww[3].'</span></a></li>';
+    }
 }
+
 //******FUNCIONES PPTO *******
 function buscacdp_detalle($numero,$vigencia)
 {
