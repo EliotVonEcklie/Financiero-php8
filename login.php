@@ -7,6 +7,7 @@
     
 	session_start();
 	session_destroy();
+
     date_default_timezone_set("America/Bogota");
     
     $linkbd = conectar_v7();
@@ -54,8 +55,8 @@
 			}
 		</style>
 
-		<script type='text/javascript' src='js/JQuery/jquery-2.1.4.min.js'></script>
-		<script type="text/javascript" src='js/JQuery/jquery.ripples.js'></script>
+		<script type='text/javascript' src = 'js/JQuery/jquery-2.1.4.min.js'></script>
+		<script type="text/javascript" src = 'js/JQuery/jquery.ripples.js'></script>
 
         <script>
             $(document).ready(function() {
@@ -70,9 +71,9 @@
 		<script>
 			function despliegamodalm(_valor,mensa)
 			{
-				document.getElementById("bgventanamodalm").style.visibility=_valor;
-				if(_valor=="hidden") {document.getElementById('ventanam').src="";}
-				else {document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;}
+				document.getElementById("bgventanamodalm").style.visibility = _valor;
+				if(_valor == "hidden") {document.getElementById('ventanam').src = "";}
+				else {document.getElementById('ventanam').src="ventana-mensaje3.php?titulos = "+mensa;}
 			}
 			var ctrlPressed = false;
 			var tecla01 = 16, tecla02 = 66;
@@ -80,23 +81,23 @@
 			if (e.keyCode == tecla01){ctrlPressed = true;}
 			if (ctrlPressed && (e.keyCode == tecla02))
 			{
-				if(document.form1.vistab.value=="hidden")
+				if(document.form1.vistab.value == "hidden")
 				{
-					document.form1.vistab.value="visible";
-					document.form1.oculto.value="2";
+					document.form1.vistab.value = "visible";
+					document.form1.oculto.value = "2";
 					document.form1.submit();
 				}
 				else 
 				{
-					document.form1.vistab.value="hidden";
-					document.form1.oculto.value="2"
+					document.form1.vistab.value = "hidden";
+					document.form1.oculto.value ="2"
 					document.form1.submit();
 				}
 			}
 			if (e.keyCode == '13'){document.form1.submit();}
 			});
 			$(document).keyup(function(e){
-			if (e.keyCode ==tecla01){ctrlPressed = false;}
+			if (e.keyCode == tecla01){ctrlPressed = false;}
 			});
 		</script>
 
@@ -115,7 +116,7 @@
 					$archivo = '.env';
 					$contenido = file_get_contents($archivo);
 					$contenido = explode("\n", $contenido);
-                    $_POST['basesfun'] = str_replace('DB_NAME=', '', $contenido[1]);
+                    $_POST['basesfun'] = str_replace('DB_NAME = ', '', $contenido[1]);
                     
 				}
 			?>
@@ -144,7 +145,7 @@
 						<td>
 							<select name="basesfun" id="basesfun">
 								<?php
-                                    $sqlr="SHOW DATABASES";
+                                    $sqlr = "SHOW DATABASES";
                                     
                                     $resp = mysqli_query($linkbd,$sqlr);
 
@@ -158,7 +159,7 @@
                                                 continue;
                                         }
 
-                                        echo '<option value="'.$row[0].'">'.$row[0].'</option>';
+                                        echo '<option value = "'.$row[0].'">'.$row[0].'</option>';
 									}
 								?>
 							</select>

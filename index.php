@@ -1,6 +1,7 @@
 <?php
 	require 'include/comun.php';
 	require 'include/funciones.php';
+
 	session_start();
 	session_destroy();
 ?>
@@ -9,7 +10,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+
 		<title>:: FINANCIERO</title>
+		
 		<?php titlepag();?>
 	</head>
 	<body style="background-color:darkseagreen; display: flex; justify-content: center; align-items: center;" >

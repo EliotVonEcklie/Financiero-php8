@@ -26,7 +26,7 @@
         
         $res = mysqli_query($linkbd,$sqlr);
         
-        while($r=mysqli_fetch_row($res))
+        while($r = mysqli_fetch_row($res))
         {
             $vigencia = $r[1];
         }
@@ -81,19 +81,19 @@
                 $_SESSION["fotousuario"] = '../../img/user_profile_photos/'.$dirfoto;
             }
 
-			$corresmensaje="1";
-			$sqlr="SELECT * FROM usuarios_privilegios WHERE id_usu='$idusu'";
-			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+			$corresmensaje = "1";
+			$sqlr = "SELECT * FROM usuarios_privilegios WHERE id_usu = '$idusu'";
+			$row = mysqli_fetch_row(mysqli_query($linkbd,$sqlr)); 
 			//$_SESSION["prcrear"]=$row[1];
 			//$_SESSION["preditar"]=$row[2];
 			//$_SESSION["prdesactivar"]=$row[3];
 			//$_SESSION["preliminar"]=$row[4];
-			$_SESSION['prcrear']=1;
-			$_SESSION['preditar']=1;
-			$_SESSION['prdesactivar']=1;
-            $_SESSION['preliminar']=1;
+			$_SESSION['prcrear'] = 1;
+			$_SESSION['preditar'] = 1;
+			$_SESSION['prdesactivar'] = 1;
+            $_SESSION['preliminar'] = 1;
             
-            $sqlr="SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio='SEPARADOR_NUMERICO'";
+            $sqlr = "SELECT valor_inicial, valor_final, descripcion_valor FROM dominios WHERE nombre_dominio = 'SEPARADOR_NUMERICO'";
             
             $row = mysqli_fetch_assoc(mysqli_query($linkbd,$sqlr));
             
@@ -136,23 +136,23 @@
             }
 
 			//verificaci�n de tipo de caracteres
-			$sqlr="SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio='TIPO_CARACTER_VERPHP'";
+			$sqlr = "SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio = 'TIPO_CARACTER_VERPHP'";
 			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
 			$_SESSION['VERCARPHPINI'] = $row[0];
 			$_SESSION['VERCARPHPFIN'] = $row[1];
-			$sqlr="SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio='TIPO_CARACTER_VERPDF'";
-			$row =mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
+			$sqlr = "SELECT valor_inicial, valor_final FROM dominios WHERE nombre_dominio = 'TIPO_CARACTER_VERPDF'";
+			$row = mysqli_fetch_row(mysqli_query($linkbd,$sqlr));
 			$_SESSION['VERCARPDFINI'] = $row[0];
 			$_SESSION['VERCARPDFFIN'] = $row[1];
 			//registro log
-			$accion="USUARIO INICIA SESION EN EL SISTEMA";
-			$origen=getUserIpAddr();
+			$accion = "USUARIO INICIA SESION EN EL SISTEMA";
+			$origen = getUserIpAddr();
 			generaLogs($_SESSION['nickusu'],'PRI','V',$accion,$origen);
 		}
 	}
 ?>
 <!DOCTYPE >
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang="es">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
@@ -174,10 +174,10 @@
 				margin: 0 !important;
 			}
 		</style>
-		<script type="text/javascript" src="js/programas.js"></script>
-		<script type="text/javascript" src="js/funcioneshf.js"></script>
-		<script type='text/javascript' src="js/JQuery/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="js/JQuery/jquery.ripples.js"></script>
+		<script type = "text/javascript" src = "js/programas.js"></script>
+		<script type = "text/javascript" src = "js/funcioneshf.js"></script>
+		<script type = 'text/javascript' src = "js/JQuery/jquery-2.1.4.min.js"></script>
+		<script type = "text/javascript" src = "js/JQuery/jquery.ripples.js"></script>
 		<script>$(document).ready(function(){$('body').ripples({resolution: 512,dropRadius: 10,perturbance: 0.04});});</script>
 		<script language="javascript">
 			var infecha= new Array();
@@ -189,52 +189,55 @@
 			var indescripc=new Array();
 			var inprioridad= new Array();
 			var colorprio= new Array();
-			var contarmen=0;
-			var ainfecha= new Array();
-			var ainhorain= new Array();
-			var ainevento= new Array();
-			var aindescripc=new Array();
-			var ainprioridad= new Array();
-			var acolorprio= new Array();
-			var acontarmen=0;
+			var contarmen = 0;
+			var ainfech = new Array();
+			var ainhorain = new Array();
+			var ainevento = new Array();
+			var aindescripc =new Array();
+			var ainprioridad = new Array();
+			var acolorprio = new Array();
+			var acontarmen = 0;
 			var infid=new Array();
-			var inftitulos=new Array();
-			var infcontarmen=0;
+			var inftitulos = new Array();
+			var infcontarmen = 0;
 			var idgeneral;
 			var idgeneral;
-			function detenermar(marqid){document.getElementById(marqid).scrollAmount=0;}
-			function arrancarmar(marqid){document.getElementById(marqid).scrollAmount=2;}
-			function despliegamodal(_valor){document.getElementById("bgventanamodal").style.visibility=_valor;}
+			function detenermar(marqid){document.getElementById(marqid).scrollAmount = 0;}
+			function arrancarmar(marqid){document.getElementById(marqid).scrollAmount = 2;}
+			function despliegamodal(_valor){document.getElementById("bgventanamodal").style.visibility = _valor;}
 			function despliegamodalm(_valor,mensa)
 			{
-				document.getElementById("bgventanamodalm").style.visibility=_valor;
-				if(_valor=="hidden"){document.getElementById('ventanam').src="";}
-				else{document.getElementById('ventanam').src="modules/modals/ventana-mensaje3.php?titulos="+mensa;}
+				document.getElementById("bgventanamodalm").style.visibility = _valor;
+				if(_valor == "hidden"){document.getElementById('ventanam').src="";}
+                else
+                {
+                    document.getElementById('ventanam').src = "modules/modals/ventana-mensaje3.php?titulos=" + mensa;
+                }
 			}
 			function tipopresupuesto(_valor)
 			{
-				document.getElementById("bgventanamodalm").style.visibility=_valor;
-				if(_valor=="hidden"){document.getElementById('ventanam').src="";}
+				document.getElementById("bgventanamodalm").style.visibility = _valor;
+				if(_valor == "hidden"){document.getElementById('ventanam').src = "";}
 				else
 				{
-					document.getElementById('ventanam').src="modules/modals/ventana-tipopresupuesto.php";
+					document.getElementById('ventanam').src = "modules/modals/ventana-tipopresupuesto.php";
 				}
 			}
 			function presupuesto_normal()
 			{
-				if(document.getElementById('npresupuesto').value!='')
-				{location.href=document.getElementById('npresupuesto').value;}
+				if(document.getElementById('npresupuesto').value!= '')
+				{location.href = document.getElementById('npresupuesto').value;}
 			}
 			function presupuesto_ccpet()
 			{
-				if(document.getElementById('npresupuestoccpet').value!='')
-				{location.href=document.getElementById('npresupuestoccpet').value;}
+				if(document.getElementById('npresupuestoccpet').value!= '')
+				{location.href = document.getElementById('npresupuestoccpet').value;}
 			}
 		</script>
 		<?php titlepag();?>
 	</head>
 	<body>
-		<IFRAME src="alertas.php" name="alertas" id="alertas" style="display:none"></IFRAME>
+		<IFRAME src = "alertas.php" name = "alertas" id = "alertas" style = "display:none"></IFRAME>
 		<span id="todastablas2"></span>
 		<br><br><br><br>
 		<table class="tablaprin">
@@ -269,17 +272,17 @@
 			<input type="hidden" name="npresupuesto" id="npresupuesto" value="<?php echo @$_SESSION['linkmod'][3];?>"/>
 			<input type="hidden" name="npresupuestoccpet" id="npresupuestoccpet" value="<?php echo @$_SESSION['linkmod'][11];?>"/>
 			<?php
-				$sqlr="CREATE TEMPORARY TABLE usr_session (cedula_usuario varchar(20))";
-				$sqlr="INSERT INTO usr_session values ('".$_SESSION['usuario']."')";
+				$sqlr = "CREATE TEMPORARY TABLE usr_session (cedula_usuario varchar(20))";
+				$sqlr = "INSERT INTO usr_session values ('".$_SESSION['usuario']."')";
 				if(!mysqli_query($linkbd,$sqlr))
 				{
 					//echo "NO SE INSERTÓ:".mysql_error($linkbd);
 				}
 				else
 				{
-					$sqlr="SELECT cedula_usuario FROM usr_session WHERE cedula_usuario='".$_SESSION['usuario']."'";
-					$res=mysqli_query($linkbd,$sqlr);
-					$row=mysqli_fetch_array($res);
+					$sqlr = "SELECT cedula_usuario FROM usr_session WHERE cedula_usuario = '".$_SESSION['usuario']."'";
+					$res = mysqli_query($linkbd,$sqlr);
+					$row = mysqli_fetch_array($res);
 					//echo "<DIV class='resaltado'>DEVOLVIO:".$row[0]."</DIV>"; corcumare  corp social y cultural del cumare
 				}
 			?>
@@ -297,6 +300,7 @@
 			</tr>
 			<?php //***Tareas***
 				$sqlr = "SELECT fechasig,codigo,codradicacion,proceso,tipot FROM planacresponsables WHERE estado='AN' AND usuariocon = '".$_SESSION['cedulausu']."' ORDER BY codigo ASC;";
+				
 				if($res = mysqli_query($linkbd,$sqlr))
 				{
 					while ($rowEmp = mysqli_fetch_row($res))
@@ -321,48 +325,51 @@
 					}
 
 				}
-				$sqlr="SELECT * FROM agenda WHERE fechaevento >= CURDATE() AND usrecibe='".$_SESSION['cedulausu']."'";
-				$res=mysqli_query($linkbd,$sqlr);
+				
+				$sqlr = "SELECT * FROM agenda WHERE fechaevento >= CURDATE() AND usrecibe='".$_SESSION['cedulausu']."'";
+				
+				$res = mysqli_query($linkbd,$sqlr);
+				
 				while ($rowEmp = mysqli_fetch_assoc($res))
 				{
-					$fechamen=$rowEmp['fechaevento'];
-					$fechven=$rowEmp['horainicial'];
-					$nomeven=$rowEmp['evento'];
-					$desevento=$rowEmp['descripcion'];
-					$prioeven=$rowEmp['prioridad'];
-					$sqlr3="SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPO_EVENTO_AG' AND valor_inicial='$nomeven'";
-					$res3=mysqli_query($linkbd,$sqlr3);
-					$temensa= mysqli_fetch_assoc($res3);
-					$texmensaje=$temensa['descripcion_valor'];
-					$sqlr2="SELECT valor_final FROM dominios WHERE nombre_dominio='PRIORIDAD_EVENTOS_AG' AND valor_inicial='$prioeven'";
-					$res2=mysqli_query($linkbd,$sqlr2);
-					$colmensa= mysqli_fetch_assoc($res2);
-					$colorevento=$colmensa['valor_final'];
+					$fechamen = $rowEmp['fechaevento'];
+					$fechven = $rowEmp['horainicial'];
+					$nomeven = $rowEmp['evento'];
+					$desevento = $rowEmp['descripcion'];
+					$prioeven = $rowEmp['prioridad'];
+					$sqlr3 = "SELECT descripcion_valor FROM dominios WHERE nombre_dominio='TIPO_EVENTO_AG' AND valor_inicial='$nomeven'";
+					$res3 = mysqli_query($linkbd,$sqlr3);
+					$temensa = mysqli_fetch_assoc($res3);
+					$texmensaje = $temensa['descripcion_valor'];
+					$sqlr2 = "SELECT valor_final FROM dominios WHERE nombre_dominio='PRIORIDAD_EVENTOS_AG' AND valor_inicial='$prioeven'";
+					$res2 = mysqli_query($linkbd,$sqlr2);
+					$colmensa = mysqli_fetch_assoc($res2);
+					$colorevento = $colmensa['valor_final'];
 					echo"
 					<script>
 					{
-						ainfecha[acontarmen]= '$fechamen';
-						ainhorain[acontarmen]= '$fechven';
-						ainevento[acontarmen]= '$texmensaje';
-						aindescripc[acontarmen]='$desevento';
-						ainprioridad[acontarmen]= '$prioeven';
-						acolorprio[acontarmen]='$colorevento';
+						ainfecha[acontarmen] = '$fechamen';
+						ainhorain[acontarmen] = '$fechven';
+						ainevento[acontarmen] = '$texmensaje';
+						aindescripc[acontarmen] ='$desevento';
+						ainprioridad[acontarmen] = '$prioeven';
+						acolorprio[acontarmen] = '$colorevento';
 						acontarmen++;
 					}
 					</script>";
 				}
-				$fec=date("Y-m-d");
-				$sqlr="SELECT * FROM infor_interes WHERE '$fec' BETWEEN fecha_inicio AND fecha_fin AND estado='S'";
-				$res=mysqli_query($linkbd,$sqlr);
+				$fec = date("Y-m-d");
+				$sqlr = "SELECT * FROM infor_interes WHERE '$fec' BETWEEN fecha_inicio AND fecha_fin AND estado='S'";
+				$res = mysqli_query($linkbd,$sqlr);
 				while ($rowEmp = mysqli_fetch_assoc($res))
 				{
-					$infoid=$rowEmp['indices'];
-					$infotitulos=$rowEmp['titulos'];
+					$infoid = $rowEmp['indices'];
+					$infotitulos = $rowEmp['titulos'];
 					echo"
 					<script>
 					{
-						infid[infcontarmen]= '$infoid';
-						inftitulos[infcontarmen]= '$infotitulos';
+						infid[infcontarmen] = '$infoid';
+						inftitulos[infcontarmen] = '$infotitulos';
 						infcontarmen++;
 					}
 					</script>";

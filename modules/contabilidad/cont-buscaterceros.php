@@ -154,74 +154,97 @@
             </div>
         </div>
         <?php
-			if($_POST['oculto']=="")
-			{
-				$_POST['scrtop'] = $_GET['scrtop'];
-                if($_POST['scrtop'] == "")
+            
+            if (isset($_POST['oculto']))
+            {
+                if($_POST['oculto']=="")
                 {
-                    $_POST['scrtop'] = 0;
-                }
-
-                $_POST['gidcta']=$_GET['idcta'];
-                
-                if(isset($_GET['filtro']))
-                {
-                    $_POST['numero'] = $_GET['filtro'];
+                    $_POST['scrtop'] = $_GET['scrtop'];
+                    if($_POST['scrtop'] == "")
+                    {
+                        $_POST['scrtop'] = 0;
+                    }
+    
+                    $_POST['gidcta']=$_GET['idcta'];
+                    
+                    if(isset($_GET['filtro']))
+                    {
+                        $_POST['numero'] = $_GET['filtro'];
+                    }
                 }
             }
+			
             
+            if (isset($_POST['scrtop']))
+            {
             echo "<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST['scrtop'].")}</script>";
-            
-			if($_GET['numpag'] != '')
-			{
-				$oculto = $_POST['oculto'];
-				if($oculto != 2)
-				{
-					$_POST['numres'] = $_GET['limreg'];
-					$_POST['numpos'] = $_GET['limreg'] * ($_GET['numpag'] - 1);
-					$_POST['nummul'] = $_GET['numpag'] - 1;
-				}
-			}
+            }
+            if (isset($_GET['numpag']))
+            {
+                if($_GET['numpag'] != '')
+                {
+                    $oculto = $_POST['oculto'];
+                    if($oculto != 2)
+                    {
+                        $_POST['numres'] = $_GET['limreg'];
+                        $_POST['numpos'] = $_GET['limreg'] * ($_GET['numpag'] - 1);
+                        $_POST['nummul'] = $_GET['numpag'] - 1;
+                    }
+                }
+            }    
             else
             {
-                if($_POST['nummul'] == '')
+                if (isset($_GET['nummul']))
                 {
-                    $_POST['numres'] = 10;
-                    $_POST['numpos'] = 0;
-                    $_POST['nummul'] = 0;
+                    if($_POST['nummul'] == '')
+                    {
+                        $_POST['numres'] = 10;
+                        $_POST['numpos'] = 0;
+                        $_POST['nummul'] = 0;
+                    }
                 }
+                    
             }
 		?>
  		<form name="form2" method="post" action="cont-buscaterceros.php">
  			<?php
-				if($_POST['oculto2']=="")
-				{
-					$_POST['oculto2']="0";
-					$_POST['cambioestado']="";
-					$_POST['nocambioestado']="";
-				}
-				//*****************************************************************
-				if($_POST['cambioestado'] != "")
-				{
-					if($_POST['cambioestado'] == "1")
-					{
-                        $sqlr = 'UPDATE terceros SET estado=\'S\' WHERE id_tercero=\''.$_POST['idestado'].'\'';
-                     	mysql_fetch_row(mysql_query($sqlr, $linkbd)); 
-					}
-					else 
-					{
-                        $sqlr="UPDATE terceros SET estado='N' WHERE id_tercero='$_POST[idestado]'";
-                     	mysql_fetch_row(mysql_query($sqlr, $linkbd)); 
-					}
+                if (isset($_GET['oculto2']))
+                {
+                    if($_POST['oculto2']=="")
+                    {
+                        $_POST['oculto2']="0";
+                        $_POST['cambioestado']="";
+                        $_POST['nocambioestado']="";
+                    }
+                }    
+                //*****************************************************************
+                if (isset($_GET['cambioestado']))
+                {
+                    if($_POST['cambioestado'] != "")
+                    {
+                        if($_POST['cambioestado'] == "1")
+                        {
+                            $sqlr = 'UPDATE terceros SET estado=\'S\' WHERE id_tercero=\''.$_POST['idestado'].'\'';
+                            mysqli_fetch_row(mysqli_query($sqlr, $linkbd)); 
+                        }
+                        else 
+                        {
+                            $sqlr="UPDATE terceros SET estado='N' WHERE id_tercero='$_POST[idestado]'";
+                            mysqli_fetch_row(mysqli_query($sqlr, $linkbd)); 
+                        }
 					echo"<script>document.form2.cambioestado.value=''</script>";
-				}
-				//*****************************************************************
-				if($_POST[nocambioestado]!="")
-				{
-					if($_POST[nocambioestado]=="1"){$_POST[lswitch1][$_POST[idestado]]=1;}
-					else {$_POST[lswitch1][$_POST[idestado]]=0;}
-					echo"<script>document.form2.nocambioestado.value=''</script>";
-				}
+                    }
+                }    
+                //*****************************************************************
+                if (isset($_GET['nocambioestado']))
+                {
+                    if($_POST['nocambioestado']!="")
+                    {
+                        if($_POST['nocambioestado']=="1"){$_POST['lswitch1'][$_POST['idestado']]=1;}
+                        else {$_POST['lswitch1'][$_POST['idestado']]=0;}
+                        echo"<script>document.form2.nocambioestado.value=''</script>";
+                    }
+                }    
 			?>
 			<table  class="inicio" align="center" >
            		<tr>
@@ -231,26 +254,36 @@
       			<tr>
         			<td class="saludo1" style='width:4cm;'>:: Documento o Nombre:</td>
         			<td>
-                    	<input type="search" name="nombre" id="nombre" value="<?php echo $_POST[nombre];?>" style='width:50%;'/>
-                        <input type="button" name="bboton" onClick="limbusquedas();" value="&nbsp;&nbsp;Buscar&nbsp;&nbsp;" />
-                    </td>
+                        <?php
+                            if (isset($_GET['cambioestado']))
+                            {
+                        ?>
+                    	        <input type="search" name="nombre" id="nombre" value="<?php echo $_POST['nombre'];?>" style='width:50%;'/>
+                                <input type="button" name="bboton" onClick="limbusquedas();" value="&nbsp;&nbsp;Buscar&nbsp;&nbsp;" />
+                                </td>
+                        <?php
+                            }
+                        ?>
        			</tr>                       
     		</table> 
             <input type="hidden" name="oculto" id="oculto" value="1"/>
 			<input type="hidden" name="ac" id="ac" value="1"/>
 			<input type="hidden" name="cod" id="cod" value="1"/>   
-    		<?php 
-				$ca=$_POST[ac];
+            <?php 
+            if (isset($_POST['ac']))
+            {
+                $ca=$_POST['ac'];
+                
 				if ($ca==2)
 				{
 					$sqlr="select count(*) from comprobante_det where  tercero='$_POST[cod]'";
-					$res=mysql_query($sqlr,$linkbd);
-					$cf =mysql_fetch_row($res);
+					$res=mysqli_query($linkbd,$sqlr);
+					$cf =mysqli_fetch_row($res);
 					if($cf[0]==0)
 		 			{
 						$sqlr="delete from terceros  where cedulanit='$_POST[cod]' ";
 						$cont=0;
-						$resp=mysql_query($sqlr,$linkbd);
+						$resp=mysqli_query($linkbd,$sqlr);
 						if (!$resp) 
 						{	
 	 						echo "<table><tr><td class='saludo1'><center><font color=blue>Manejador de Errores de la Clase BD<br><font size=1></font></font><br><p align=center>No se pudo ejecutar la petición: <br><font color=red><b>$sqlr</b></font></p>";
@@ -264,41 +297,97 @@
 						}
 						else
 						{
-							$ntr = mysql_affected_rows();
+							$ntr = mysqli_affected_rows($linkbd);
 							if ($ntr==0){echo "<script>alert('No se puede anular la cuenta por ser de tipo Mayor');</script>";}
 						}
 					}
 					else {echo "<script>alert('No se puede anular, porque el Tercero tiene movimientos contables anteriores');</script>";}
-				}   
-  			?>
-    		<input type="hidden" name="oculto2" id="oculto2" value="<?php echo $_POST[oculto2];?>"/>
-    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php echo $_POST[cambioestado];?>"/>
-    		<input type="hidden" name="nocambioestado" id="nocambioestado" value="<?php echo $_POST[nocambioestado];?>"/>
-    		<input type="hidden" name="idestado" id="idestado" value="<?php echo $_POST[idestado];?>"/>
-            <input type="hidden" name="numres" id="numres" value="<?php echo $_POST[numres];?>"/>
-    		<input type="hidden" name="numpos" id="numpos" value="<?php echo $_POST[numpos];?>"/>
-       		<input type="hidden" name="nummul" id="nummul" value="<?php echo $_POST[nummul];?>"/>
-            <input type="hidden" name="scrtop" id="scrtop" value="<?php echo $_POST[scrtop];?>"/>
-        	<input type="hidden" name="gidcta" id="gidcta" value="<?php echo $_POST[gidcta];?>"/>
+                } 
+            }      
+            if (isset($_GET['oculto2']))
+            {?>
+                <input type="hidden" name="oculto2" id="oculto2" value="<?php echo $_POST['oculto2'];?>"/>
+            <?php
+            }
+            if (isset($_GET['cambioestado']))
+            {?>
+    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php echo $_POST['cambioestado'];?>"/>
+            <?php
+            }
+            if (isset($_GET['nocambioestado']))
+            {?>
+    		<input type="hidden" name="nocambioestado" id="nocambioestado" value="<?php echo $_POST['nocambioestado'];?>"/>
+            <?php
+            }
+            if (isset($_GET['idestado']))
+            {?>
+    		<input type="hidden" name="idestado" id="idestado" value="<?php echo $_POST['idestado'];?>"/>
+            <?php
+            }
+            if (isset($_GET['numres']))
+            {?>
+            <input type="hidden" name="numres" id="numres" value="<?php echo $_POST['numres'];?>"/>
+            <?php
+            }
+            if (isset($_GET['numpos']))
+            {?>
+            <input type="hidden" name="numpos" id="numpos" value="<?php echo $_POST['numpos'];?>"/>
+            <?php
+            }
+            if (isset($_GET['nummul']))
+            {?>
+       		<input type="hidden" name="nummul" id="nummul" value="<?php echo $_POST['nummul'];?>"/>
+            <?php
+            }
+            if (isset($_GET['scrtop']))
+            {?>
+            <input type="hidden" name="scrtop" id="scrtop" value="<?php echo $_POST['scrtop'];?>"/>
+            <?php
+            }
+            if (isset($_GET['gidcta']))
+            {?>
+        	<input type="hidden" name="gidcta" id="gidcta" value="<?php echo $_POST['gidcta'];?>"/>
+            <?php
+            }
+            ?>
 			<div class="subpantallap" style="height:68%; width:99.6%; overflow-x:hidden;" id="divdet">
       		<?php
-				$oculto=$_POST['oculto'];
-				//if($_POST[oculto])
+                if (isset($_GET['oculto']))
+                {
+				    $oculto=$_POST['oculto'];
+                    //if($_POST[oculto])
+                }    
 				{
-					$crit1=" ";
-					if ($_POST[nombre]!="")
-					{$crit1="WHERE concat_ws(' ', nombre1,nombre2,apellido1,apellido2,razonsocial,cedulanit) LIKE '%$_POST[nombre]%'";}
+                    $crit1=" ";
+                if (isset($_GET['nombre']))
+                {
+                    if ($_POST['nombre']!="")
+                        
+                    {$crit1="WHERE concat_ws(' ', nombre1,nombre2,apellido1,apellido2,razonsocial,cedulanit) LIKE '%$_POST[nombre]%'";}
+                }    
 					$sqlr="SELECT * FROM terceros $crit1";
-					$resp = mysql_query($sqlr,$linkbd);
-					$_POST[numtop]=mysql_num_rows($resp);
-					$nuncilumnas=ceil($_POST[numtop]/$_POST[numres]);
-					$cond2="";
-					if ($_POST[numres]!="-1"){$cond2="LIMIT $_POST[numpos], $_POST[numres]"; }
+					$resp = mysqli_query($linkbd,$sqlr);
+                    $_POST['numtop']=mysqli_num_rows($resp);
+                    
+                    if (isset($_GET['nummul']))
+                    {
+                        $nuncilumnas=ceil($_POST['numtop']/$_POST['numres']);
+                    }    
+                    $cond2="";
+                if (isset($_GET['numres']))
+                {    
+                    if ($_POST['numres']!="-1"){$cond2="LIMIT $_POST[numpos], $_POST[numres]"; }
+                }
 					$sqlr="SELECT * FROM terceros $crit1 ORDER BY apellido1,apellido2,nombre1,nombre2,razonsocial $cond2";
-					$resp = mysql_query($sqlr,$linkbd);
-					$con=1;
-					$numcontrol=$_POST[nummul]+1;
-					if(($nuncilumnas==$numcontrol)||($_POST[numres]=="-1"))
+					$resp = mysqli_query($linkbd,$sqlr);
+                    $con=1;
+                if (isset($_GET['nummul']))
+                {       
+                    $numcontrol=$_POST['nummul']+1;
+                }
+                if (isset($_GET['numres']))
+                {    
+					if(($nuncilumnas==$numcontrol)||($_POST['numres']=="-1"))
 					{
 						$imagenforward="<img src='imagenes/forward02.png' style='width:17px;cursor:default;'>";
 						$imagensforward="<img src='imagenes/skip_forward02.png' style='width:16px;cursor:default;' >";
@@ -307,8 +396,13 @@
 					{
 						$imagenforward="<img src='imagenes/forward01.png' style='width:17px;cursor:pointer;' title='Siguiente' onClick='numsiguiente()'>";
 						$imagensforward="<img src='imagenes/skip_forward01.png' style='width:16px;cursor:pointer;' title='Fin' onClick='saltocol(\"$nuncilumnas\")'>";
-					}
-					if(($_POST[numpos]==0)||($_POST[numres]=="-1"))
+                    }
+                }   
+                $imagenback = "";
+                $imagensback = "";
+                if (isset($_GET['numres']))
+                {      
+					if(($_POST['numpos']==0)||($_POST['numres']=="-1"))
 					{
 						$imagenback="<img src='imagenes/back02.png' style='width:17px;cursor:default;'>";
 						$imagensback="<img src='imagenes/skip_back02.png' style='width:16px;cursor:default;'>";
@@ -317,7 +411,8 @@
 					{
 						$imagenback="<img src='imagenes/back01.png' style='width:17px;cursor:pointer;' title='Anterior' onClick='numanterior();'>";
 						$imagensback="<img src='imagenes/skip_back01.png' style='width:16px;cursor:pointer;' title='Inicio' onClick='saltocol(\"1\")'>";
-					}
+                    }
+                }    
 					$ntips1=10;
 					$ntips2=11;
 					if($_SESSION["prdesactivar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
@@ -329,12 +424,12 @@
 								<td colspan='$ntips1' class='titulos'>.: Resultados Busqueda:</td>
 								<td class='submenu'>
 								<select name='renumres' id='renumres' onChange='cambionum();' style='width:100%'>
-									<option value='10'"; if ($_POST[renumres]=='10'){echo 'selected';} echo ">10</option>
-									<option value='20'"; if ($_POST[renumres]=='20'){echo 'selected';} echo ">20</option>
-									<option value='30'"; if ($_POST[renumres]=='30'){echo 'selected';} echo ">30</option>
-									<option value='50'"; if ($_POST[renumres]=='50'){echo 'selected';} echo ">50</option>
-									<option value='100'"; if ($_POST[renumres]=='100'){echo 'selected';} echo ">100</option>
-									<option value='-1'"; if ($_POST[renumres]=='-1'){echo 'selected';} echo ">Todos</option>
+									<option value='10'"; if ($_POST['renumres']=='10'){echo 'selected';} echo ">10</option>
+									<option value='20'"; if ($_POST['renumres']=='20'){echo 'selected';} echo ">20</option>
+									<option value='30'"; if ($_POST['renumres']=='30'){echo 'selected';} echo ">30</option>
+									<option value='50'"; if ($_POST['renumres']=='50'){echo 'selected';} echo ">50</option>
+									<option value='100'"; if ($_POST['renumres']=='100'){echo 'selected';} echo ">100</option>
+									<option value='-1'"; if ($_POST['renumres']=='-1'){echo 'selected';} echo ">Todos</option>
 								</select>
 							</td>
 							</tr>
@@ -352,27 +447,37 @@
 								if($_SESSION["preditar"]==1){echo"<td class='titulos2' style='width:4%;'>Editar</td>";}
 								if($_SESSION["preliminar"]==1){echo"<td class='titulos2' style='width:4%;' >Eliminar</td>";}
 								echo"</tr>";
-								
+                            $con2 = "";	
 							$iter='saludo1a';
 							$iter2='saludo2';
 							$filas=1;
- 							while ($row =mysql_fetch_row($resp)) 
- 							{	 
-								$con2=$con+ $_POST[numpos];
+ 							while ($row =mysqli_fetch_row($resp)) 
+ 							{	
+                                if (isset($_GET['nummul']))
+                                {       
+                                    $con2=$con+ $_POST['numpos'];
+                                }
  	 							if($row[21]=='S')
-	  								{$imgsem="src='imagenes/sema_verdeON.jpg' title='Activo'";$coloracti="#0F0";$_POST[lswitch1][$row[0]]=0;}
+	  								{$imgsem="src='imagenes/sema_verdeON.jpg' title='Activo'";$coloracti="#0F0";$_POST['lswitch1'][$row[0]]=0;}
 								else
-									{$imgsem="src='imagenes/sema_rojoON.jpg' title='Inactivo'";$coloracti="#C00";;$_POST[lswitch1][$row[0]]=1;}
+									{$imgsem="src='imagenes/sema_rojoON.jpg' title='Inactivo'";$coloracti="#C00";;$_POST['lswitch1'][$row[0]]=1;}
 		 						$nombresc=strtoupper($row[5]).' '.strtoupper($row[3]).' '.strtoupper($row[4]).' '.strtoupper($row[1]).' '.strtoupper($row[2]);
-								if($_POST[gidcta]!="")
-								{
-									if($_POST[gidcta]==$row[0]){$estilo='background-color:yellow';}
-									else{$estilo="";}
-								}
+                                if (isset($_GET['gidcta']))
+                                {     
+                                    if($_POST['gidcta']!="")
+                                    {
+                                        if($_POST['gidcta']==$row[0]){$estilo='background-color:yellow';}
+                                        else{$estilo="";}
+                                    }
+                                }    
 								else{$estilo="";}	
 								$idcta="'$row[0]'";
-								$numfil="'$filas'";
-								$filtro="'$_POST[nombre]'";
+                                $numfil="'$filas'";
+                                $filtro = "";
+                                if (isset($_GET['nombre']))
+                                {     
+                                    $filtro="'$_POST[nombre]'";
+                                }    
 							if($_SESSION["preditar"]==1)
 							{
 								echo"<tr class='$iter' onDblClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='text-transform:uppercase; $estilo' >";
@@ -389,7 +494,7 @@
 	 									<td style='text-align:center;'><img $imgsem style='width:20px'/></td>";
 							if($_SESSION["prdesactivar"]==1)
 							{
-								echo"<td style='text-align:center;'><input type='range' name='lswitch1[]' value='".$_POST[lswitch1][$row[0]]."' min ='0' max='1' step ='1' style='background:$coloracti; width:60%' onChange='cambioswitch(\"$row[0]\",\"".$_POST[lswitch1][$row[0]]."\")' /></td>";
+								echo"<td style='text-align:center;'><input type='range' name='lswitch1[]' value='".$_POST['lswitch1'][$row[0]]."' min ='0' max='1' step ='1' style='background:$coloracti; width:60%' onChange='cambioswitch(\"$row[0]\",\"".$_POST['lswitch1'][$row[0]]."\")' /></td>";
 							}
 	 						if($_SESSION["preditar"]==1)
 							{		
@@ -410,7 +515,7 @@
 								 $iter2=$aux;
 								 $filas++;
  							}
-							if ($_POST[numtop]==0)
+							if ($_POST['numtop']==0)
 							{
 								echo "
 								<table class='inicio'>
@@ -443,7 +548,7 @@
 					}
 				?>
             </div>
-            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST[numtop];?>" />
+            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST['numtop'];?>" />
 	 	</form>
 	</body>
 </html>
