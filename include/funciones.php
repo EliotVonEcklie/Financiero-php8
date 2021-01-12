@@ -4318,17 +4318,17 @@ function paginasnuevas($modulo)
 {
 	switch ($modulo)
 	{
-		case "cont":	$pagina="mypop=window.open('../spid.php?pagina=cont-principal.php','','');mypop.focus();";break;
-		case "meci":	$pagina="mypop=window.open('../spid.php?pagina=meci-principal.php','','');mypop.focus();";break;
-		case "teso":	$pagina="mypop=window.open('../spid.php?pagina=teso-principal.php','','');mypop.focus();";break;
-		case "hum":		$pagina="mypop=window.open('../spid.php?pagina=hum-principal.php','','');mypop.focus();";break;
-		case "plan":	$pagina="mypop=window.open('../spid.php?pagina=plan-principal.php','','');mypop.focus();";break;
-		case "inve":	$pagina="mypop=window.open('../spid.php?pagina=inve-principal.php','','');mypop.focus();";break;
-		case "adm":		$pagina="mypop=window.open('../spid.php?pagina=adm-principal.php','','');mypop.focus();";break;
-		case "presu":	$pagina="mypop=window.open('../spid.php?pagina=presu-principal.php','','');mypop.focus();";break;
-		case "contra":	$pagina="mypop=window.open('../spid.php?pagina=contra-principal.php','','');mypop.focus();";break;
-		case "serv":	$pagina="mypop=window.open('../spid.php?pagina=serv-principal.php','','');mypop.focus();";break;
-		case "ccpet":	$pagina="mypop=window.open('../spid.php?pagina=ccp-principal.php','','');mypop.focus();";break;
+		case "cont":	$pagina = "mypop = window.open('../../spid.php?pagina=cont-principal.php', '', ''); mypop.focus();";break;
+		case "meci":	$pagina = "mypop = window.open('../../spid.php?pagina=meci-principal.php', '', ''); mypop.focus();";break;
+		case "teso":	$pagina = "mypop = window.open('../../spid.php?pagina=teso-principal.php', '', ''); mypop.focus();";break;
+		case "hum":		$pagina = "mypop = window.open('../../spid.php?pagina=hum-principal.php', '', ''); mypop.focus();";break;
+		case "plan":	$pagina = "mypop = window.open('../../spid.php?pagina=plan-principal.php', '', ''); mypop.focus();";break;
+		case "inve":	$pagina = "mypop = window.open('../../spid.php?pagina=inve-principal.php', '', ''); mypop.focus();";break;
+		case "adm":		$pagina = "mypop = window.open('../../spid.php?pagina=adm-principal.php', '', ''); mypop.focus();";break;
+		case "presu":	$pagina = "mypop = window.open('../../spid.php?pagina=presu-principal.php', '', ''); mypop.focus();";break;
+		case "contra":	$pagina = "mypop = window.open('../../spid.php?pagina=contra-principal.php', '', ''); mypop.focus();";break;
+		case "serv":	$pagina = "mypop = window.open('../../spid.php?pagina=serv-principal.php', '', ''); mypop.focus();";break;
+		case "ccpet":	$pagina = "mypop = window.open('../../spid.php?pagina=ccp-principal.php', '', ''); mypop.focus();";break;
 	}
 	return $pagina;
 }

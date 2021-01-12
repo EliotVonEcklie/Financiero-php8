@@ -23,6 +23,7 @@
 		<script type="text/javascript" src="../../js/JQuery/jquery-2.1.4.min.js"></script>
 
 		<title>:: Spid</title>
+        
 		<script>
 			function continuar(){parent.despliegamodalm("hidden");}
 			var tecla01 = 13;

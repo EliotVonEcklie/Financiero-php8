@@ -4,4 +4,10 @@
 #       .gitignore File
 #
 
-logs/**/*
+logs/
+
+node_modules/
+
+vendor/
+
+img/acuario.mp4

@@ -142,13 +142,17 @@ function titlepag()
 	echo '<link rel="shortcut icon" href="favicon.ico"/>';
 }
 
-function validasusuarioypass($usuario,$passw)
+function validasusuarioypass($usuario, $passw)
 {
-	$conexion = conectar_v7();
-	$sqlr = "SELECT us.nom_usu FROM usuarios us, roles ro WHERE us.usu_usu='$usuario' AND us.pass_usu='$passw' AND us.id_rol=ro.id_rol AND us.est_usu='1'";
-	$res = mysqli_query($conexion, $sqlr);
-	$r = mysqli_fetch_row($res);
-	return $r[0];
+    $conexion = conectar_v7();
+    
+    $sqlr = 'SELECT us.nom_usu FROM usuarios us, roles ro WHERE us.usu_usu=\''.$usuario.'\' AND us.pass_usu=\''.$passw.'\' AND us.id_rol = ro.id_rol AND us.est_usu=\'1\'';
+    
+    $res = mysqli_query($conexion, $sqlr);
+    
+    $r = mysqli_fetch_assoc($res);
+    
+	return (isset($r['nom_usu']) ? $r['nom_usu'] : null);
 }
 
 function view($sql,$return=''){

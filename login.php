@@ -23,8 +23,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<title>:: FINANCIERO</title>
 
-		<link href="css/css2.css<?php /*echo date('d_m_Y_h_i_s');*/?>" rel="stylesheet" type="text/css" />
-		<link href="css/css3.css<?php /*echo date('d_m_Y_h_i_s');*/?>" rel="stylesheet" type="text/css" />
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->        
+
+		<link href="css/css2.css" rel="stylesheet" type="text/css" />
+		<link href="css/css3.css" rel="stylesheet" type="text/css" />
 		<link href="css/cssimagenes.css" rel="stylesheet" type="text/css" />
 
 		<style>
@@ -36,22 +40,31 @@
 			  min-height: 100%;
 			z-index:-100;
             }
+
 			.marquee1
 			{
-				font-size:12;
-				color:black;
+				font-size: 12;
+				color: black;
 				position: absolute;
 				width: 80%;
 				height: 100%;
 				margin: 0;
 				text-align: center;
-				transform:translateX(100%);
+				transform: translateX(100%);
 				animation: marquee1 15s linear infinite;
 			}
+
 			@keyframes marquee1 
 			{
-				0% {transform: translateX(100%);}
-				100% {transform: translateX(-100%);}
+				0%
+                {
+                    transform: translateX(100%);
+                }
+
+				100%
+                {
+                    transform: translateX(-100%);
+                }
 			}
 		</style>
 
@@ -71,10 +84,18 @@
 		<script>
 			function despliegamodalm(_valor,mensa)
 			{
-				document.getElementById("bgventanamodalm").style.visibility = _valor;
-				if(_valor == "hidden") {document.getElementById('ventanam').src = "";}
-				else {document.getElementById('ventanam').src="ventana-mensaje3.php?titulos = "+mensa;}
-			}
+                document.getElementById("bgventanamodalm").style.visibility = _valor;
+                
+                if(_valor == "hidden") 
+                {
+                    document.getElementById('ventanam').src = '';
+                }
+                else 
+                {
+                    document.getElementById('ventanam').src = 'modules/modals/ventana-mensaje3.php?titulos=' + mensa;
+                }
+            }
+            
 			var ctrlPressed = false;
 			var tecla01 = 16, tecla02 = 66;
 			$(document).keydown(function(e){
@@ -122,18 +143,18 @@
 			?>
 			<div  style="margin: 15px auto; padding-bottom: 30px; padding-top:30px; padding-left: 250px; padding-right: 250px;   width:35%;   ">
 				<div><img src="img/ideal_logo_light.png" align="absmiddle" style="width:100%; margin-bottom:10px; margin-top: 50px;"></div>
-				<table class="inicio"  style=" padding: 0; position: relative; width: 100%;height: 15.5em; list-style: none; border: 3px solid #eee; border-radius: 5px; box-shadow: 0 0 10px #000; overflow: hidden;">
+				<table class="inicio"  style="padding: 0; position: relative; width: 100%;height: 20.5em; list-style: none; border: 3px solid #eee; border-radius: 5px; box-shadow: 0 0 10px #000; overflow: hidden;">
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color:rgba(44, 198, 219); color:#FFFFFF; width:100%" colspan="3"><image src='img/icons/llaves.png' style=" height:40%; width:12%; "> Inicio de Sesion :.</td>	
+						<td style="border-bottom:#222 thin dotted; background-color:rgba(44, 198, 219); color:#FFFFFF; width:100%" colspan="3"><image src='img/icons/password.png'> Inicio de Sesion :.</td>	
 					</tr>
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/usuario_on.png' style=" height:20%; width:60%;"></td>
+						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/username.png'></td>
 						<td style="border-bottom:#222 thin dotted; background-color: #eeeeee;"> Usuario :.</td> 
-						<td style="border-bottom:#222 thin dotted; text-align:center"><input type="text" name="user" id="user" value="<?php if(isset($_POST['user'])) echo $_POST['user'];?>" style="width:65%; height:90%"/></td>
+						<td style="border-bottom:#222 thin dotted; text-align:center"><input type="text" name="user" id="user" value="<?php if(isset($_POST['user'])) echo $_POST['user'];?>" style="width:65%; height:50%"/></td>
 					</tr>
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/candado.png' style=" height:16%; width:50%;"></td> <td style="border-bottom:#222 thin dotted; background-color: #CCCCCC;">Contraseña :.</td>
-						<td style=" text-align:center;border-bottom:#222 thin dotted;"><input type="password" name="pass" id="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" style="width:65%; height:90%" /></td>
+						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/sign-in-form-password.png'></td> <td style="border-bottom:#222 thin dotted; background-color: #CCCCCC;">Contraseña :.</td>
+						<td style=" text-align:center;border-bottom:#222 thin dotted;"><input type="password" name="pass" id="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" style="width:65%; height:50%"/></td>
 					</tr>
 					<tr>
 						<td colspan="3" style="padding-bottom:5px; text-align: center;" ><em class="botonflecha" onClick="document.form1.submit();">Aceptar</em></td>
