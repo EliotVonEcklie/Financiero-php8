@@ -375,28 +375,35 @@
                                     <td colspan='$ntips1' class='titulos'>.: Resultados Busqueda:</td>
                                     <td class='submenu'>
                                     <select name='renumres' id='renumres' onChange='cambionum();' style='width:100%'>
-                                        <option value='10'"; if ($_POST['renumres']=='10'){echo 'selected';} echo ">10</option>
-                                        <option value='20'"; if ($_POST['renumres']=='20'){echo 'selected';} echo ">20</option>
-                                        <option value='30'"; if ($_POST['renumres']=='30'){echo 'selected';} echo ">30</option>
-                                        <option value='50'"; if ($_POST['renumres']=='50'){echo 'selected';} echo ">50</option>
-                                        <option value='100'"; if ($_POST['renumres']=='100'){echo 'selected';} echo ">100</option>
-                                        <option value='-1'"; if ($_POST['renumres']=='-1'){echo 'selected';} echo ">Todos</option>
+                                        <option value='10'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '10') echo 'selected'; echo ">10</option>
+                                        <option value='20'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '20') echo 'selected'; echo ">20</option>
+                                        <option value='30'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '30') echo 'selected'; echo ">30</option>
+                                        <option value='50'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '50') echo 'selected'; echo ">50</option>
+                                        <option value='100'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '100') echo 'selected'; echo ">100</option>
+                                        <option value='-1'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '-1') echo 'selected'; echo ">Todos</option>
                                     </select>
                                 </td>
                                 </tr>
                                 <tr><td colspan='$ntips2'>Terceros Encontrados: $_POST[numtop]</td></tr>
                                 <tr>
                                     <td class='titulos2' style='width:4%;'>Item</td>
-                                    <td class='titulos2' >Raz&oacute;n Social</td>
+                                    <td class='titulos2' >Razón Social</td>
                                     <td class='titulos2' style='width:10%;'>Primer Apellido</td>
                                     <td class='titulos2' style='width:10%;'>Segundo Apellido</td>
                                     <td class='titulos2' style='width:10%;'>Primer Nombre</td>
                                     <td class='titulos2' style='width:10%;'>Segundo Nombre</td>
                                     <td class='titulos2' style='width:8%;'>Documento</td>";
-                                    if($_SESSION["prdesactivar"]==1){echo"<td class='titulos2' colspan='2' style='width:6%;' >Estado</td>";}	
-                                    else {echo"<td class='titulos2' style='width:6%;' >Estado</td>";}
-                                    if($_SESSION["preditar"]==1){echo"<td class='titulos2' style='width:4%;'>Editar</td>";}
-                                    if($_SESSION["preliminar"]==1){echo"<td class='titulos2' style='width:4%;' >Eliminar</td>";}
+
+                                    if($_SESSION["prdesactivar"] == 1)
+                                        echo"<td class='titulos2' colspan='2' style='width:6%;' >Estado</td>";
+                                    else
+                                        echo"<td class='titulos2' style='width:6%;' >Estado</td>";
+
+                                    if($_SESSION["preditar"] == 1) 
+                                        echo"<td class='titulos2' style='width:4%;'>Editar</td>";
+                                    if($_SESSION["preliminar"] == 1)
+                                        echo"<td class='titulos2' style='width:4%;'>Eliminar</td>";
+
                                     echo"</tr>";
 
                                 $con2 = "";	
@@ -433,51 +440,53 @@
                                     $idcta="'$row[0]'";
                                     $numfil="'$filas'";
                                     $filtro = "";
+
                                     if (isset($_GET['nombre']))
                                     {     
                                         $filtro="'$_POST[nombre]'";
                                     }    
-                                if($_SESSION["preditar"]==1)
-                                {
-                                    echo "<tr class='$iter' onDblClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='text-transform:uppercase; $estilo' >";
-                                }
-                                else
-                                {
-                                    echo "<tr class='$iter' style='text-transform:uppercase; $estilo' >";
-                                }
 
-                                echo "
-                                            <td>$con2</td>
-                                            <td>$row[5]</td>
-                                            <td>$row[3]</td>
-                                            <td>$row[4]</td>
-                                            <td>$row[1]</td>
-                                            <td>$row[2]</td>
-                                            <td>$row[12]</td>
-                                            <td style='text-align:center;'><img $imgsem style='width:20px'/></td>";
-                                            
-                                if($_SESSION["prdesactivar"] == 1)
-                                {
-                                    echo"<td style='text-align:center;'><input type='range' name='lswitch1[]' value='".$_POST['lswitch1'][$row[0]]."' min ='0' max='1' step ='1' style='background:$coloracti; width:60%' onChange='cambioswitch(\"$row[0]\",\"".$_POST['lswitch1'][$row[0]]."\")' /></td>";
-                                }
-                                if($_SESSION["preditar"] == 1)
-                                {		
-                                    echo"<td style='text-align:center;'>
-                                        <a onClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='cursor:pointer;'>
-                                            <img src='imagenes/b_edit.png' style='width:18px' title='Editar'>
-                                        </a>
-                                    </td>";
-                                }
-                                if($_SESSION["preliminar"] == 1)
-                                {
-                                            echo"<td style='text-align:center;><a href='#' onClick='anulatercero($row[0],$row[12])'><img src='imagenes/anular.png'></a></td>";
-                                }
-                                echo "</tr>";
-                                    $con+=1;
-                                    $aux=$iter;
-                                    $iter=$iter2;
-                                    $iter2=$aux;
-                                    $filas++;
+                                    if($_SESSION["preditar"]==1)
+                                    {
+                                        echo '<tr class="'.$iter.'" onDblClick="verUltimaPos($idcta, $numfil, $filtro);" style="text-transform:uppercase; '.$estilo.'">';
+                                    }
+                                    else
+                                    {
+                                        echo '<tr class="'.$iter.'" style="text-transform:uppercase; '.$estilo.'">';
+                                    }
+
+                                    echo "
+                                                <td>$con2</td>
+                                                <td>$row[5]</td>
+                                                <td>$row[3]</td>
+                                                <td>$row[4]</td>
+                                                <td>$row[1]</td>
+                                                <td>$row[2]</td>
+                                                <td>$row[12]</td>
+                                                <td style='text-align:center;'><img $imgsem style='width:20px'/></td>";
+                                                
+                                    if($_SESSION["prdesactivar"] == 1)
+                                    {
+                                        echo '<td style="text-align:center;"><input type="range" name="lswitch1[]" value="'.$_POST['lswitch1'][$row[0]].'" min ="0" max="1" step ="1" style="background:'.$coloracti.'; width:60%" onChange="cambioswitch(\''.$row[0].'\',\''.$_POST['lswitch1'][$row[0]].'\');"/></td>';
+                                    }
+                                    if($_SESSION["preditar"] == 1)
+                                    {		
+                                        echo"<td style='text-align:center;'>
+                                            <a onClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='cursor:pointer;'>
+                                                <img src='imagenes/b_edit.png' style='width:18px' title='Editar'>
+                                            </a>
+                                        </td>";
+                                    }
+                                    if($_SESSION["preliminar"] == 1)
+                                    {
+                                                echo"<td style='text-align:center;><a href='#' onClick='anulatercero($row[0],$row[12])'><img src='imagenes/anular.png'></a></td>";
+                                    }
+                                    echo "</tr>";
+                                        $con+=1;
+                                        $aux=$iter;
+                                        $iter=$iter2;
+                                        $iter2=$aux;
+                                        $filas++;
                                 }
                                 if ($_POST['numtop']==0)
                                 {
