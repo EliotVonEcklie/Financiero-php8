@@ -145,21 +145,21 @@
             	<?php 
 					if($_SESSION["prcrear"] == 1)
 					{
-                        $botonnuevo = '<a onClick="location.href=\'cont-terceros.php\'" class="mgbt"><img src="img/icons/create_file.png" title="Nuevo"/></a>';
+                        $botonnuevo = '<a onClick="location.href=\'cont-terceros.php\'" class="mgbt"><img src="../../img/icons/add.png" style="height:25; width:25" title="Nuevo"/></a>';
                     }
 					else
 					{
-                        $botonnuevo = "<a class='mgbt1'><img src='imagenes/add2.png'/></a>";
+                        $botonnuevo = "<a class='mgbt1'><img src='../../img/icons/add.png'/></a>";
                     }
 				?>
 
             	<td colspan="3" class="cinta">
 					<?php echo $botonnuevo;?>
                     
-					<a class="mgbt1"><img src="imagenes/guardad.png"/></a>
-					<a onClick="document.form2.submit();" class="mgbt"><img src="imagenes/busca.png" title="Buscar" /></a>
-					<a onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="imagenes/agenda1.png" title="Agenda" /></a>
-					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="imagenes/nv.png" title="Nueva Ventana"></a>
+					<a class="mgbt1"><img src="../../img/icons/disabled-save.png"style="height:25; width:25"/></a>
+					<a onClick="document.form2.submit();" class="mgbt"><img src="../../img/icons/search.png" title="Buscar" style="height:25; width:25"/></a>
+					<a onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda" /></a>
+					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="../../img/icons/new-tv.png"style="height:25; width:25" title="Nueva Ventana"></a>
 				</td>
         	</tr>
      	</table>
@@ -416,13 +416,13 @@
                                     $con2 = $con+ $_POST['numpos'];
                                     if($row[21]=='S')
                                     {
-                                        $imgsem = 'src="imagenes/sema_verdeON.jpg" title="Activo"';
+                                        $imgsem = ' src="../../img/icons/green-circle.png" style="height:25; width:25" title="Activo"';
                                         $coloracti = '#0F0';
-                                        $_POST['lswitch1'][$row[0]] = 0;
+                                       $_POST['lswitch1'][$row[0]] = 0;
                                     }
                                     else
                                     {
-                                        $imgsem = 'src="imagenes/sema_rojoON.jpg" title="Inactivo"';
+                                        $imgsem = 'src="../../img/icons/red-circle.png" style="height:25; width:25" title="Inactivo"';
                                         $coloracti = '#C00';
                                         $_POST['lswitch1'][$row[0]] = 1;
                                     }
@@ -473,13 +473,13 @@
                                     {		
                                         echo"<td style='text-align:center;'>
                                             <a onClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='cursor:pointer;'>
-                                                <img src='imagenes/b_edit.png' style='width:18px' title='Editar'>
+                                                <img src='../../img/icons/edit-file.png' style='width:25px;height:25px' title='Editar'>
                                             </a>
                                         </td>";
                                     }
                                     if($_SESSION["preliminar"] == 1)
                                     {
-                                                echo"<td style='text-align:center;><a href='#' onClick='anulatercero($row[0],$row[12])'><img src='imagenes/anular.png'></a></td>";
+                                                echo"<td style='text-align:center;><a href='#' onClick='anulatercero($row[0],$row[12])'><img src='../../img/icons/delete.png' style='width:25px;height:25px'></a></td>";
                                     }
                                     echo "</tr>";
                                         $con+=1;

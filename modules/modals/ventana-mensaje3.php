@@ -38,7 +38,7 @@
 		echo "
 			<table class='inicio'>
 				<tr>
-					<td class='saludo1' style='text-align:center;'><img src='../../img/icons/alert.png' style='width:25px'>$frase[0]<img src='../../img/icons/alert.png' style='width:25px'></td>
+					<td class='saludo1' style='text-align:center;'><img src='../../img/icons/warning.png' style='width:25px'>$frase[0]<img src='../../img/icons/warning.png' style='width:25px'></td>
 			</tr>";
 		if ($nlineas!=1) {for ($x=1;$x<$nlineas;$x++){echo"<tr><td style='text-align:center;font-size:8pt'>$frase[$x]</td></tr>";}}
 		echo"
