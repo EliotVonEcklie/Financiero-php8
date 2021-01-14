@@ -43,7 +43,7 @@
                 
                 numpag++;
                 
-                location.href = "cont-editaterceros.php?idter="+idcta+"&scrtop="+scrtop+"&totreg="+filas+"&altura="+altura+"&numpag="+numpag+"&limreg="+limreg+"&filtro="+filtro;
+                location.href = "cont-editaterceros.php?idter=" + idcta + "&scrtop=" + scrtop + "&totreg=" + filas + "&altura=" + altura + "&numpag=" + numpag + "&limreg=" + limreg + "&filtro=" + filtro;
 			}
 			function anulatercero(id, documento)
 			{
@@ -79,16 +79,16 @@
 					switch(_tip)
 					{
 						case "1":
-                            document.getElementById('ventanam').src = "ventana-mensaje1.php?titulos=" + mensa;
+                            document.getElementById('ventanam').src = "../modals/ventana-mensaje1.php?titulos=" + mensa;
                             break;
 						case "2":
-                            document.getElementById('ventanam').src = "ventana-mensaje3.php?titulos=" + mensa;
+                            document.getElementById('ventanam').src = "../modals/ventana-mensaje3.php?titulos=" + mensa;
                             break;
 						case "3":
-                            document.getElementById('ventanam').src = "ventana-mensaje2.php?titulos=" + mensa;
+                            document.getElementById('ventanam').src = "../modals/ventana-mensaje2.php?titulos=" + mensa;
                             break;
 						case "4":
-                            document.getElementById('ventanam').src = "ventana-consulta2.php?titulos=" + mensa + "&idresp=" + pregunta;
+                            document.getElementById('ventanam').src = "../modals/ventana-consulta2.php?titulos=" + mensa + "&idresp=" + pregunta;
                             break;	
 					}
 				}
@@ -230,7 +230,8 @@
 					{
                         $sqlr="UPDATE terceros SET estado='N' WHERE id_tercero='$_POST[idestado]'";
                         mysqli_fetch_row(mysqli_query($linkbd, $sqlr)); 
-					}
+                    }
+                    
 					echo"<script>document.form2.cambioestado.value=''</script>";
 				}
 
@@ -261,7 +262,7 @@
                 if(isset($_POST['ac']))
                 {
                     $ca = $_POST['ac'];
-                    if ($ca==2)
+                    if ($ca == 2)
                     {
                         $sqlr = 'SELECT COUNT(*) FROM comprobante_det WHERE tercero=\''.$_POST['cod'].'\'';
                         $res = mysqli_query($linkbd, $sqlr);
@@ -366,57 +367,71 @@
                     //}
                         $ntips1=10;
                         $ntips2=11;
-                        if($_SESSION["prdesactivar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
-                        if($_SESSION["preditar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
-                        if($_SESSION["preliminar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
-                        echo "
-                            <table class='inicio'>
+                        if($_SESSION['prdesactivar'] != 1)
+                        {
+                            $ntips1 = $ntips1 - 1;
+                            $ntips2 = $ntips2 - 1;
+                        }
+                        if($_SESSION['preditar'] != 1)
+                        {
+                            $ntips1 = $ntips1 - 1;
+                            $ntips2 = $ntips2 - 1;
+                        }
+                        if($_SESSION['preliminar'] != 1)
+                        {
+                            $ntips1 = $ntips1 - 1;
+                            $ntips2 = $ntips2 - 1;
+                        }
+
+                        echo '
+                            <table class="inicio">
                                 <tr>
-                                    <td colspan='$ntips1' class='titulos'>.: Resultados Busqueda:</td>
-                                    <td class='submenu'>
-                                    <select name='renumres' id='renumres' onChange='cambionum();' style='width:100%'>
-                                        <option value='10'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '10') echo 'selected'; echo ">10</option>
+                                    <td colspan="'.$ntips1.'" class="titulos>">.: Resultados Busqueda:</td>
+                                    <td class="submenu">
+                                    <select name="renumres" id="renumres" onChange="cambionum();" style="width:100%">
+                                        <option value="10"'; if (isset($_POST['renumres']) && $_POST['renumres'] == '10') echo 'selected'; echo ">10</option>
                                         <option value='20'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '20') echo 'selected'; echo ">20</option>
                                         <option value='30'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '30') echo 'selected'; echo ">30</option>
                                         <option value='50'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '50') echo 'selected'; echo ">50</option>
                                         <option value='100'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '100') echo 'selected'; echo ">100</option>
-                                        <option value='-1'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '-1') echo 'selected'; echo ">Todos</option>
+                                        <option value='-1'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '-1') echo 'selected'; echo '>Todos</option>
                                     </select>
                                 </td>
                                 </tr>
-                                <tr><td colspan='$ntips2'>Terceros Encontrados: $_POST[numtop]</td></tr>
+                                <tr><td colspan="'.$ntips2.'">Terceros Encontrados: '.$_POST['numtop'].'</td></tr>
                                 <tr>
-                                    <td class='titulos2' style='width:4%;'>Item</td>
-                                    <td class='titulos2' >Razón Social</td>
-                                    <td class='titulos2' style='width:10%;'>Primer Apellido</td>
-                                    <td class='titulos2' style='width:10%;'>Segundo Apellido</td>
-                                    <td class='titulos2' style='width:10%;'>Primer Nombre</td>
-                                    <td class='titulos2' style='width:10%;'>Segundo Nombre</td>
-                                    <td class='titulos2' style='width:8%;'>Documento</td>";
+                                    <td class="titulos2" style="width:4%;">Item</td>
+                                    <td class="titulos2" >Razón Social</td>
+                                    <td class="titulos2" style="width:10%;">Primer Apellido</td>
+                                    <td class="titulos2" style="width:10%;">Segundo Apellido</td>
+                                    <td class="titulos2" style="width:10%;">Primer Nombre</td>
+                                    <td class="titulos2" style="width:10%;">Segundo Nombre</td>
+                                    <td class="titulos2" style="width:8%;">Documento</td>';
 
                                     if($_SESSION["prdesactivar"] == 1)
-                                        echo"<td class='titulos2' colspan='2' style='width:6%;' >Estado</td>";
+                                        echo '<td class="titulos2" colspan="2" style="width:6%;" >Estado</td>';
                                     else
-                                        echo"<td class='titulos2' style='width:6%;' >Estado</td>";
+                                        echo '<td class="titulos2" style="width:6%;" >Estado</td>';
 
                                     if($_SESSION["preditar"] == 1) 
-                                        echo"<td class='titulos2' style='width:4%;'>Editar</td>";
+                                        echo '<td class="titulos2" style="width:4%;">Editar</td>';
+
                                     if($_SESSION["preliminar"] == 1)
-                                        echo"<td class='titulos2' style='width:4%;'>Eliminar</td>";
+                                        echo '<td class="titulos2" style="width:4%;">Eliminar</td>';
 
                                     echo"</tr>";
 
-                                $con2 = "";	
-                                $iter='saludo1a';
-                                $iter2='saludo2';
-                                $filas=1;
+                                $con2 = '';	
+                                $iter = 'saludo1a';
+                                $iter2 = 'saludo2';
+                                $filas = 1;
 
                                 while ($row = mysqli_fetch_row($resp)) 
                                 {	 
-                                    $con2 = $con+ $_POST['numpos'];
+                                    $con2 = $con + $_POST['numpos'];
                                     if($row[21]=='S')
                                     {
-                                        $imgsem = ' src="../../img/icons/green-circle.png" style="height:25; width:25" title="Activo"';
+                                        $imgsem = 'src="../../img/icons/green-circle.png" style="height:25; width:25" title="Activo"';
                                         $coloracti = '#0F0';
                                        $_POST['lswitch1'][$row[0]] = 0;
                                     }
@@ -437,18 +452,18 @@
                                     else
                                         $estilo = '';
 
-                                    $idcta="'$row[0]'";
-                                    $numfil="'$filas'";
-                                    $filtro = "";
+                                    $idcta = $row[0];
+                                    $numfil = $filas;
+                                    $filtro = '';
 
                                     if (isset($_GET['nombre']))
                                     {     
-                                        $filtro="'$_POST[nombre]'";
+                                        $filtro = $_POST['nombre'];
                                     }    
 
-                                    if($_SESSION["preditar"]==1)
+                                    if($_SESSION["preditar"] == 1)
                                     {
-                                        echo '<tr class="'.$iter.'" onDblClick="verUltimaPos($idcta, $numfil, $filtro);" style="text-transform:uppercase; '.$estilo.'">';
+                                        echo '<tr class="'.$iter.'" onDblClick="verUltimaPos(\''.$idcta.'\', \''.$numfil.'\', \''.$filtro.'.\');" style="text-transform:uppercase; '.$estilo.'">';
                                     }
                                     else
                                     {

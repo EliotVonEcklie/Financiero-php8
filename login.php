@@ -166,7 +166,7 @@
 						<td>
 							<select name="basesfun" id="basesfun">
 								<?php
-                                    $sqlr = "SHOW DATABASES";
+                                    $sqlr = 'SHOW DATABASES';
                                     
                                     $resp = mysqli_query($linkbd,$sqlr);
 

@@ -10,6 +10,7 @@
     cargainfomenus('CO', $_SESSION['nivel']);
 
     date_default_timezone_set('America/Bogota');
+    
     $link = conectar_v7();
     if (!isset($_SESSION['usuario']))
     {
