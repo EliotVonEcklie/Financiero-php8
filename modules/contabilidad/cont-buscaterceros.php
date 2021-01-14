@@ -493,7 +493,7 @@
                                     echo "
                                     <table class='inicio'>
                                         <tr>
-                                            <td class='saludo1' style='text-align:center;width:100%'><img src='imagenes\alert.png' style='width:25px'>No hay coincidencias en la b&uacute;squeda $tibusqueda<img src='imagenes\alert.png' style='width:25px'></td>
+                                            <td class='saludo1' style='text-align:center;width:100%'><img src='../../img/icons/warning.png' style='width:25px'>No hay coincidencias en la b&uacute;squeda $tibusqueda<img src='../../img/icons/warning.png' style='width:25px'></td>
                                         </tr>
                                     </table>";
                                 }

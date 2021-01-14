@@ -1,11 +1,14 @@
 <?php //V 1000 12/12/16 ?> 
 <!--V 1.0 24/02/2015-->
 <?php
-	require"comun.inc";
-	require"funciones.inc";
+	require "../../include/comun.php";
+	require "../../include/funciones.php";
 	session_start();
-	$linkbd=conectar_bd();	
-	cargarcodigopag($_GET[codpag],$_SESSION["nivel"]);
+    $linkbd = conectar_v7();	
+
+    if(isset($_GET['codpag']))
+        cargarcodigopag($_GET['codpag'],$_SESSION['nivel']);
+    
 	header("Cache-control: private"); // Arregla IE 6
 	date_default_timezone_set("America/Bogota");
 ?>
@@ -15,10 +18,12 @@
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<title>:: Spid - Contabilidad</title>
-        <link href="css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<link href="css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="jquery-1.11.0.min.js"></script> 
-        <script type="text/javascript" src="css/programas.js"></script>
+        <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+		<link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+
+		<script type="text/javascript" src="../../js/JQuery/jquery-1.11.0.min.js"></script> 
+        <script type="text/javascript" src="../../js/programas.js"></script>
+
 		<script>
 			function verUltimaPos(idcta, filas, filtro){
 				var scrtop=$('#divdet').scrollTop();
@@ -99,16 +104,20 @@
 			<tr>
             	<?php 
 					if($_SESSION["prcrear"]==1)
-					{$botonnuevo="<a onClick=\"location.href='cont-centrocostos.php'\" class='mgbt'><img src='imagenes/add.png' title='Nuevo' /></a>";}
+					{
+                        $botonnuevo = '<a onClick="location.href=\'cont-centrocostos.php\'" class="mgbt"><img src="../../img/icons/add.png" title="Nuevo" style="height:25; width:25" /></a>';
+                    }
 					else
-					{$botonnuevo="<a class='mgbt1'><img src='imagenes/add2.png' /></a>";}
+					{
+                        $botonnuevo = "<a class='mgbt1'><img src='../../img/icons/add.png' /></a>";
+                    }
 				?>
   				<td colspan="3" class="cinta">
 				<?php echo $botonnuevo;?>
-					<a class="mgbt"><img src="imagenes/guardad.png"/></a>
-					<a onClick="document.form2.submit();" class="mgbt"><img src="imagenes/busca.png" title="Buscar" /></a>
-					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="imagenes/agenda1.png" title="Agenda" /></a>
-					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="imagenes/nv.png" title="Nueva Ventana"></a>
+					<a class="mgbt"><img src="../../img/icons/disabled-save.png"style="height:25; width:25"/></a>
+					<a onClick="document.form2.submit();" class="mgbt"><img src="../../img/icons/search.png" title="Buscar" style="height:25; width:25"/></a>
+					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda"/></a>
+					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="../../img/icons/new-tv.png"style="height:25; width:25" title="Nueva Ventana"></a>
 				</td>
           	</tr>
   		</table>
@@ -119,62 +128,72 @@
             </div>
         </div>
         <?php
-			if($_POST[oculto]=="")
+			if(!isset( $_POST['oculto']))
 			{
-				$_POST[scrtop]=$_GET['scrtop'];
-				if($_POST[scrtop]==""){$_POST[scrtop]=0;}
-				$_POST[gidcta]=$_GET['idcta'];
-				if(isset($_GET['filtro'])){$_POST[numero]=$_GET['filtro'];}
-			}
-			echo"<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST[scrtop].")}</script>";
-			if($_GET[numpag]!="")
-			{
-				$oculto=$_POST[oculto];
-				if($oculto!=2)
-				{
-				$_POST[numres]=$_GET[limreg];
-				$_POST[numpos]=$_GET[limreg]*($_GET[numpag]-1);
-				$_POST[nummul]=$_GET[numpag]-1;
-				}
-			}
+                if(isset($_GET['scrtop']))
+                    $_POST['scrtop'] = $_GET['scrtop'];
+                if(isset($_GET['scrtop'] ))    
+				    if($_POST['scrtop'] = $_GET['scrtop'])
+				        $_POST['gidcta']=$_GET['idcta'];
+				if(isset($_GET['filtro'])){$_POST['numero']=$_GET['filtro'];}
+            }
+            if(isset($_GET['scrtop'] ))
+            {
+                echo"<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST['scrtop'].")}</script>";
+            }
+            $oculto = "";
+            if(isset($_GET['numpag'] ))
+            {
+                if($_GET['numpag']!="")
+                {
+                    $oculto=$_POST['oculto'];
+                    if($oculto!=2)
+                    {
+                    $_POST['numres']=$_GET['limreg'];
+                    $_POST['numpos']=$_GET['limreg']*($_GET['numpag']-1);
+                    $_POST['nummul']=$_GET['numpag']-1;
+                    }
+                }
+            }    
 			else
 			{
-				if($_POST[nummul]=="")
-				{
-					$_POST[numres]=10;
-					$_POST[numpos]=0;
-					$_POST[nummul]=0;
-				}
-			}
+                 
+                    if(isset( $_POST['nummul']))
+                    {
+                        $_POST['numres']=10;
+                        $_POST['numpos']=0;
+                        $_POST['nummul']=0;
+                    }
+                }
 		?>
  		<form name="form2" method="post" action="cont-buscacentrocosto.php">
 			<?php
-                if($_POST[oculto2]=="")
+                if(!isset( $_POST['oculto2']))
                 {
-                    $_POST[oculto2]="0";
-                    $_POST[cambioestado]="";
-                    $_POST[nocambioestado]="";
-                }
+                    $_POST['oculto2']="0";
+                    $_POST['cambioestado']="";
+                    $_POST['nocambioestado']="";
+                }   
                 //*****************************************************************
-                if($_POST[cambioestado]!="")
-                {
-                    if($_POST[cambioestado]=="1")
+                if($_POST['cambioestado']!="")
+                { 
+                    if($_POST['cambioestado']=="1")
                     {
-                        $sqlr="UPDATE centrocosto SET estado='S' WHERE id_cc='$_POST[idestado]'";
-                        mysql_fetch_row(mysql_query($sqlr,$linkbd)); 
+                        $sqlr = 'UPDATE centrocosto SET estado=\'S\' WHERE id_cc=\''.$_POST['idestado'].'\'';
+                        mysqli_fetch_row(mysqli_query($sqlr,$linkbd)); 
                     }
                     else 
                     {
                         $sqlr="UPDATE centrocosto SET estado='N' WHERE id_cc='$_POST[idestado]'";
-                        mysql_fetch_row(mysql_query($sqlr,$linkbd)); 
+                        mysqli_fetch_row(mysqli_query($sqlr,$linkbd)); 
                     }
 					echo"<script>document.form2.cambioestado.value=''</script>";
                 }
                 //*****************************************************************
-                if($_POST[nocambioestado]!="")
+                if($_POST['nocambioestado']!="")
                 {
-                    if($_POST[nocambioestado]=="1"){$_POST[lswitch1][$_POST[idestado]]=1;}
-                    else {$_POST[lswitch1][$_POST[idestado]]=0;}
+                    if($_POST['nocambioestado']=="1"){$_POST['lswitch1'][$_POST['idestado']]=1;}
+                    else {$_POST['lswitch1'][$_POST['idestado']]=0;}
                     echo"<script>document.form2.nocambioestado.value=''</script>";
                 }
             ?>
@@ -186,78 +205,92 @@
                 <tr>
                     <td class="saludo1" style='width:3cm;'>C&oacute;digo o Nombre:</td>
                     <td >
-                    	<input type="search" name="nombre" id="nombre" value="<?php echo $_POST[nombre];?>" style='width:50%;'/>
+                    	<input type="search" name="nombre" id="nombre" value="<?php if(isset( $_POST['nombre'])) echo $_POST['nombre'];?>" style='width:50%;'/>
                         <input type="button" name="bboton" onClick="limbusquedas();" value="&nbsp;&nbsp;Buscar&nbsp;&nbsp;" />
                     </td>
                 </tr>                       
             </table>  
             <input name="oculto" id="oculto" type="hidden" value="1"/>
-     		<input type="hidden" name="oculto2" id="oculto2" value="<?php echo $_POST[oculto2];?>"/>
-    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php echo $_POST[cambioestado];?>"/>
-   			<input type="hidden" name="nocambioestado" id="nocambioestado" value="<?php echo $_POST[nocambioestado];?>"/>
-    		<input type="hidden" name="idestado" id="idestado" value="<?php echo $_POST[idestado];?>"/> 
-            <input type="hidden" name="numres" id="numres" value="<?php echo $_POST[numres];?>"/>
-    		<input type="hidden" name="numpos" id="numpos" value="<?php echo $_POST[numpos];?>"/>
-       		<input type="hidden" name="nummul" id="nummul" value="<?php echo $_POST[nummul];?>"/>
-            <input type="hidden" name="scrtop" id="scrtop" value="<?php echo $_POST[scrtop];?>"/>
-        	<input type="hidden" name="gidcta" id="gidcta" value="<?php echo $_POST[gidcta];?>"/>
+     		<input type="hidden" name="oculto2" id="oculto2" value="<?php if(isset( $_POST['oculto2'])) echo $_POST['oculto2'];?>"/>
+    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php echo $_POST['cambioestado'];?>"/>
+   			<input type="hidden" name="nocambioestado" id="nocambioestado" value="<?php if(isset( $_POST['nocambioestado'])) echo $_POST['nocambioestado'];?>"/>
+    		<input type="hidden" name="idestado" id="idestado" value="<?php if(isset( $_POST['idestado'])) echo $_POST['idestado'];?>"/> 
+            <input type="hidden" name="numres" id="numres" value="<?php if(isset( $_POST['numres'])) echo $_POST['numres'];?>"/>
+    		<input type="hidden" name="numpos" id="numpos" value="<?php if(isset( $_POST['numpos'])) echo $_POST['numpos'];?>"/>
+       		<input type="hidden" name="nummul" id="nummul" value="<?php if(isset( $_POST['nummul'])) echo $_POST['nummul'];?>"/>
+            <input type="hidden" name="scrtop" id="scrtop" value="<?php if(isset( $_POST['scrtop'])) echo $_POST['scrtop'];?>"/>
+        	<input type="hidden" name="gidcta" id="gidcta" value="<?php if(isset( $_POST['gidcta'])) echo $_POST['gidcta'];?>"/>
     		<div class="subpantalla" style="height:68.5%; width:99.6%; overflow-x:hidden;" id="divdet">
       		<?php
+            $oculto = ""; 
+            if(isset( $_POST['oculto']))
+            {
 				$oculto=$_POST['oculto'];
-				//if($_POST[oculto])
+			}	//if($_POST[oculto])
 				{
-					$crit1="";
-					if ($_POST[nombre]!=""){$crit1=" WHERE concat_ws(' ', id_cc, nombre) LIKE '%$_POST[nombre]%' ";}
+                    $crit1="";
+                    if(isset( $_POST['numres']))
+					if ($_POST['nombre']!=""){$crit1=" WHERE concat_ws(' ', id_cc, nombre) LIKE '%  $_POST[nombre]%' ";}
 					$sqlr="SELECT * FROM centrocosto $crit1";
-					$resp = mysql_query($sqlr,$linkbd);
-					$_POST[numtop]=mysql_num_rows($resp);
-					$nuncilumnas=ceil($_POST[numtop]/$_POST[numres]);
+					$resp = mysqli_query($linkbd,$sqlr);
+                    $_POST['numtop']=mysqli_num_rows($resp);
+                    if(isset( $_POST['numres']))
+					$nuncilumnas=ceil($_POST['numtop']/$_POST['numres']);
 
-				$cond2="";
-				if ($_POST[numres]!="-1"){ 
+                $cond2="";
+                if(isset( $_POST['numres']))
+				if ($_POST['numres']!="-1"){ 
 					$cond2="LIMIT $_POST[numpos], $_POST[numres]"; 
 				}
 					$sqlr="SELECT * FROM centrocosto $crit1 ORDER BY id_cc ".$cond2;
-					$resp = mysql_query($sqlr,$linkbd);
-					$con=1;
-					$numcontrol=$_POST[nummul]+1;
-					if(($nuncilumnas==$numcontrol)||($_POST[numres]=="-1"))
-					{
-						$imagenforward="<img src='imagenes/forward02.png' style='width:17px;cursor:default;'>";
-						$imagensforward="<img src='imagenes/skip_forward02.png' style='width:16px;cursor:default;' >";
-					}
-					else 
-					{
-						$imagenforward="<img src='imagenes/forward01.png' style='width:17px;cursor:pointer;' title='Siguiente' onClick='numsiguiente()'>";
-						$imagensforward="<img src='imagenes/skip_forward01.png' style='width:16px;cursor:pointer;' title='Fin' onClick='saltocol(\"$nuncilumnas\")'>";
-					}
-					if(($_POST[numpos]==0)||($_POST[numres]=="-1"))
-					{
-						$imagenback="<img src='imagenes/back02.png' style='width:17px;cursor:default;'>";
-						$imagensback="<img src='imagenes/skip_back02.png' style='width:16px;cursor:default;'>";
-					}
-					else
-					{
-						$imagenback="<img src='imagenes/back01.png' style='width:17px;cursor:pointer;' title='Anterior' onClick='numanterior();'>";
-						$imagensback="<img src='imagenes/skip_back01.png' style='width:16px;cursor:pointer;' title='Inicio' onClick='saltocol(\"1\")'>";
-					}
+					$resp = mysqli_query($linkbd,$sqlr);
+                    $con=1;
+                    $numcontrol = "";
+                    $nuncilumnas = "";
+                    if(isset( $_POST['numres'])){
+                        $numcontrol=$_POST['nummul']+1;
+                        if(($nuncilumnas==$numcontrol)||($_POST['numres']=="-1"))
+                        {
+                            $imagenforward="<img src='imagenes/forward02.png' style='width:17px;cursor:default;'>";
+                            $imagensforward="<img src='imagenes/skip_forward02.png' style='width:16px;cursor:default;' >";
+                        }
+                        else 
+                        {
+                            $imagenforward="<img src='imagenes/forward01.png' style='width:17px;cursor:pointer;' title='Siguiente' onClick='numsiguiente()'>";
+                            $imagensforward="<img src='imagenes/skip_forward01.png' style='width:16px;cursor:pointer;' title='Fin' onClick='saltocol(\"$nuncilumnas\")'>";
+                        }
+                    }
+                    
+                    if(isset( $_POST['numres'])){    
+                        if(($_POST['numpos']==0)||($_POST['numres']=="-1"))
+                        {
+                            $imagenback="<img src='imagenes/back02.png' style='width:17px;cursor:default;'>";
+                            $imagensback="<img src='imagenes/skip_back02.png' style='width:16px;cursor:default;'>";
+                        }
+                        else
+                        {
+                            $imagenback="<img src='imagenes/back01.png' style='width:17px;cursor:pointer;' title='Anterior' onClick='numanterior();'>";
+                            $imagensback="<img src='imagenes/skip_back01.png' style='width:16px;cursor:pointer;' title='Inicio' onClick='saltocol(\"1\")'>";
+                        }
+                    }    
 					$ntips1=7;
 					$ntips2=8;
 					if($_SESSION["prdesactivar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
 					if($_SESSION["preditar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
-					if($_SESSION["preliminar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
+                    if($_SESSION["preliminar"]!=1){$ntips1=$ntips1-1;$ntips2=$ntips2-1;}
 					echo "
 					<table class='inicio' align='center' width='80%'>
 						<tr>
 							<td colspan='$ntips1' class='titulos'>.: Resultados Busqueda:</td>
 							<td class='submenu'>
-								<select name='renumres' id='renumres' onChange='cambionum();' style='width:100%'>
-									<option value='10'"; if ($_POST[renumres]=='10'){echo 'selected';} echo ">10</option>
-									<option value='20'"; if ($_POST[renumres]=='20'){echo 'selected';} echo ">20</option>
-									<option value='30'"; if ($_POST[renumres]=='30'){echo 'selected';} echo ">30</option>
-									<option value='50'"; if ($_POST[renumres]=='50'){echo 'selected';} echo ">50</option>
-									<option value='100'"; if ($_POST[renumres]=='100'){echo 'selected';} echo ">100</option>
-									<option value='-1'"; if ($_POST[renumres]=='-1'){echo 'selected';} echo ">Todos</option>
+                                <select name='renumres' id='renumres' onChange='cambionum();' style='width:100%'>
+                                
+									<option value='10'"; if (isset($_POST['renumres']) && $_POST['renumres']=='10'){echo 'selected';} echo ">10</option>
+									<option value='20'"; if (isset($_POST['renumres']) && $_POST['renumres']=='20'){echo 'selected';} echo ">20</option>
+									<option value='30'"; if (isset($_POST['renumres']) && $_POST['renumres']=='30'){echo 'selected';} echo ">30</option>
+									<option value='50'"; if (isset($_POST['renumres']) && $_POST['renumres']=='50'){echo 'selected';} echo ">50</option>
+									<option value='100'"; if (isset($_POST['renumres']) && $_POST['renumres']=='100'){echo 'selected';} echo ">100</option>
+									<option value='-1'"; if (isset($_POST['renumres']) && $_POST['renumres']=='-1'){echo 'selected';} echo ">Todos</option>
 								</select>
 							</td>
 						</tr>
@@ -275,24 +308,28 @@
 					$iter='saludo1a';
 					$iter2='saludo2';
 					$filas=1;
-					 while ($row =mysql_fetch_row($resp)) 
+					 while ($row =mysqli_fetch_row($resp)) 
 					 {
-						$tipo="";
-						$con2=$con+ $_POST[numpos];
+                        $con2 = "";
+                        $tipo="";
+                        if(isset( $_POST['numpos']))
+						$con2=$con+ $_POST['numpos'];
  						if($row[2]=='S')
-	  						{$imgsem="src='imagenes/sema_verdeON.jpg' title='Activo'";$coloracti="#0F0";$_POST[lswitch1][$row[0]]=0;}
+	  						{$imgsem="src='../../img/icons/green-circle.png' title='Activo'";$coloracti="#0F0";$_POST['lswitch1'][$row[0]]=0;}
 						else
-							{$imgsem="src='imagenes/sema_rojoON.jpg' title='Inactivo'";$coloracti="#C00";;$_POST[lswitch1][$row[0]]=1;}
+							{$imgsem="src='../../img/icons/red-circle.png' title='Inactivo'";$coloracti="#C00";;$_POST['lswitch1'][$row[0]]=1;}
  						if($row[3]=='S'){$tipo="Entidad";}
  						if($row[3]=='N'){$tipo="Externo";} 
-						if($_POST[gidcta]!="")
+						if(isset( $_POST['gidcta']))
 						{
-							if($_POST[gidcta]==$row[0]){$estilo='background-color:yellow';}
+							if($_POST['gidcta']==$row[0]){$estilo='background-color:yellow';}
 							else{$estilo="";}
 						}
 						else{$estilo="";}	
 						$idcta="'$row[0]'";
-						$numfil="'$filas'";
+                        $numfil="'$filas'";
+                        $filtro="";
+                        if(isset( $_POST['nombre']))
 						$filtro="'$_POST[nombre]'";
 						if($_SESSION["preditar"]==1)
 						{
@@ -312,35 +349,38 @@
 						<td style='text-align:center;'><img $imgsem style='width:20px'/></td>";
 						if($_SESSION["prdesactivar"]==1)
 						{
-							echo"<td style='text-align:center;'><input type='range' name='lswitch1[]' value='".$_POST[lswitch1][$row[0]]."' min ='0' max='1' step ='1' style='background:$coloracti; width:60%' onChange='cambioswitch(\"$row[0]\",\"".$_POST[lswitch1][$row[0]]."\")' /></td>";
+							echo"<td style='text-align:center;'><input type='range' name='lswitch1[]' value='".$_POST['lswitch1'][$row[0]]."' min ='0' max='1' step ='1' style='background:$coloracti; width:60%' onChange='cambioswitch(\"$row[0]\",\"".$_POST['lswitch1'][$row[0]]."\")' /></td>";
 						}
 	 					if($_SESSION["preditar"]==1)
 						{	
 							echo"<td style='text-align:center;'>
 									<a onClick=\"verUltimaPos($idcta, $numfil, $filtro)\" style='cursor:pointer;'>
-										<img src='imagenes/b_edit.png' style='width:18px' title='Editar'>
+										<img src='../../img/icons/edit-file.png' style='width:18px' title='Editar'>
 									</a>
 								</td>";
 						}
 						if($_SESSION["preliminar"]==1)
 						{
-							echo"<td style='text-align:center;cursor:pointer;'><a onClick=anular(id=$row[0])><img src='imagenes/anular.png' style='width:22px' title='Eliminar'></a></td>";
+							echo"<td style='text-align:center;cursor:pointer;'><a onClick=anular(id=$row[0])><img src='../../img/icons/delete.png' style='width:22px' title='Eliminar'></a></td>";
 						}
 	 					$con+=1;
 	 					$aux=$iter;
 	 					$iter=$iter2;
 	 					$iter2=$aux;
 						$filas++;
- 					}
-					if ($_POST[numtop]==0)
+                     }
+                     $tibusqueda = "";
+					if ($_POST['numtop']==0)
 					{
 						echo "
 						<table class='inicio'>
 							<tr>
-								<td class='saludo1' style='text-align:center;width:100%'><img src='imagenes\alert.png' style='width:25px'>No hay coincidencias en la b&uacute;squeda $tibusqueda<img src='imagenes\alert.png' style='width:25px'></td>
+								<td class='saludo1' style='text-align:center;width:100%'><img src='../../img/icons/warning.png' style='width:25px'>No hay coincidencias en la b&uacute;squeda $tibusqueda<img src='../../img/icons/warning.png' style='width:25px'></td>
 							</tr>
 						</table>";
-					}
+                    }
+                    $imagensback = "";
+                    $imagenback = "";
  					echo"
 						</table>
 						<table class='inicio'>
@@ -356,7 +396,9 @@
 						else{$numx=$xx+($numcontrol-9);}
 						if($numcontrol==$numx){echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";}
 						else {echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";}
-					}
+                    }
+                    $imagenforward = "";
+                    $imagensforward = "";
 					echo"			&nbsp;&nbsp;<a>$imagenforward</a>
 									&nbsp;<a>$imagensforward</a>
 								</td>
@@ -365,7 +407,7 @@
 				}
 			?>			
 			</div>
-            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST[numtop];?>" />
+            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST['numtop'];?>" />
 		</form>
 	</body>
 </html>
