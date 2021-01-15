@@ -211,8 +211,8 @@
                 </tr>                       
             </table>  
             <input name="oculto" id="oculto" type="hidden" value="1"/>
-     		<input type="hidden" name="oculto2" id="oculto2" value="<?php if(isset( $_POST['oculto2'])) echo $_POST['oculto2'];?>"/>
-    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php echo $_POST['cambioestado'];?>"/>
+     		<input type="hidden" name="oculto2" id="oculto2" value="<?php if(isset($_POST['oculto2'])) echo $_POST['oculto2'];?>"/>
+    		<input type="hidden" name="cambioestado" id="cambioestado" value="<?php if(isset( $_POST['cambioestado'])) echo $_POST['cambioestado'];?>"/>
    			<input type="hidden" name="nocambioestado" id="nocambioestado" value="<?php if(isset( $_POST['nocambioestado'])) echo $_POST['nocambioestado'];?>"/>
     		<input type="hidden" name="idestado" id="idestado" value="<?php if(isset( $_POST['idestado'])) echo $_POST['idestado'];?>"/> 
             <input type="hidden" name="numres" id="numres" value="<?php if(isset( $_POST['numres'])) echo $_POST['numres'];?>"/>
@@ -229,7 +229,7 @@
 			}	//if($_POST[oculto])
 				{
                     $crit1="";
-                    if(isset( $_POST['numres']))
+                    if(isset( $_POST['nombre']))
 					if ($_POST['nombre']!=""){$crit1=" WHERE concat_ws(' ', id_cc, nombre) LIKE '%  $_POST[nombre]%' ";}
 					$sqlr="SELECT * FROM centrocosto $crit1";
 					$resp = mysqli_query($linkbd,$sqlr);
@@ -261,7 +261,7 @@
                         }
                     }
                     
-                    if(isset( $_POST['numres'])){    
+                    if(isset( $_POST['numpos'])){    
                         if(($_POST['numpos']==0)||($_POST['numres']=="-1"))
                         {
                             $imagenback="<img src='imagenes/back02.png' style='width:17px;cursor:default;'>";
