@@ -93,7 +93,7 @@
 					}
 				}
 			}
-			function respuestaconsulta(estado,pregunta)
+			function respuestaconsulta(estado, pregunta)
 			{
 				if(estado == 'S')
 				{
@@ -224,22 +224,31 @@
 					if($_POST['cambioestado'] == '1')
 					{
                         $sqlr = 'UPDATE terceros SET estado=\'S\' WHERE id_tercero=\''.$_POST['idestado'].'\'';
-                        mysqli_fetch_row(mysqli_query($linkbd, $sqlr)); 
+
+                        mysqli_query($linkbd, $sqlr);
 					}
 					else
 					{
-                        $sqlr="UPDATE terceros SET estado='N' WHERE id_tercero='$_POST[idestado]'";
-                        mysqli_fetch_row(mysqli_query($linkbd, $sqlr)); 
+                        $sqlr = 'UPDATE terceros SET estado=\'N\' WHERE id_tercero=\''.$_POST['idestado'].'\'';
+                        
+                        mysqli_query($linkbd, $sqlr);
                     }
                     
-					echo"<script>document.form2.cambioestado.value=''</script>";
+					echo '<script>document.form2.cambioestado.value=\'\'</script>';
 				}
 
-				if($_POST['nocambioestado']!="")
+				if($_POST['nocambioestado'] != '')
 				{
-					if($_POST['nocambioestado']=="1"){$_POST['lswitch1'][$_POST['idestado']]=1;}
-					else {$_POST['lswitch1'][$_POST['idestado']]=0;}
-					echo"<script>document.form2.nocambioestado.value=''</script>";
+                    if($_POST['nocambioestado'] == '1')
+                    {
+                        $_POST['lswitch1'][$_POST['idestado']] = 1;
+                    }
+                    else
+                    {
+                        $_POST['lswitch1'][$_POST['idestado']] = 0;
+                    }
+
+					echo '<script>document.form2.nocambioestado.value=\'\'</script>';
 				}
 			?>
 			<table  class="inicio" style="margin: auto;" >
@@ -272,7 +281,7 @@
                         {
                             $sqlr = 'DELETE FROM terceros WHERE cedulanit=\''.$_POST['cod'].'\'';
                             $cont = 0;
-                            $resp = mysqli_query($sqlr, $linkbd);
+                            $resp = mysqli_query($linkbd, $sqlr);
 
                             if (!$resp) 
                             {	
@@ -318,7 +327,7 @@
                     
                     //if($_POST[oculto])
                     //{
-                        $crit1 = " ";
+                        $crit1 = ' ';
                         
                         if (isset($_POST['nombre']))
                         {
@@ -431,13 +440,13 @@
                                     $con2 = $con + $_POST['numpos'];
                                     if($row[21]=='S')
                                     {
-                                        $imgsem = 'src="../../img/icons/green-circle.png" style="height:25; width:25" title="Activo"';
+                                        $imgsem = 'src="../../img/icons/circle-green.png" style="height:25; width:25" title="Activo"';
                                         $coloracti = '#0F0';
                                        $_POST['lswitch1'][$row[0]] = 0;
                                     }
                                     else
                                     {
-                                        $imgsem = 'src="../../img/icons/red-circle.png" style="height:25; width:25" title="Inactivo"';
+                                        $imgsem = 'src="../../img/icons/circle-red.png" style="height:25; width:25" title="Inactivo"';
                                         $coloracti = '#C00';
                                         $_POST['lswitch1'][$row[0]] = 1;
                                     }
