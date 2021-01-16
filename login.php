@@ -145,15 +145,15 @@
 				<div><img src="img/ideal_logo_light.png" align="absmiddle" style="width:100%; margin-bottom:10px; margin-top: 50px;"></div>
 				<table class="inicio"  style="padding: 0; position: relative; width: 100%;height: 20.5em; list-style: none; border: 3px solid #eee; border-radius: 5px; box-shadow: 0 0 10px #000; overflow: hidden;">
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color:rgba(44, 198, 219); color:#FFFFFF; width:100%" colspan="3"><image src='img/icons/password.png'> Inicio de Sesion :.</td>	
+						<td style="border-bottom:#222 thin dotted; background-color:rgba(44, 198, 219); color:#FFFFFF; width:100%" colspan="3"><image src='img/icons/sign-in-form.png'> Inicio de Sesion :.</td>	
 					</tr>
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/username.png'></td>
+						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/input-username.png'></td>
 						<td style="border-bottom:#222 thin dotted; background-color: #eeeeee;"> Usuario :.</td> 
 						<td style="border-bottom:#222 thin dotted; text-align:center"><input type="text" name="user" id="user" value="<?php if(isset($_POST['user'])) echo $_POST['user'];?>" style="width:65%; height:50%"/></td>
 					</tr>
 					<tr>
-						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/sign-in-form-password.png'></td> <td style="border-bottom:#222 thin dotted; background-color: #CCCCCC;">Contraseña :.</td>
+						<td style="border-bottom:#222 thin dotted; background-color: rgba(75, 231, 89); text-align:center; width:10%; height:20%" colspan="1"><image src='img/icons/input-password.png'></td> <td style="border-bottom:#222 thin dotted; background-color: #CCCCCC;">Contraseña :.</td>
 						<td style=" text-align:center;border-bottom:#222 thin dotted;"><input type="password" name="pass" id="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" style="width:65%; height:50%"/></td>
 					</tr>
 					<tr>
