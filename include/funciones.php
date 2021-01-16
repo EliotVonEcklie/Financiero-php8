@@ -4318,18 +4318,66 @@ function paginasnuevas($modulo)
 {
 	switch ($modulo)
 	{
-		case "cont":	$pagina = "mypop = window.open('../../spid.php?pagina=cont-principal.php', '', ''); mypop.focus();";break;
-		case "meci":	$pagina = "mypop = window.open('../../spid.php?pagina=meci-principal.php', '', ''); mypop.focus();";break;
-		case "teso":	$pagina = "mypop = window.open('../../spid.php?pagina=teso-principal.php', '', ''); mypop.focus();";break;
-		case "hum":		$pagina = "mypop = window.open('../../spid.php?pagina=hum-principal.php', '', ''); mypop.focus();";break;
-		case "plan":	$pagina = "mypop = window.open('../../spid.php?pagina=plan-principal.php', '', ''); mypop.focus();";break;
-		case "inve":	$pagina = "mypop = window.open('../../spid.php?pagina=inve-principal.php', '', ''); mypop.focus();";break;
-		case "adm":		$pagina = "mypop = window.open('../../spid.php?pagina=adm-principal.php', '', ''); mypop.focus();";break;
-		case "presu":	$pagina = "mypop = window.open('../../spid.php?pagina=presu-principal.php', '', ''); mypop.focus();";break;
-		case "contra":	$pagina = "mypop = window.open('../../spid.php?pagina=contra-principal.php', '', ''); mypop.focus();";break;
-		case "serv":	$pagina = "mypop = window.open('../../spid.php?pagina=serv-principal.php', '', ''); mypop.focus();";break;
-		case "ccpet":	$pagina = "mypop = window.open('../../spid.php?pagina=ccp-principal.php', '', ''); mypop.focus();";break;
-	}
+        /*
+		    case "cont":	$pagina = "mypop = window.open('../../spid.php?pagina=cont-principal.php', '', ''); mypop.focus();";break;
+		    case "meci":	$pagina = "mypop = window.open('../../spid.php?pagina=meci-principal.php', '', ''); mypop.focus();";break;
+		    case "teso":	$pagina = "mypop = window.open('../../spid.php?pagina=teso-principal.php', '', ''); mypop.focus();";break;
+		    case "hum":		$pagina = "mypop = window.open('../../spid.php?pagina=hum-principal.php', '', ''); mypop.focus();";break;
+		    case "plan":	$pagina = "mypop = window.open('../../spid.php?pagina=plan-principal.php', '', ''); mypop.focus();";break;
+		    case "inve":	$pagina = "mypop = window.open('../../spid.php?pagina=inve-principal.php', '', ''); mypop.focus();";break;
+		    case "adm":		$pagina = "mypop = window.open('../../spid.php?pagina=adm-principal.php', '', ''); mypop.focus();";break;
+		    case "presu":	$pagina = "mypop = window.open('../../spid.php?pagina=presu-principal.php', '', ''); mypop.focus();";break;
+		    case "contra":	$pagina = "mypop = window.open('../../spid.php?pagina=contra-principal.php', '', ''); mypop.focus();";break;
+		    case "serv":	$pagina = "mypop = window.open('../../spid.php?pagina=serv-principal.php', '', ''); mypop.focus();";break;
+		    case "ccpet":	$pagina = "mypop = window.open('../../spid.php?pagina=ccp-principal.php', '', ''); mypop.focus();";break;
+        */
+
+        case "cont":	
+            $pagina = "window.open('../../modules/contabilidad/cont-principal.php', '', '');";
+            break;
+
+        case "meci":	
+            $pagina = "window.open('../../modules/meci/meci-principal.php', '', '');";
+            break;
+
+        case "teso":	
+            $pagina = "window.open('../../modules/tesoreria/teso-principal.php', '', '');";
+            break;
+
+        case "hum":		
+            $pagina = "window.open('../../modules/gestionhum/hum-principal.php', '', '');";
+            break;
+
+        case "plan":	
+            $pagina = "window.open('../../modules/planeacion/plan-principal.php', '', '');";
+            break;
+
+        case "inve":	
+            $pagina = "window.open('../../modules/inversion/inve-principal.php', '', '');";
+            break;
+
+        case "adm":		
+            $pagina = "window.open('../../modules/administracion/adm-principal.php', '', '');";
+            break;
+
+        case "presu":	
+            $pagina = "window.open('../../modules/presupuesto/presu-principal.php', '', '');";
+            break;
+
+        case "contra":	
+            $pagina = "window.open('../../modules/contraloria/contra-principal.php', '', '');";
+            break;
+
+        case "serv":	
+            $pagina = "window.open('../../modules/servicios/serv-principal.php', '', '');";
+            break;
+
+        case "ccpet":	
+            $pagina = "window.open('../../modules/ccpet/ccp-principal.php', '', '');";
+            break;
+
+    }
+
 	return $pagina;
 }
 function busca_recaudos($recibo,$tipo)
@@ -4925,57 +4973,5 @@ function nombrefuncionario($codigo)
 		}
 		return $firmas;
 	}
-	class zipplan
-	{
-		public static function zipcrear($ruta,$nombre,$archivos,$tipo)
-		{
-			$rutadestino="informacion/documentosradicados/$tipo/$nombre";
-			$rutadestinozip="informacion/documentosradicados/$tipo/$nombre.zip";
-			mkdir($rutadestino, 0777);
-			$yconta=count($archivos);
-			for($y=0;$y<$yconta;$y++)
-			{
-				$nomarch=$ruta.$archivos[$y];
-				$nuevoarch=$rutadestino.'/'.$archivos[$y];
-				copy($nomarch, $nuevoarch);
-			}
-			$zip = new ZipArchive();
-			$zip->open($rutadestinozip, ZipArchive::CREATE);
-			for($y=0;$y<$yconta;$y++)
-			{
-				$nuevoarch=$rutadestino.'/'.$archivos[$y];
-				$zip->addFile($nuevoarch);
-			}
-			$zip->close();
-		}
-		public static function zipcrear2($ruta,$nombre,$archivos,$tipo)
-		{
-			$rutadestino="informacion/documentosradicados/responsables/$tipo/$nombre";
-			$rutadestinozip="informacion/documentosradicados/responsables/$tipo/$nombre.zip";
-			mkdir($rutadestino, 0777);
-			$yconta=count($archivos);
-			for($y=0;$y<$yconta;$y++)
-			{
-				$nomarch=$ruta.$archivos[$y];
-				$nuevoarch=$rutadestino.'/'.$archivos[$y];
-				copy($nomarch, $nuevoarch);
-			}
-			$zip = new ZipArchive();
-			$zip->open($rutadestinozip, ZipArchive::CREATE);
-			for($y=0;$y<$yconta;$y++)
-			{
-				$nuevoarch=$rutadestino.'/'.$archivos[$y];
-				$zip->addFile($nuevoarch);
-			}
-			$zip->close();
-		}
-		public static function zipdesc($nombre,$tipo)
-		{
-			$nomarchivo="C:/xampp/htdocs/financiero";
-			$zip = new ZipArchive();
-			$zip->open('', ZipArchive::CREATE);
-			$zip->extractTo($_SERVER['DOCUMENT_ROOT']);
-			$zip->close();
-		}
-	}
+
 ?>

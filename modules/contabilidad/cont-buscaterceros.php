@@ -19,10 +19,14 @@
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->
+
 		<title>:: Spid - Contabilidad</title>
 
-        <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
-        <link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+        <link href="../../css/css2.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/css3.css" rel="stylesheet" type="text/css"/>
 
 		<script type="text/javascript" src="../../js/JQuery/jquery-1.11.0.min.js"></script> 
         <script type="text/javascript" src="../../js/programas.js"></script>
@@ -158,7 +162,7 @@
                     
 					<a class="mgbt1"><img src="../../img/icons/disabled-save.png"style="height:25; width:25"/></a>
 					<a onClick="document.form2.submit();" class="mgbt"><img src="../../img/icons/search.png" title="Buscar" style="height:25; width:25"/></a>
-					<a onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda" /></a>
+					<a onClick="window.open('plan-agenda.php', '', '');" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda" /></a>
 					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="../../img/icons/new-tv.png"style="height:25; width:25" title="Nueva Ventana"></a>
 				</td>
         	</tr>
@@ -395,15 +399,15 @@
                         echo '
                             <table class="inicio">
                                 <tr>
-                                    <td colspan="'.$ntips1.'" class="titulos>">.: Resultados Busqueda:</td>
+                                    <td colspan="'.$ntips1.'" class="titulos">.: Resultados Busqueda:</td>
                                     <td class="submenu">
                                     <select name="renumres" id="renumres" onChange="cambionum();" style="width:100%">
-                                        <option value="10"'; if (isset($_POST['renumres']) && $_POST['renumres'] == '10') echo 'selected'; echo ">10</option>
-                                        <option value='20'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '20') echo 'selected'; echo ">20</option>
-                                        <option value='30'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '30') echo 'selected'; echo ">30</option>
-                                        <option value='50'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '50') echo 'selected'; echo ">50</option>
+                                        <option value="10"';  if (isset($_POST['renumres']) && $_POST['renumres'] == '10')  echo 'selected'; echo ">10</option>
+                                        <option value='20'";  if (isset($_POST['renumres']) && $_POST['renumres'] == '20')  echo 'selected'; echo ">20</option>
+                                        <option value='30'";  if (isset($_POST['renumres']) && $_POST['renumres'] == '30')  echo 'selected'; echo ">30</option>
+                                        <option value='50'";  if (isset($_POST['renumres']) && $_POST['renumres'] == '50')  echo 'selected'; echo ">50</option>
                                         <option value='100'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '100') echo 'selected'; echo ">100</option>
-                                        <option value='-1'"; if (isset($_POST['renumres']) && $_POST['renumres'] == '-1') echo 'selected'; echo '>Todos</option>
+                                        <option value='-1'";  if (isset($_POST['renumres']) && $_POST['renumres'] == '-1')  echo 'selected'; echo '>Todos</option>
                                     </select>
                                 </td>
                                 </tr>
@@ -517,7 +521,7 @@
                                     echo "
                                     <table class='inicio'>
                                         <tr>
-                                            <td class='saludo1' style='text-align:center;width:100%'><img src='../../img/icons/warning.png' style='width:25px'>No hay coincidencias en la b&uacute;squeda $tibusqueda<img src='../../img/icons/warning.png' style='width:25px'></td>
+                                            <td class='saludo1' style='text-align:center;width:100%'><img src='../../img/icons/warning.png' style='width:25px'>No hay coincidencias en la búsqueda<img src='../../img/icons/warning.png' style='width:25px'></td>
                                         </tr>
                                     </table>";
                                 }
@@ -528,14 +532,35 @@
                                     <td style='text-align:center;'>
                                         <a>$imagensback</a>&nbsp;
                                         <a>$imagenback</a>&nbsp;&nbsp;";
-                        if($nuncilumnas<=9){$numfin=$nuncilumnas;}
-                        else{$numfin=9;}
+                        
+                        if($nuncilumnas <= 9)
+                        {
+                            $numfin = $nuncilumnas;
+                        }
+                        else
+                        {
+                            $numfin = 9;
+                        }
+
                         for($xx = 1; $xx <= $numfin; $xx++)
                         {
-                            if($numcontrol<=9){$numx=$xx;}
-                            else{$numx=$xx+($numcontrol-9);}
-                            if($numcontrol==$numx){echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";}
-                            else {echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";}
+                            if($numcontrol <= 9)
+                            {
+                                $numx = $xx;
+                            }
+                            else
+                            {
+                                $numx = $xx + ($numcontrol - 9);
+                            }
+
+                            if($numcontrol==$numx)
+                            {
+                                echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";
+                            }
+                            else
+                            {
+                                echo '<a onClick="saltocol(\''.$numx.'\');" style="color:#000000;cursor:pointer;"> '.$numx.' </a>';
+                            }
                         }
                         echo"			&nbsp;&nbsp;<a>$imagenforward</a>
                                         &nbsp;<a>$imagensforward</a>

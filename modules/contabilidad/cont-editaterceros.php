@@ -1,98 +1,189 @@
-<?php //V 1000 12/12/16 ?> 
-<!--V 1.0 24/02/2015-->
 <?php
-	require "comun.inc";
-	require "funciones.inc";
-	session_start();
-	$linkbd=conectar_bd();	
-	cargarcodigopag($_GET[codpag],$_SESSION["nivel"]);
-	header("Cache-control: private"); // Arregla IE 6
-	date_default_timezone_set("America/Bogota");
-	$scroll=$_GET['scrtop'];
-	$totreg=$_GET['totreg'];
-	$idcta=$_GET['idcta'];
-	$altura=$_GET['altura'];
-	$filtro="'".$_GET['filtro']."'";
+
+	require '../../include/comun.php';
+    require '../../include/funciones.php';
+    
+    session_start();
+    
+    $linkbd = conectar_v7();
+    
+    if(isset($_GET['codpag']))
+        cargarcodigopag($_GET['codpag'], $_SESSION['nivel']);
+    
+    date_default_timezone_set("America/Bogota");
+    
+    if(isset($_GET['scrtop']))
+        $scroll = $_GET['scrtop'];
+
+    if(isset($_GET['totreg']))
+        $totreg = $_GET['totreg'];
+        
+    if(isset($_GET['idcta']))
+        $idcta = $_GET['idcta'];
+
+    if(isset($_GET['altura']))
+        $altura = $_GET['altura'];
+        
+    if(isset($_GET['filtro']))
+        $filtro = '\''.$_GET['filtro'].'\'';
+
 ?>
+
 <!DOCTYPE >
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
 	<head>
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->
+
 		<title>:: Contabilidad</title>
-        <link href="css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<link href="css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="css/programas.js"></script>
-		<script type="text/javascript" src="css/funciones.js"></script>
-		<script type="text/javascript" src="css/sweetalert.js"></script>
-		<script type="text/javascript" src="css/sweetalert.min.js"></script>
-        <script type='text/javascript' src='JQuery/jquery-2.1.4.min.js'></script>
-        <script type="text/javascript" src="JQuery/alphanum/jquery.alphanum.js"></script>
-		<link href="css/sweetalert.css" rel="stylesheet" type="text/css" />
+
+        <link href="../../css/css2.css" rel="stylesheet" type="text/css" />
+		<link href="../../css/css3.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="../../js/programas.js"></script>
+		<script type="text/javascript" src="../../js/funciones.js"></script>
+		<script type="text/javascript" src="../../js/sweetalert.js"></script>
+		<script type="text/javascript" src="../../js/sweetalert.min.js"></script>
+        <script type='text/javascript' src='../../js/JQuery/jquery-2.1.4.min.js'></script>
+        <script type="text/javascript" src="../../js/JQuery/alphanum/jquery.alphanum.js"></script>
+
+		<link href="../../css/sweetalert.css" rel="stylesheet" type="text/css"/>
+
 		<script>
         	function validar(formulario){
-				document.getElementById('oculto').value='7';
+				document.getElementById('oculto').value = '7';
 				document.form2.submit();
-			}
+            }
+            
 			function validarR(formulario){
-				document.getElementById('bt').value='1';
+				document.getElementById('bt').value = '1';
 				document.form2.submit();
-			}
+            }
+            
 			function guardar()
 			{
-				if (document.getElementById('persona').value!="-1")
+				if (document.getElementById('persona').value != '-1')
 				{
-					if (document.getElementById('persona').value=="1")
+					if (document.getElementById('persona').value == '1')
 					{
-						var validacion00=document.getElementById('documento').value;
-						var validacion01=document.getElementById('razonsocial').value;
-						var validacion02=document.getElementById('direccion').value;
-						var validacion03=document.getElementById("contribuyente");
-						var validacion04=document.getElementById("proveedor");
-						var validacion05=document.getElementById("empleado");
-						if(!validacion03.checked){var valcheck01="0";}
-						else {var valcheck01="1";}
-						if(!validacion04.checked){var valcheck02="0";}
-						else {var valcheck02="1";}
-						if(!validacion05.checked){var valcheck03="0";}
-						else {var valcheck03="1";}
-						if((validacion00.trim()!='')&&(validacion01.trim()!='')&&(validacion02.trim()!='')&&(document.getElementById('mnpio').value!="-1")&&((valcheck01=="1")||(valcheck02=="1")||(valcheck03=="1")))
-						{despliegamodalm('visible','4','Esta Seguro de Modificar','1');}
-						else {despliegamodalm('visible','2','Falta informacion para modificar el Tercero');}
+						var validacion00 = document.getElementById('documento').value;
+						var validacion01 = document.getElementById('razonsocial').value;
+						var validacion02 = document.getElementById('direccion').value;
+						var validacion03 = document.getElementById('contribuyente');
+						var validacion04 = document.getElementById('proveedor');
+						var validacion05 = document.getElementById('empleado');
+                        
+                        if(!validacion03.checked)
+                        {
+                            var valcheck01 = '0';
+                        }
+                        else
+                        {
+                            var valcheck01 = '1';
+                        }
+                        if(!validacion04.checked)
+                        {
+                            var valcheck02 = '0';
+                        }
+                        else 
+                        {
+                            var valcheck02 = '1';
+                        }
+                        if(!validacion05.checked)
+                        {
+                            var valcheck03 = '0';
+                        }
+                        else 
+                        {
+                            var valcheck03 = '1';
+                        }
+
+                        if((validacion00.trim() != '') &&
+                           (validacion01.trim() != '') &&
+                           (validacion02.trim() != '') &&
+                           (document.getElementById('mnpio').value != '-1') &&
+                           ((valcheck01 == '1') || (valcheck02 == '1') || (valcheck03 == '1')))
+						{
+                            despliegamodalm('visible', '4', 'Esta Seguro de Modificar','1');
+                        }
+                        else 
+                        {
+                            despliegamodalm('visible', '2', 'Falta informacion para modificar el Tercero');
+                        }
 					}
 					else
 					{
-						var validacion00=document.getElementById('documento').value;
-						var validacion01=document.getElementById('apellido1').value;
-						var validacion06=document.getElementById('nombre1').value;
-						var validacion02=document.getElementById('direccion').value;
-						var validacion03=document.getElementById("contribuyente");
-						var validacion04=document.getElementById("proveedor");
-						var validacion05=document.getElementById("empleado");
-						if(!validacion03.checked){var valcheck01="0";}
-						else {var valcheck01="1";}
-						if(!validacion04.checked){var valcheck02="0";}
-						else {var valcheck02="1";}
-						if(!validacion05.checked){var valcheck03="0";}
-						else {var valcheck03="1";}
-						if((validacion06.trim()!='')&&(validacion00.trim()!='')&&(validacion01.trim()!='')&&(validacion02.trim()!='')&&(document.getElementById('mnpio').value!="-1")&&((valcheck01=="1")||(valcheck02=="1")||(valcheck03=="1")))
-						{despliegamodalm('visible','4','Esta Seguro de Modificar','1');}
-						else {despliegamodalm('visible','2','Falta informacion para modificar el Tercero');}
+						var validacion00 = document.getElementById('documento').value;
+						var validacion01 = document.getElementById('apellido1').value;
+						var validacion06 = document.getElementById('nombre1').value;
+						var validacion02 = document.getElementById('direccion').value;
+						var validacion03 = document.getElementById('contribuyente');
+						var validacion04 = document.getElementById('proveedor');
+                        var validacion05 = document.getElementById('empleado');
+                        
+                        if(!validacion03.checked)
+                        {
+                            var valcheck01 = '0';
+                        }
+                        else 
+                        {
+                            var valcheck01 = '1';
+                        }
+                        if(!validacion04.checked)
+                        {
+                            var valcheck02 = '0';
+                        }
+                        else 
+                        {
+                            var valcheck02 = '1';
+                        }
+                        if(!validacion05.checked)
+                        {
+                            var valcheck03 = '0';
+                        }
+                        else 
+                        {
+                            var valcheck03 = '1';
+                        }
+
+                        if((validacion06.trim() != '') &&
+                           (validacion00.trim() != '') &&
+                           (validacion01.trim() != '') &&
+                           (validacion02.trim() != '') &&
+                           (document.getElementById('mnpio').value != '-1') &&
+                           ((valcheck01 == '1') || (valcheck02 == '1') || (valcheck03 == '1')))
+						{
+                            despliegamodalm('visible', '4', 'Esta Seguro de Modificar','1');
+                        }
+                        else 
+                        {
+                            despliegamodalm('visible', '2', 'Falta informacion para modificar el Tercero');
+                        }
 					
 					}
 				}
-				else {despliegamodalm('visible','2','Falta informacion para modificar el Tercero');}
+                else 
+                {
+                    despliegamodalm('visible', '2', 'Falta informacion para modificar el Tercero');
+                }
  			}
 			function despliegamodalm(_valor,_tip,mensa,pregunta)
 			{
-				document.getElementById("bgventanamodalm").style.visibility=_valor;
-				if(_valor=="hidden")
+				document.getElementById('bgventanamodalm').style.visibility = _valor;
+                
+                if(_valor == 'hidden')
 				{
-					document.getElementById('ventanam').src="";
-					if(document.getElementById('valfocus').value=="2")
+					document.getElementById('ventanam').src = '';
+                    
+                    if(document.getElementById('valfocus').value == '2')
 					{
-						document.getElementById('valfocus').value='1';
-						document.getElementById('documento').focus();
+						document.getElementById('valfocus').value = '1';
+                        
+                        document.getElementById('documento').focus();
 						document.getElementById('documento').select();
 					}
 				}
@@ -101,13 +192,20 @@
 					switch(_tip)
 					{
 						case "1":
-							document.getElementById('ventanam').src="ventana-mensaje1.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje1.php?titulos=" + mensa;
+                            break;
+
 						case "2":
-							document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje3.php?titulos=" + mensa;
+                            break;
+
 						case "3":
-							document.getElementById('ventanam').src="ventana-mensaje2.php?titulos="+mensa;break;
+                            document.getElementById('ventanam').src = "ventana-mensaje2.php?titulos=" + mensa;
+                            break;
+
 						case "4":
-							document.getElementById('ventanam').src="ventana-consulta1.php?titulos="+mensa+"&idresp="+pregunta;break;	
+                            document.getElementById('ventanam').src = "ventana-consulta1.php?titulos=" + mensa + "&idresp=" + pregunta;
+                            break;	
 					}
 				}
 			}
@@ -195,10 +293,15 @@
 		<IFRAME src="alertas.php" name="alertas" id="alertas" style="display:none"></IFRAME>
 		<span id="todastablas2"></span>
         <?php
-		$numpag=$_GET[numpag];
-		$limreg=$_GET[limreg];
-		$scrtop=26*$totreg;
-		?>
+            
+            $numpag = $_GET['numpag'];
+        
+		    $limreg = $_GET['limreg'];
+        
+            $scrtop = 26 * $totreg;
+        
+        ?>
+
 		<table>
 			<tr><script>barra_imagenes("cont");</script><?php cuadro_titulos();?></tr>	 
     		<tr><?php menu_desplegable("cont");?></tr>
@@ -227,96 +330,134 @@
         </div>
  		<form name="form2" method="post" action="">
  			<?php
-			if ($_GET[idter]!=""){echo "<script>document.getElementById('codrec').value=$_GET[idter];</script>";}
-			$sqlr="select * from  terceros ORDER BY id_tercero DESC";
-			$res=mysql_query($sqlr,$linkbd);
-			$r=mysql_fetch_row($res);
-			$_POST[maximo]=$r[0];
-			if($_POST[oculto]=="")
-			{
 
-				if ($_POST[codrec]!="" || $_GET[idter]!="")
-				{
-					if($_POST[codrec]!=""){$sqlr="select *from terceros where id_tercero='$_POST[codrec]'";}
-					else{$sqlr="select *from terceros where id_tercero ='$_GET[idter]'";}
-				}
-				else{$sqlr="select * from terceros ORDER BY id_tercero DESC";}
-				$res=mysql_query($sqlr,$linkbd);
-				$row=mysql_fetch_row($res);
-			   	$_POST[idtercero]=$row[0];
-			}
-			if(($_POST[oculto]!="2")&&($_POST[oculto]!="7"))
-			{
-				$sqlr="select *from terceros where id_tercero=$_POST[idtercero]";
-				$resp = mysql_query($sqlr,$linkbd);
-				$row =mysql_fetch_row($resp);
-				$_POST[idtercero]=$row[0];
-				$_POST[nombre1]=$row[1];
-				$_POST[nombre2]=$row[2];
-				$_POST[apellido1]=$row[3];
-				$_POST[apellido2]=$row[4];	 	 
-				$_POST[razonsocial]=$row[5];	 	 	 
-				$_POST[direccion]=$row[6];	 	 
-				$_POST[telefono]=$row[7];	 	 	 
-				$_POST[celular]=$row[8];	 	 	 
-				$_POST[email]=$row[9];	 	 	 
-				$_POST[web]=$row[10];	 	 	 
-				$_POST[tipodoc]=$row[11];	 	 
-				$_POST[documento]=$row[12];	 	 
-				$_POST[codver]=$row[13];	 	 
-				$_POST[dpto]=$row[14];	 	 	 	 	 	 
-				$_POST[mnpio]=$row[15];	 	 	 	 	 	 	 
-				$_POST[persona]=$row[16];	 	 	 	 	 	 	 
-				$_POST[regimen]=$row[17];	 	 	 	 	 	 	 
-				$_POST[contribuyente]=$row[18];	 	 	 	 	 	 	 
-				$_POST[proveedor]=$row[19];	 	 	 	 	 	 	 	 	 	 	 
-				$_POST[empleado]=$row[20];
-				$_POST[estado]=$row[21]; 
-			}
-			//NEXT
-			if($_POST[apellido1]!=""){
-				$sqln="select *from terceros where apellido1 > '$_POST[apellido1]' ORDER BY apellido1 ASC LIMIT 1";
-				$resn=mysql_query($sqln,$linkbd);
-				$row=mysql_fetch_row($resn);
-				$next=$row[0];
-			}
-			else{
-				$sqln="select *from terceros where razonsocial > '$_POST[razonsocial]' ORDER BY razonsocial ASC LIMIT 1";
-				$resn=mysql_query($sqln,$linkbd);
-				$row=mysql_fetch_row($resn);
-				$next=$row[0];
-			}
-			//PREV
-			if($_POST[apellido1]!=""){
-				$sqlp="select *from terceros where apellido1 < '$_POST[apellido1]' ORDER BY  apellido1 DESC LIMIT 1";
-				$resp=mysql_query($sqlp,$linkbd);
-				$row=mysql_fetch_row($resp);
-				$prev=$row[0];
-			}
-			else{
-				$sqlp="select *from terceros where razonsocial < '$_POST[razonsocial]' ORDER BY  razonsocial DESC LIMIT 1";
-				$resp=mysql_query($sqlp,$linkbd);
-				$row=mysql_fetch_row($resp);
-				$prev=$row[0];
-			}
-			$sqlr = "SELECT id_entidad FROM entidadreciprocatercero WHERE tercero = '$_POST[documento]'";
-			$resp = mysql_query($sqlr,$linkbd);
-			$row = mysql_num_rows($resp);
-			//echo $row;
-			
-			if(($_POST[persona]=='1' && $_POST[bt]) || $row > 0 )
-			{
-				$sqlrEntidadReciproca = "SELECT id_entidad, nombre FROM codigoscun WHERE nit='$_POST[documento]'";
-				$respEntidadReciproca = mysql_query($sqlrEntidadReciproca,$linkbd);
-				$rowEntidadReciproca = mysql_fetch_row($respEntidadReciproca);
-				$_POST[idEntidad] = $rowEntidadReciproca[0];
-				$_POST[entidad] = $rowEntidadReciproca[1];
-			}
+                if ($_GET['idter'] != '')
+                {
+                    echo "<script>document.getElementById('codrec').value=$_GET[idter];</script>";
+                
+                }
+
+                $sqlr = "SELECT * FROM terceros ORDER BY id_tercero DESC";
+
+                $res = mysqli_query($linkbd, $sqlr);
+                $r = mysqli_fetch_row($res);
+
+                $_POST['maximo']=$r[0];
+
+                if($_POST['oculto'] == '')
+                {
+
+                    if ($_POST['codrec'] != '' || $_GET['idter'] != '')
+                    {
+                        if($_POST['codrec'] != '')
+                        {
+                            $sqlr = 'SELECT * FROM terceros WHERE id_tercero=\''.$_POST['codrec'].'\'';
+                        }
+                        else
+                        {
+                            $sqlr = 'SELECT * FROM terceros WHERE id_tercero=\''.$_GET['idter'].'\'';
+                        }
+                    }
+                    else
+                    {
+                        $sqlr = 'SELECT * FROM terceros ORDER BY id_tercero DESC';
+                    }
+
+                    $res = mysqli_query($linkbd, $sqlr);
+                    $row = mysqli_fetch_row($res);
+
+                    $_POST['idtercero']=$row[0];
+                }
+                if(($_POST['oculto'] != '2') && ($_POST['oculto'] != '7'))
+                {
+                    $sqlr = 'SELECT * FROM terceros WHERE id_tercero=\''.$_POST['idtercero'].'\'';
+                    
+                    $resp = mysqli_query($linkbd, $sqlr);
+                    $row = mysqli_fetch_row($resp);
+
+                    $_POST['idtercero'] = $row[0];
+                    $_POST['nombre1'] = $row[1];
+                    $_POST['nombre2'] = $row[2];
+                    $_POST['apellido1'] = $row[3];
+                    $_POST['apellido2'] = $row[4];	 	 
+                    $_POST['razonsocial'] = $row[5];	 	 	 
+                    $_POST['direccion'] = $row[6];	 	 
+                    $_POST['telefono']= $row[7];	 	 	 
+                    $_POST['celular'] = $row[8];	 	 	 
+                    $_POST['email'] = $row[9];	 	 	 
+                    $_POST['web'] = $row[10];	 	 	 
+                    $_POST['tipodoc'] = $row[11];	 	 
+                    $_POST['documento'] = $row[12];	 	 
+                    $_POST['codver'] = $row[13];	 	 
+                    $_POST['dpto'] = $row[14];	 	 	 	 	 	 
+                    $_POST['mnpio'] = $row[15];	 	 	 	 	 	 	 
+                    $_POST['persona'] = $row[16];	 	 	 	 	 	 	 
+                    $_POST['regimen'] = $row[17];	 	 	 	 	 	 	 
+                    $_POST['contribuyente'] = $row[18];	 	 	 	 	 	 	 
+                    $_POST['proveedor'] = $row[19];	 	 	 	 	 	 	 	 	 	 	 
+                    $_POST['empleado'] = $row[20];
+                    $_POST['estado'] = $row[21]; 
+                }
+                //NEXT
+                if($_POST['apellido1'] != "")
+                {
+                    $sqln = 'SELECT * FROM terceros WHERE apellido1 > \''.$_POST['apellido1'].'\' ORDER BY apellido1 ASC LIMIT 1';
+
+                    $resn = mysqli_query($linkbd, $sqln);
+                    $row = mysqli_fetch_row($resn);
+
+                    $next = $row[0];
+                }
+                else
+                {
+                    $sqln = 'SELECT * FROM terceros WHERE razonsocial > \''.$_POST['razonsocial'].'\' ORDER BY razonsocial ASC LIMIT 1';
+
+                    $resn = mysqli_query($linkbd, $sqln);
+                    $row = mysqli_fetch_row($resn);
+
+                    $next = $row[0];
+                }
+
+                //PREV
+                if($_POST['apellido1'] != '')
+                {
+                    $sqlp = 'SELECT * FROM terceros WHERE apellido1 < \''.$_POST['apellido1'].'\' ORDER BY apellido1 DESC LIMIT 1';
+
+                    $resp = mysqli_query($linkbd, $sqln);
+                    $row = mysqli_fetch_row($resp);
+
+                    $prev = $row[0];
+                }
+                else
+                {
+                    $sqlp = 'SELECT * FROM terceros WHERE razonsocial < \''.$_POST['razonsocial'].'\' ORDER BY  razonsocial DESC LIMIT 1';
+
+                    $resp = mysqli_query($linkbd, $sqln);
+                    $row = mysqli_fetch_row($resp);
+
+                    $prev = $row[0];
+                }
+
+                $sqlr = 'SELECT id_entidad FROM entidadreciprocatercero WHERE tercero = \''.$_POST['documento'].'\'';
+
+                $resp = mysqli_query($linkbd, $sqln);
+                $row = mysqli_num_rows($resp);
+                
+                if(($_POST['persona'] == '1' && $_POST['bt']) || $row > 0 )
+                {
+                    $sqlrEntidadReciproca = 'SELECT id_entidad, nombre FROM codigoscun WHERE nit=\''.$_POST['documento'].'\'';
+
+                    $respEntidadReciproca = mysqli_query($linkbd, $sqlrEntidadReciproca);
+                    $rowEntidadReciproca = mysqli_fetch_assoc($respEntidadReciproca);
+
+                    $_POST['idEntidad'] = $rowEntidadReciproca['id_entidad'];
+                    $_POST['entidad'] = $rowEntidadReciproca['nombre'];
+                }
  			?>
    	 		<table class="inicio" >
       			<tr>
         			<td class="titulos" colspan="5">.: Editar Terceros</td>
-                    <td class="cerrar" style='width:7%'><a onClick="location.href='cont-principal.php'">&nbsp;Cerrar</a></td>
+                    <td class="cerrar" style="width:7%"><a onClick="location.href = 'cont-principal.php'">&nbsp;Cerrar</a></td>
       			</tr>
 	   			<tr>
         			<td class="saludo1" style="width:3.5cm;">.: Tipo Persona:</td>
@@ -324,12 +465,20 @@
                     	<select name="persona" id="persona" style="width:30%;" onChange="validar()">
 							<option value="-1">...</option>
 							<?php
-  		   						$sqlr="Select * from personas where estado='1'";
-								$resp = mysql_query($sqlr,$linkbd);
-                                while ($row =mysql_fetch_row($resp)) 
+
+  		   						$sqlr="SELECT * FROM personas WHERE estado='1'";
+                                $resp = mysqli_query($sqlr,$linkbd);
+                                
+                                while ($row =mysqli_fetch_row($resp)) 
                                 {
-                                    if($row[0]==$_POST[persona]){echo "<option value=$row[0] SELECTED>$row[1]</option>";}
-                                    else {echo "<option value=$row[0]>$row[1]</option>";}	  
+                                    if($row[0] == $_POST['persona'])
+                                    {
+                                        echo "<option value=$row[0] SELECTED>$row[1]</option>";
+                                    }
+                                    else 
+                                    {
+                                        echo "<option value=$row[0]>$row[1]</option>";
+                                    }	  
                                 }  
 		  					?>
 						</select>   
@@ -526,10 +675,14 @@
       	 				break ;
    					default: 
 				} 
-				if($_POST[oculto]=='2')
+				if($_POST['oculto']=='2')
 				{
-					$sqlr="UPDATE terceros SET nombre1='$_POST[nombre1]',nombre2='$_POST[nombre2]',apellido1='$_POST[apellido1]', apellido2='$_POST[apellido2]',razonsocial='$_POST[razonsocial]',direccion='$_POST[direccion]',telefono='$_POST[telefono]', celular='$_POST[celular]',email='$_POST[email]',web='$_POST[web]',tipodoc=$_POST[tipodoc],cedulanit='$_POST[documento]', codver='$_POST[codver]',depto='$_POST[dpto]',mnpio='$_POST[mnpio]',persona=$_POST[persona],regimen=$_POST[regimen],  contribuyente='$_POST[contribuyente]',proveedor='$_POST[proveedor]',empleado='$_POST[empleado]',estado='$_POST[estado]' WHERE id_tercero=$_POST[idtercero]";
-  					if (!mysql_query($sqlr,$linkbd)){echo "<script>despliegamodalm('visible','2','No se pudo ejecutar la petici�n');</script>";}
+					$sqlr = 'UPDATE terceros SET nombre1=\''.$_POST[nombre1].'\',nombre2=\''.$_POST[nombre2].'\',apellido1=\''.$_POST[apellido1]', apellido2='$_POST[apellido2]',razonsocial='$_POST[razonsocial]',direccion='$_POST[direccion]',telefono='$_POST[telefono]', celular='$_POST[celular]',email='$_POST[email]',web='$_POST[web]',tipodoc=$_POST[tipodoc],cedulanit='$_POST[documento]', codver='$_POST[codver]',depto='$_POST[dpto]',mnpio='$_POST[mnpio]',persona=$_POST[persona],regimen=$_POST[regimen],  contribuyente='$_POST[contribuyente]',proveedor='$_POST[proveedor]',empleado='$_POST[empleado]',estado='$_POST[estado]' WHERE id_tercero=$_POST[idtercero]';
+                    
+                    if (!mysqli_query($sqlr,$linkbd))
+                    {
+                          echo "<script>despliegamodalm('visible','2','No se pudo ejecutar la petici�n');</script>";
+                    }
 					else
 					{
 						$sqlr = "DELETE FROM entidadreciprocatercero WHERE tercero = '$_POST[documento]'";
@@ -540,7 +693,7 @@
 						echo "<script>despliegamodalm('visible','3','Se ha modificado con Exito');</script>";
 					}
 				}
-				if($_POST[idEntidad]!='')
+				if($_POST['idEntidad'] != '')
 				{
 					echo "<script>buscaNombreEntidad('idEntidad','entidad');</script>";
 				}
