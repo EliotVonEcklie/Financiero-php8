@@ -1,0 +1,12 @@
+12:16:40  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+13:49:00  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+14:59:21  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+14:59:53  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:02:25  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:03:16  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:03:28  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:04:37  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:14:29  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:14:58  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:15:31  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1
+15:15:36  <->PRI<->V<->SPID           <->USUARIO INICIA SESION EN EL SISTEMA               <->127.0.0.1

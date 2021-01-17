@@ -1,0 +1,14 @@
+
+#   Financiero for PHP 8
+#
+#       .gitignore File
+#
+
+logs/
+
+node_modules/
+
+vendor/
+
+img/login/acuario.mp4
+img/login/acuario.mp4

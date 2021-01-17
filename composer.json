@@ -1,0 +1,8 @@
+{
+    "require": {
+        "illuminate/database": "^5.4",
+        "cossou/jasperphp": "^2.8",
+        "vlucas/phpdotenv": "^3.6",
+        "kint-php/kint": "^3.3"
+    }
+}
