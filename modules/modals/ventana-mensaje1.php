@@ -1,8 +1,10 @@
 <?php 
 	header("Cache-control: no-cache, no-store, must-revalidate");
-	header("Content-Type: text/html;charset=utf8");
-	require "comun.inc";
-	require"funciones.inc";
+    header("Content-Type: text/html;charset=utf8");
+    
+	require '../../include/comun.php';
+    require '../../include/funciones.php';
+    
 	date_default_timezone_set("America/Bogota");
 ?>
 <!DOCTYPE >
@@ -10,14 +12,31 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html" charset="utf8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
-		<link href="css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<link href="css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="JQuery/jquery-2.1.4.min.js?<?php echo date('d_m_Y_h_i_s');?>"></script>
+
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->
+
+		<link href="../../css/css2.css" rel="stylesheet" type="text/css"/>
+		<link href="../../css/css3.css" rel="stylesheet" type="text/css"/>
+
 		<script>
-			function continuar(){parent.funcionmensaje();parent.despliegamodalm("hidden");}
-			setTimeout("continuar()",5000);
-			var tecla01 = 13; 
-			$(document).keydown(function(e){if (e.keyCode == tecla01){continuar();}})
+            function continuar()
+            {
+                parent.funcionmensaje();
+                parent.despliegamodalm("hidden");
+            }
+
+            setTimeout('continuar()', 5000);
+            
+            var tecla01 = 13; 
+            
+			$(document).keydown(function(e) {
+                if (e.keyCode == tecla01)
+                {
+                    continuar();
+                }
+            });
 		</script>
 	</head>
 	<body style="overflow:hidden"></br></br>
@@ -29,7 +48,7 @@
 		<table>
 			<tr>
 				<td style="padding: 14px;text-align:center">
-					<em name="continuar" id="continuar" class="botonflecha" onclick="continuar()">Continuar</em>
+					<em name="continuar" id="continuar" class="botonflecha" onclick="continuar();">Continuar</em>
 				</td>
 			</tr>
 		</table>

@@ -17,9 +17,15 @@
 	<head>
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->
+
 		<title>:: Spid - Contabilidad</title>
-        <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
-		<link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+
+        <link href="../../css/css2.css" rel="stylesheet" type="text/css"/>
+		<link href="../../css/css3.css" rel="stylesheet" type="text/css"/>
 
 		<script type="text/javascript" src="../../js/JQuery/jquery-1.11.0.min.js"></script> 
         <script type="text/javascript" src="../../js/programas.js"></script>
