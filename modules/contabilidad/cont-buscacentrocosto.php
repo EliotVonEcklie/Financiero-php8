@@ -60,13 +60,13 @@
 					switch(_tip)
 					{
 						case "1":
-							document.getElementById('ventanam').src="ventana-mensaje1.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje1.php?titulos="+mensa;break;
 						case "2":
-							document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje3.php?titulos="+mensa;break;
 						case "3":
-							document.getElementById('ventanam').src="ventana-mensaje2.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje2.php?titulos="+mensa;break;
 						case "4":
-							document.getElementById('ventanam').src="ventana-consulta2.php?titulos="+mensa+"&idresp="+pregunta;break;	
+							document.getElementById('ventanam').src="../modals/ventana-consulta1.php?titulos="+mensa+"&idresp="+pregunta;break;	
 					}
 				}
 			}
@@ -134,15 +134,14 @@
             </div>
         </div>
         <?php
-			if(!isset( $_POST['oculto']))
-			{
+			
                 if(isset($_GET['scrtop']))
                     $_POST['scrtop'] = $_GET['scrtop'];
                 if(isset($_GET['scrtop'] ))    
 				    if($_POST['scrtop'] = $_GET['scrtop'])
 				        $_POST['gidcta']=$_GET['idcta'];
 				if(isset($_GET['filtro'])){$_POST['numero']=$_GET['filtro'];}
-            }
+            
             if(isset($_GET['scrtop'] ))
             {
                 echo"<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST['scrtop'].")}</script>";

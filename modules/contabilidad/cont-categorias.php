@@ -89,11 +89,11 @@
     		<tr><?php menu_desplegable("cont");?></tr>
 			<tr>
   				<td colspan="3" class="cinta">
-					<a onClick="location.href='cont-categorias.php'" class="mgbt"><img src="imagenes/add.png" title="Nuevo"/></a>
-					<a onClick="guardar();" class="mgbt"><img src="imagenes/guarda.png" title="Guardar" /></a>
-					<a onClick="location.href='cont-buscacategorias.php'" class="mgbt"><img src="imagenes/busca.png" title="Buscar" /></a>
-					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="imagenes/agenda1.png" title="Agenda" /></a>
-					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="imagenes/nv.png" title="Nueva Ventana"></a>
+					<a onClick="location.href='cont-categorias.php'" class="mgbt"><img src="../../img/icons/add.png" title="Nuevo" style="height:25; width:25"/></a>
+					<a onClick="guardar();" class="mgbt"><img img src="../../img/icons/save.png"style="height:25; width:25"/></a>
+					<a onClick="location.href='cont-buscacategorias.php'" class="mgbt"><img src="../../img/icons/search.png" title="Buscar" style="height:25; width:25"/></a>
+					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda"/></a>
+					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="../../img/icons/new-tv.png"style="height:25; width:25" title="Nueva Ventana"></a>
 				</td>
            	</tr>
 		</table>

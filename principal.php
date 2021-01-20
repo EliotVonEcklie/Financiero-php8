@@ -74,7 +74,7 @@
             
             if($dirfoto == '')
             {
-                $_SESSION['fotousuario'] = '../../img/icons/usuario_on.png';
+                $_SESSION['fotousuario'] = '../../img/icons/account-male-user-2.png';
             }
             else
             {
