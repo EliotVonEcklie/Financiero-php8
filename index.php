@@ -13,7 +13,7 @@
 
 		<title>:: FINANCIERO</title>
 		
-		<?php titlepag();?>
+		<link rel="shortcut icon" href="favicon.ico"/>
 	</head>
 	<body style="background-color:darkseagreen; display: flex; justify-content: center; align-items: center;" >
 		<script>
