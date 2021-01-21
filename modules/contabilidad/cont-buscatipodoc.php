@@ -207,7 +207,9 @@
 				{
                     $crit1="";
                     if(isset( $_POST['nombre']))
-					if ($_POST['nombre'] != ""){$crit1="WHERE concat_ws(' ', nombre, codigo) LIKE '%$_POST[nombre]%'";}
+					if ($_POST['nombre'] != ""){ 
+                        $crit1="WHERE concat_ws(' ', nombre, codigo) LIKE '%$_POST[nombre]%'";
+                    }
 					$sqlr = "SELECT * FROM tipo_comprobante $crit1";
 					$resp = mysqli_query($linkbd,$sqlr);
                     $_POST['numtop'] = mysqli_num_rows($resp);

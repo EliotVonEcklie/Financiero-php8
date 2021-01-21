@@ -393,14 +393,32 @@
 								<td style='text-align:center;'>
 									<a>$imagensback</a>&nbsp;
 									<a>$imagenback</a>&nbsp;&nbsp;";
-					if($nuncilumnas<=9){$numfin=$nuncilumnas;}
-					else{$numfin=9;}
+                    if($nuncilumnas<=9)
+                    {
+                        $numfin=$nuncilumnas;
+                    }
+                    else
+                    {
+                        $numfin=9;
+                    }
 					for($xx = 1; $xx <= $numfin; $xx++)
 					{
-						if($numcontrol<=9){$numx=$xx;}
-						else{$numx=$xx+($numcontrol-9);}
-						if($numcontrol==$numx){echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";}
-						else {echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";}
+                        if($numcontrol<=9)
+                        {
+                            $numx=$xx;
+                        }
+                        else
+                        {
+                            $numx=$xx+($numcontrol-9);
+                        }
+                        if($numcontrol==$numx)
+                        {
+                            echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";
+                        }
+                        else 
+                        {
+                            echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";
+                        }
                     }
                     $imagenforward = "";
                     $imagensforward = "";
@@ -412,7 +430,7 @@
 				}
 			?>			
 			</div>
-            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST['numtop'];?>" />
+            <input type="hidden" name="numtop" id="numtop" value="<?php if(isset( $_POST['numtop'])) echo $_POST['numtop'];?>" />
 		</form>
 	</body>
 </html>

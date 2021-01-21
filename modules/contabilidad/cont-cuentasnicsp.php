@@ -18,8 +18,8 @@
 		<title>:: Spid - Contabilidad</title>
         <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
 		<link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
-		<script type="text/javascript" src="JQuery/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="css/programas.js"></script>
+		<script type='text/javascript' src='../../js/JQuery/jquery-2.1.4.min.js'></script>
+        <script type="text/javascript" src="../../js/programas.js"></script>
 		<script>
 			$(window).load(function () {
 				$('#cargando').hide();
@@ -108,12 +108,12 @@
             <tr><?php menu_desplegable("cont");?></tr>
 			<tr>
   				<td colspan="3" class="cinta">
-					<a onClick="location.href='cont-cuentasaddnicsp.php'" class='mgbt'><img src='imagenes/add.png' title='Nuevo' /></a>
-					<a class="mgbt1"><img src="imagenes/guardad.png"/></a>
-					<a onClick="document.form2.submit()" class="mgbt"><img src="imagenes/busca.png" title="Buscar" /></a>
-					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="imagenes/agenda1.png" title="Agenda" /></a>
-					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="imagenes/nv.png" title="Nueva Ventana"></a>
-					<a href="#" onclick="crearexcel()" class="mgbt"><img src="imagenes/excel.png" title="Excel"></a>
+					<a onClick="location.href='cont-cuentasaddnicsp.php'" class='mgbt'><img src="../../img/icons/add.png" title="Nuevo" style="height:25; width:25"/></a>
+					<a class="mgbt1"><img img src="../../img/icons/disabled-save.png"style="height:25; width:25"/></a>
+					<a onClick="document.form2.submit()" class="mgbt"><img src="../../img/icons/search.png" title="Buscar" style="height:25; width:25"/></a>
+					<a href="" onClick="mypop=window.open('plan-agenda.php','','');mypop.focus()" class="mgbt"><img src="../../img/icons/agenda.png"style="height:25; width:25" title="Agenda"/></a>
+					<a onClick="<?php echo paginasnuevas("cont");?>" class="mgbt"><img src="../../img/icons/new-tv.png"style="height:25; width:25" title="Nueva Ventana"></a>
+					<a href="#" onclick="crearexcel()" class="mgbt"><img src="../../img/icons/excel.png"style="height:25; width:25" title="Excel"></a>
 				</td>
     		</tr>
         </table>
@@ -215,7 +215,8 @@
         <input type="hidden" name="scrtop" id="scrtop" value="<?php if(isset($_GET['scrtop'])) echo $_POST['scrtop'];?>"/>
         <input type="hidden" name="gidcta" id="gidcta" value="<?php if(isset($_GET['gidcta'])) echo $_POST['gidcta'];?>"/>
 		<div class="subpantallap" style="height:65%; width:99.6%; overflow-x:hidden;" id="divdet">
-        <?php   
+        <?php
+            $ca = "";
             if(isset($_GET['ac']))
 			$ca=$_POST['ac'];
 			if ($ca==2)
@@ -238,16 +239,18 @@
 					}
 					else
 					{
-						$ntr = mysqli_affected_rows();
+						$ntr = mysqli_affected_rows($linkbd);
 						if ($ntr==0){echo "<script>despliegamodalm('visible','2','No se puede anular la cuenta por ser de tipo Mayor');</script>";}
 					}
 				}
 				else{echo "<script>despliegamodalm('visible','2','No se puede anular, la cuenta tiene movimientos contables anteriores');</script>";}
-			}   
+            }
+            if(isset($_GET['oculto']))   
 			$oculto=$_POST['oculto'];
 			//if($oculto!="")
 			{
-				$cond="";
+                $cond="";
+                if(isset($_GET['numero']))
 				if ($_POST['numero']!=""){$cond="WHERE concat_ws(' ', tabla.cuenta, tabla.nombre) LIKE '%$_POST[numero]%'";$cond1="WHERE concat_ws(' ', cuenta, nombre) LIKE '%$_POST[numero]%'"; }
 				if(!empty($_POST['todos'])){
 					$sqlr="SELECT * FROM cuentasnicsp $cond1";
@@ -255,22 +258,28 @@
 					$sqlr="SELECT * FROM (SELECT cn1.cuenta FROM cuentasnicsp AS cn1 INNER JOIN cuentasnicsp AS cn2 ON cn2.tipo='Auxiliar'  AND cn2.cuenta LIKE CONCAT( cn1.cuenta,  '%' ) WHERE cn1.tipo='Mayor' GROUP BY cn1.cuenta UNION SELECT cuenta FROM cuentasnicsp WHERE tipo='Auxiliar') AS tabla  $cond";
 				}
 				
-			
+                if(isset($_GET['oculto']))
 				if($_POST['oculto']!=2){
 					$resp = mysqli_query($linkbd, $sqlr);		
 					$_POST['numtop']=mysqli_num_rows($resp);
 				}
-				
+				if(isset($_GET['numtop']))
 				$nuncilumnas=ceil($_POST['numtop'] && $_POST['numres']);
-				$cond2="";
-				if ($_POST['numres']!="-1"){$cond2="LIMIT $_POST[numpos], $_POST[numres]";}
+                $cond2="";
+                
+                if(!isset($_POST['numres']))
+                {
+                    $cond2 = 'LIMIT $_POST[numpos], $_POST[numres]';
+                }
 				if(!empty($_POST['todos'])){
 					$sqlr="SELECT * FROM cuentasnicsp $cond1 ORDER BY cuenta $cond2";
 				}else{
 					$sqlr="SELECT * FROM (SELECT cn1.cuenta,cn1.nombre,cn1.naturaleza,cn1.centrocosto,cn1.tercero,cn1.tipo,cn1.estado FROM cuentasnicsp AS cn1 INNER JOIN cuentasnicsp AS cn2 ON cn2.tipo='Auxiliar'  AND cn2.cuenta LIKE CONCAT( cn1.cuenta,  '%' ) WHERE cn1.tipo='Mayor' GROUP BY cn1.cuenta UNION SELECT cuenta,nombre,naturaleza,centrocosto,tercero,tipo,estado FROM cuentasnicsp WHERE tipo='Auxiliar') AS tabla $cond ORDER BY 1 $cond2";
 				}
-				$resp = mysqli_query($linkbd, $sqlr);		
-				$numcontrol=$_POST['nummul']+1;
+                $resp = mysqli_query($linkbd, $sqlr);
+                if(isset($_GET['nummul']))		
+                $numcontrol=$_POST['nummul']+1;
+                if(isset($_GET['numres']))	
 				if(($nuncilumnas==$numcontrol)||($_POST['numres']=="-1"))
 				{
 					$imagenforward="<img src='imagenes/forward02.png' style='width:17px'>";
@@ -280,7 +289,8 @@
 				{
 					$imagenforward="<img src='imagenes/forward01.png' style='width:17px' title='Siguiente' onClick='numsiguiente()'>";
 					$imagensforward="<img src='imagenes/skip_forward01.png' style='width:16px' title='Fin' onClick='saltocol(\"$nuncilumnas\")'>";
-				}
+                }
+                if(isset($_GET['numpos']))	
 				if($_POST['numpos']==0)
 				{
 					$imagenback="<img src='imagenes/back02.png' style='width:17px'>";
@@ -325,7 +335,7 @@
 				$co2='saludo2';	
 				$i=1;
 				$filas=1;
-				while ($r =mysqli_fetch_row($resp)) 
+                while ($row = mysqli_fetch_row($resp)) 
 				{
 					$con2=$i+ $_POST['numpos'];
 					if($r[6]=='S'){$imgsem="src='imagenes/sema_verdeON.jpg' title='Activo'";$coloracti="#0F0";$_POST['lswitch1'][$r[0]]=0;}
