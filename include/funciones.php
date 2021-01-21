@@ -8,8 +8,8 @@ $url2 = $_SERVER["PHP_SELF"];
 function generaSuperavit($cuenta,$vigencia,$vigenciaf,$fechaf,$fechaf2){
 	global $linkbd;
 	$query="SELECT SUM(psd.valor) FROM pptosuperavit ps, pptosuperavit_detalle psd WHERE psd.cuenta='$cuenta' AND psd.vigencia=$vigencia AND NOT(ps.estado='N' OR psd.estado='R') AND ps.consvigencia=psd.consvigencia AND ps.fecha between '$fechaf' AND '$fechaf2' GROUP BY psd.cuenta";
-	$result=mysql_query($query,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($query,$linkbd);
+	$row=mysqli_fetch_row($result);
 	return $row[0];
 }
 function generaReporteIngresos($numCuenta,$vigencia,$fechaf,$fechaf2,$agregado = ''){
@@ -17,9 +17,9 @@ function generaReporteIngresos($numCuenta,$vigencia,$fechaf,$fechaf2,$agregado =
 	global $linkbd;
 	$queryPresupuesto="SELECT valor,vigencia FROM pptocuentaspptoinicial WHERE cuenta='$numCuenta' AND vigencia=$vigencia";
 
-	$result=mysql_query($queryPresupuesto, $linkbd);
+	$result=mysqli_query($queryPresupuesto, $linkbd);
 
-				while($row=mysql_fetch_array($result)){
+				while($row=mysqli_fetch_array($result)){
 
 					$presuDefinitivo+=$row[0];
 				 }
@@ -28,11 +28,11 @@ function generaReporteIngresos($numCuenta,$vigencia,$fechaf,$fechaf2,$agregado =
 
 			$queryAdiciones="SELECT SUM(pad.valor),pad.id_adicion,pa.fecha FROM pptoadiciones pad,pptoacuerdos pa WHERE pad.cuenta='$numCuenta' AND pad.vigencia=$vigencia AND pa.id_acuerdo=pad.id_acuerdo AND pad.id_acuerdo>0 AND NOT(pa.estado='N') AND pad.tipomovimiento<>'S' AND  pa.fecha BETWEEN '$fechaf' AND '$fechaf2' GROUP BY cuenta";
 
-			$result=mysql_query($queryAdiciones, $linkbd);
+			$result=mysqli_query($queryAdiciones, $linkbd);
 			$totentAdicion=0.0;
 			$totsalAdicion=0.0;
-				if(mysql_num_rows($result)!=0){
-					while($row=mysql_fetch_array($result)){
+				if(mysqli_num_rows($result)!=0){
+					while($row=mysqli_fetch_array($result)){
 					$presuDefinitivo+=$row[0];
 					$totentAdicion+=$row[0];
 					$totsalAdicion+=0.0;
@@ -44,11 +44,11 @@ function generaReporteIngresos($numCuenta,$vigencia,$fechaf,$fechaf2,$agregado =
 
 				$queryReducciones="SELECT SUM(pr.valor),pr.id_reduccion,pa.fecha FROM pptoreducciones pr,pptoacuerdos pa WHERE pr.cuenta='$numCuenta' AND pr.vigencia=$vigencia AND pr.id_acuerdo=pa.id_acuerdo AND pr.id_acuerdo>0 AND NOT(pa.estado='N') AND pa.fecha BETWEEN '$fechaf' AND '$fechaf2' GROUP BY pr.cuenta";
 
-				$result=mysql_query($queryReducciones, $linkbd);
+				$result=mysqli_query($queryReducciones, $linkbd);
 				$totentReduccion=0.0;
 				$totsalReduccion=0.0;
-				if(mysql_num_rows($result)!=0){
-					while($row=mysql_fetch_array($result)){
+				if(mysqli_num_rows($result)!=0){
+					while($row=mysqli_fetch_array($result)){
 					$presuDefinitivo-=$row[0];
 					$totentReduccion+=$row[0];
 					$totsalReduccion+=0.0;
@@ -56,10 +56,10 @@ function generaReporteIngresos($numCuenta,$vigencia,$fechaf,$fechaf2,$agregado =
 			}
 	$queryDispo="SELECT SUM(pad.valor),pad.id_adicion,pa.fecha FROM pptoadiciones pad,pptoacuerdos pa WHERE pad.cuenta='$numCuenta' AND pad.vigencia=$vigencia AND pa.id_acuerdo=pad.id_acuerdo AND pad.id_acuerdo>0 AND NOT(pa.estado='N') AND pad.tipomovimiento='S' AND  pa.fecha BETWEEN '$fechaf' AND '$fechaf2' GROUP BY cuenta";
 
-			$result=mysql_query($queryDispo, $linkbd);
+			$result=mysqli_query($queryDispo, $linkbd);
 			$totentDisponibilidad=0.0;
-				if(mysql_num_rows($result)!=0){
-					while($row=mysql_fetch_array($result)){
+				if(mysqli_num_rows($result)!=0){
+					while($row=mysqli_fetch_array($result)){
 					$presuDefinitivo+=$row[0];
 					$totentDisponibilidad+=$row[0];
 				}
@@ -92,39 +92,39 @@ function generaRecaudo($cuenta,$vigencia,$vigenciaf,$fechaf,$fechaf2){
 	global $linkbd;
 	//////////////////////////////// YA!!
 	$queryreccaja="SELECT SUM(prc.valor) FROM pptorecibocajappto prc,tesoreciboscaja trc WHERE prc.cuenta='$cuenta' AND prc.vigencia=$vigencia AND trc.id_recibos=prc.idrecibo AND NOT(trc.estado='N' OR trc.estado='R') AND NOT(prc.tipo='R' OR prc.tipo='P') AND trc.fecha between '$fechaf' AND '$fechaf2' GROUP BY prc.cuenta";
-	$result=mysql_query($queryreccaja,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($queryreccaja,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totreccaja=$row[0];
 	////////////////////////////////// YA!!
 	$queryregalias="SELECT SUM(prd.valor) FROM pptoregalias_cab prc ,pptoregalias_det prd WHERE prc.codigo=prd.codigo AND prc.estado='S' AND prc.fecha between '$fechaf' AND '$fechaf2' AND prc.vigencia='$vigencia' AND prc.tipo_mov='101' AND prd.rubro='$cuenta' GROUP BY prd.rubro ";
-	$result=mysql_query($queryregalias,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($queryregalias,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totregalias=$row[0];
 	////////////////////////////////// YA!!
 	$querysinreccaja="SELECT SUM(psrc.valor) FROM pptosinrecibocajappto psrc,tesosinreciboscaja tsrc WHERE psrc.cuenta='$cuenta' AND psrc.vigencia=$vigencia AND tsrc.id_recibos=psrc.idrecibo AND NOT(tsrc.estado='N' OR tsrc.estado='R') AND tsrc.fecha between '$fechaf' AND '$fechaf2' GROUP BY psrc.cuenta";
 
-	$result=mysql_query($querysinreccaja,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($querysinreccaja,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totsinreccaja=$row[0];
 	/////////////////////////////// YA!!
 	$queryingssf="SELECT SUM(pissf.valor) FROM pptoingssf pissf,tesossfingreso_cab tissf WHERE pissf.cuenta='$cuenta' AND pissf.vigencia=$vigencia AND pissf.idrecibo=tissf.id_recaudo AND NOT(tissf.estado='N' OR tissf.estado='R') AND tissf.vigencia=$vigencia AND tissf.fecha between '$fechaf' AND '$fechaf2' GROUP BY pissf.cuenta";
-	$result=mysql_query($queryingssf,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($queryingssf,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totingssf=$row[0];
 	/////////////////////// YA!!
 	$querynotasban="SELECT SUM(pnb.valor) FROM pptonotasbanppto pnb,tesonotasbancarias_cab tnp WHERE pnb.cuenta='$cuenta' AND pnb.vigencia=$vigencia AND tnp.id_comp=pnb.idrecibo AND NOT(tnp.estado='R' OR tnp.estado='N')  AND tnp.vigencia=$vigencia AND tnp.fecha between '$fechaf' AND '$fechaf2' GROUP BY pnb.cuenta";
-	$result=mysql_query($querynotasban,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($querynotasban,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totnotasban=$row[0];
 	/////////////////////// YA!!
 	$queryrecatrans="SELECT SUM(pitp.valor) FROM pptoingtranppto pitp,tesorecaudotransferencia titp WHERE pitp.cuenta='$cuenta' AND pitp.vigencia=$vigencia AND pitp.idrecibo=titp.id_recaudo AND NOT(titp.estado='N' OR titp.estado='R') AND titp.fecha between '$fechaf' AND '$fechaf2' GROUP BY pitp.cuenta";
-	$result=mysql_query($queryrecatrans,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($queryrecatrans,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totrecatrans=$row[0];
 	/////////////////////// YA!!
 	$queryrecatrans="SELECT SUM(pitp.valor) FROM pptoingtranpptosgr pitp,tesorecaudotransferenciasgr titp WHERE pitp.cuenta='$cuenta' AND pitp.vigencia=$vigencia AND pitp.idrecibo=titp.id_recaudo AND NOT(titp.estado='N' OR titp.estado='R') AND titp.fecha between '$fechaf' AND '$fechaf2' GROUP BY pitp.cuenta";
-	$result=mysql_query($queryrecatrans,$linkbd);
-	$row=mysql_fetch_row($result);
+	$result=mysqli_query($queryrecatrans,$linkbd);
+	$row=mysqli_fetch_row($result);
 	$totrecatransgr=$row[0];
 	////////////////////// YA!!
 	$queryretencionE="SELECT SUM(prc.valor) FROM pptoretencionpago prc,tesoegresos trc WHERE prc.cuenta='$cuenta' AND prc.vigencia=$vigencia AND trc.id_egreso=prc.idrecibo AND NOT(trc.estado='N') AND trc.fecha between '$fechaf' AND '$fechaf2' AND trc.tipo_mov='201' AND prc.tipo='egreso' AND NOT EXISTS (SELECT 1 FROM tesoegresos tra WHERE tra.id_egreso=trc.id_egreso  AND tra.tipo_mov='401') GROUP BY prc.cuenta";
@@ -3969,21 +3969,14 @@ function cargarcodigopag($cod,$nivel)
 {//header ("location: http://servidor/financiero/principal.php");
 	if ($cod != "")
 	{
-        $datin=datosiniciales();
-        
-        if(!($conexion=mysql_connect($datin[1],$datin[2],$datin[3])))
-        
-        die("no se puede conectar");
-        
-        if(!mysql_select_db($datin[0]))
-        
-        die("no se puede seleccionar bd");
+
+        $conexion = conectar_v7();
         
         $cod = strtoupper($cod);
         
         $sqlr="SELECT id_opcion,ruta_opcion FROM opciones WHERE comando='".$cod."'";
         
-        $r=mysql_fetch_row(mysql_query($sqlr,$conexion));
+        $r=mysqi_fetch_row(mysql_query($sqlr,$conexion));
         
         $opsi=$r[0];
         
@@ -3991,7 +3984,7 @@ function cargarcodigopag($cod,$nivel)
 		{
             $sqln = "SELECT id_opcion FROM rol_priv WHERE id_rol='".$nivel."' AND id_opcion='".$opsi."'";
             
-            $niv = mysql_fetch_row(mysql_query($sqln,$conexion));
+            $niv = mysqli_fetch_row(mysql_query($sqln,$conexion));
             
             $supnivel = $niv[0];
             

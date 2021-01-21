@@ -17,9 +17,15 @@
 	<head>
 	 	<meta http-equiv="Content-Type" content="text/html" charset="iso-8859-1"/>
         <meta http-equiv="X-UA-Compatible" content="IE=9"/>
+
+        <meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->
+        <meta http-equiv="expires" content="0"> <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->
+
 		<title>:: Spid - Contabilidad</title>
-        <link href="../../css/css2.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
-		<link href="../../css/css3.css?<?php echo date('d_m_Y_h_i_s');?>" rel="stylesheet" type="text/css"/>
+
+        <link href="../../css/css2.css" rel="stylesheet" type="text/css"/>
+		<link href="../../css/css3.css" rel="stylesheet" type="text/css"/>
 
 		<script type="text/javascript" src="../../js/JQuery/jquery-1.11.0.min.js"></script> 
         <script type="text/javascript" src="../../js/programas.js"></script>
@@ -54,13 +60,13 @@
 					switch(_tip)
 					{
 						case "1":
-							document.getElementById('ventanam').src="ventana-mensaje1.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje1.php?titulos="+mensa;break;
 						case "2":
-							document.getElementById('ventanam').src="ventana-mensaje3.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje3.php?titulos="+mensa;break;
 						case "3":
-							document.getElementById('ventanam').src="ventana-mensaje2.php?titulos="+mensa;break;
+							document.getElementById('ventanam').src="../modals/ventana-mensaje2.php?titulos="+mensa;break;
 						case "4":
-							document.getElementById('ventanam').src="ventana-consulta2.php?titulos="+mensa+"&idresp="+pregunta;break;	
+							document.getElementById('ventanam').src="../modals/ventana-consulta1.php?titulos="+mensa+"&idresp="+pregunta;break;	
 					}
 				}
 			}
@@ -128,15 +134,14 @@
             </div>
         </div>
         <?php
-			if(!isset( $_POST['oculto']))
-			{
+			
                 if(isset($_GET['scrtop']))
                     $_POST['scrtop'] = $_GET['scrtop'];
                 if(isset($_GET['scrtop'] ))    
 				    if($_POST['scrtop'] = $_GET['scrtop'])
 				        $_POST['gidcta']=$_GET['idcta'];
 				if(isset($_GET['filtro'])){$_POST['numero']=$_GET['filtro'];}
-            }
+            
             if(isset($_GET['scrtop'] ))
             {
                 echo"<script>window.onload=function(){ $('#divdet').scrollTop(".$_POST['scrtop'].")}</script>";
@@ -388,14 +393,32 @@
 								<td style='text-align:center;'>
 									<a>$imagensback</a>&nbsp;
 									<a>$imagenback</a>&nbsp;&nbsp;";
-					if($nuncilumnas<=9){$numfin=$nuncilumnas;}
-					else{$numfin=9;}
+                    if($nuncilumnas<=9)
+                    {
+                        $numfin=$nuncilumnas;
+                    }
+                    else
+                    {
+                        $numfin=9;
+                    }
 					for($xx = 1; $xx <= $numfin; $xx++)
 					{
-						if($numcontrol<=9){$numx=$xx;}
-						else{$numx=$xx+($numcontrol-9);}
-						if($numcontrol==$numx){echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";}
-						else {echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";}
+                        if($numcontrol<=9)
+                        {
+                            $numx=$xx;
+                        }
+                        else
+                        {
+                            $numx=$xx+($numcontrol-9);
+                        }
+                        if($numcontrol==$numx)
+                        {
+                            echo"<a onClick='saltocol(\"$numx\")'; style='color:#24D915;cursor:pointer;'> $numx </a>";
+                        }
+                        else 
+                        {
+                            echo"<a onClick='saltocol(\"$numx\")'; style='color:#000000;cursor:pointer;'> $numx </a>";
+                        }
                     }
                     $imagenforward = "";
                     $imagensforward = "";
@@ -407,7 +430,7 @@
 				}
 			?>			
 			</div>
-            <input type="hidden" name="numtop" id="numtop" value="<?php echo $_POST['numtop'];?>" />
+            <input type="hidden" name="numtop" id="numtop" value="<?php if(isset( $_POST['numtop'])) echo $_POST['numtop'];?>" />
 		</form>
 	</body>
 </html>

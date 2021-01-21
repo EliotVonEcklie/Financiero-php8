@@ -207,7 +207,9 @@
 				{
                     $crit1="";
                     if(isset( $_POST['nombre']))
-					if ($_POST['nombre'] != ""){$crit1="WHERE concat_ws(' ', nombre, codigo) LIKE '%$_POST[nombre]%'";}
+					if ($_POST['nombre'] != ""){ 
+                        $crit1="WHERE concat_ws(' ', nombre, codigo) LIKE '%$_POST[nombre]%'";
+                    }
 					$sqlr = "SELECT * FROM tipo_comprobante $crit1";
 					$resp = mysqli_query($linkbd,$sqlr);
                     $_POST['numtop'] = mysqli_num_rows($resp);
@@ -298,21 +300,21 @@
 							$ddt='cont-editartipodoc.php?idtipocom=';
 						   	$acti="";
 						   	$imgedit="src='../../img/icons/edit-file.png' title='Editar'";
-						   	$imgfig1="src='../../img/icons/yellow-circleOFF.png' ";
-						   	$imgfig2="src='../../img/icons/red-circle.png' title='No Fijo'";
+						   	$imgfig1="src='../../img/icons/circle-gray.png' ";
+						   	$imgfig2="src='../../img/icons/circle-red.png' title='No Fijo'";
 					   	}
 					   	else
 					   	{
 						   	$ddt='#';
 						   	$acti="disabled";
 						   	$imgedit="src='../../img/icons/security-lock.png' title='No Editable'";
-						   	$imgfig1="src='../../img/icons/green-circle.png' title='Fijo'";
-						   	$imgfig2="src='../../img/icons/yellow-circleOFF.png' ";
+						   	$imgfig1="src='../../img/icons/circle-green.png' title='Fijo'";
+						   	$imgfig2="src='../../img/icons/circle-gray.png' ";
 					  	}
 					   	if($row[2]=='S')
-						  	{$imgsem="src='../../img/icons/green-circle.png' title='Activo'";$coloracti="#0F0";$_POST['lswitch1'][$row[0]]=0;}
+						  	{$imgsem="src='../../img/icons/circle-green.png' title='Activo'";$coloracti="#0F0";$_POST['lswitch1'][$row[0]]=0;}
 					   	else
-						  	{$imgsem="src='../../img/icons/red-circle.png' title='Inactivo'";$coloracti="#C00";;$_POST['lswitch1'][$row[0]]=1;}
+						  	{$imgsem="src='../../img/icons/circle-red.png' title='Inactivo'";$coloracti="#C00";;$_POST['lswitch1'][$row[0]]=1;}
 
                         if(isset( $_POST['gidcta']))
                         {
