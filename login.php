@@ -84,9 +84,9 @@
 		<script>
 			function despliegamodalm(_valor,mensa)
 			{
-                document.getElementById("bgventanamodalm").style.visibility = _valor;
+                document.getElementById('bgventanamodalm').style.visibility = _valor;
                 
-                if(_valor == "hidden") 
+                if(_valor == 'hidden') 
                 {
                     document.getElementById('ventanam').src = '';
                 }
@@ -96,33 +96,44 @@
                 }
             }
             
-			var ctrlPressed = false;
-			var tecla01 = 16, tecla02 = 66;
-			$(document).keydown(function(e){
-			if (e.keyCode == tecla01){ctrlPressed = true;}
-			if (ctrlPressed && (e.keyCode == tecla02))
-			{
-				if(document.form1.vistab.value == "hidden")
-				{
-					document.form1.vistab.value = "visible";
-					document.form1.oculto.value = "2";
-					document.form1.submit();
-				}
-				else 
-				{
-					document.form1.vistab.value = "hidden";
-					document.form1.oculto.value ="2"
-					document.form1.submit();
-				}
-			}
-			if (e.keyCode == '13'){document.form1.submit();}
-			});
-			$(document).keyup(function(e){
-			if (e.keyCode == tecla01){ctrlPressed = false;}
+            var ctrlPressed = false;
+            
+            var tecla01 = 16, tecla02 = 66;
+            
+			$(document).keydown( function(e) {
+
+                if (e.keyCode == tecla01)
+                    ctrlPressed = true;
+
+                if (ctrlPressed && (e.keyCode == tecla02))
+                    if(document.form1.vistab.value == 'hidden')
+                    {
+                        document.form1.vistab.value = 'visible';
+                        document.form1.oculto.value = '2';
+
+                        document.form1.submit();
+                    }
+                    else 
+                    {
+                        document.form1.vistab.value = 'hidden';
+                        document.form1.oculto.value = '2'
+
+                        document.form1.submit();
+                    }
+
+                if (e.keyCode == '13')
+                    document.form1.submit();
+            });
+            
+			$(document).keyup( function(e) {
+                if (e.keyCode == tecla01)
+                {
+                    ctrlPressed = false;
+                }
 			});
 		</script>
 
-		<?php titlepag();?>
+        <link rel="shortcut icon" href="favicon.ico"/>
 	</head>
 
 	<body>
@@ -205,7 +216,7 @@
                         {
                             $valap = validasusuarioypass($_POST['user'], $_POST['pass']);
 
-                            if ($valap == "")
+                            if ($valap == '')
                             {
                                 echo "<script>despliegamodalm('visible','Error el Usuario o la Contraseña no son correctos');</script>";
                             }

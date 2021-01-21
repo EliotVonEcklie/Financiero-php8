@@ -103,10 +103,10 @@
 				{
 					switch(pregunta)
 					{
-                        case "1":
+                        case '1':
                             document.form2.cambioestado.value = '1';
                             break;
-                        case "2":	
+                        case '2':	
                             document.form2.cambioestado.value = '0';
                             break;
 					}
@@ -115,11 +115,11 @@
 				{
 					switch(pregunta)
 					{
-                        case "1":	
-                            document.form2.nocambioestado.value = "1";
+                        case '1':	
+                            document.form2.nocambioestado.value = '1';
                             break;
-                        case "2":	
-                            document.form2.nocambioestado.value = "0";
+                        case '2':	
+                            document.form2.nocambioestado.value = '0';
                             break;
 					}
 				}
@@ -127,7 +127,7 @@
 			}
 		</script>
 
-		<?php titlepag();?>
+        <link rel="shortcut icon" href="favicon.ico"/>
 	</head>
 	<body>
         <IFRAME src="alertas.php" name="alertas" id="alertas" style="display:none"></IFRAME>
@@ -192,7 +192,7 @@
             
             echo '<script>window.onload = function(){ $(\'#divdet\').scrollTop('.$_POST['scrtop'].')}</script>';
             
-			if(isset($_GET['numpag']))
+			if(isset($_GET['numpag']) && isset($_POST['oculto']))
 			{
                 $oculto = $_POST['oculto'];
                 
