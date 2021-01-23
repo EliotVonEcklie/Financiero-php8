@@ -34,25 +34,30 @@
         
         //*** verificar el username y el pass
         
-        $users = $_POST['user'];
+        if(isset($_POST['user']) && isset($_POST['pass']))
+        {
+
+            $users = $_POST['user'];
         
-        $pass = $_POST['pass'];
+            $pass = $_POST['pass'];
+            
+            $sqlr = "SELECT U.nom_usu, R.nom_rol, U.id_rol, U.id_usu, U.foto_usu, U.usu_usu, U.cc_usu FROM usuarios U, roles R WHERE U.usu_usu='$users' AND U.pass_usu='$pass' AND U.id_rol = R.id_rol AND U.est_usu='1'";
         
-        $sqlr = "SELECT U.nom_usu, R.nom_rol, U.id_rol, U.id_usu, U.foto_usu, U.usu_usu, U.cc_usu FROM usuarios U, roles R WHERE U.usu_usu='$users' AND U.pass_usu='$pass' AND U.id_rol = R.id_rol AND U.est_usu='1'";
+            $res = mysqli_query($linkbd,$sqlr);
         
-        $res = mysqli_query($linkbd,$sqlr);
+            while($r = mysqli_fetch_row($res))
+		    {
+			    $user = $r[0];
+			    $perf = $r[1];
+			    $niv = $r[2];
+			    $idusu = $r[3];
+			    $nick = $r[5];
+			    $dirfoto = $r[4];
+			    $cedusu = $r[6];
+            }
+        }
         
-        while($r = mysqli_fetch_row($res))
-		{
-			$user = $r[0];
-			$perf = $r[1];
-			$niv = $r[2];
-			$idusu = $r[3];
-			$nick = $r[5];
-			$dirfoto = $r[4];
-			$cedusu = $r[6];
-		}
-		if ($user == "")
+		if (!isset($user))
 		{
 			//login incorrecto
 			echo"<br><br><br><br><br><br><br><center><table border='1' cellpadding='0' cellspacing='0' bordercolor='#FFFFFF' width='50%'><tr bgcolor='#000066' colspan='1'><td><center><font color='#FFFFFF' face='Verdana, Arial, Helvetica, sans-serif' size='4' ><b>SPID</b></font></center></td></tr>";

@@ -20,25 +20,39 @@
 		<link href="../../css/css2.css" rel="stylesheet" type="text/css"/>
 		<link href="../../css/css3.css" rel="stylesheet" type="text/css"/>
 
-		<script type="text/javascript" src="../../js/JQuery/jquery-2.1.4.min.js?<?php echo date('d_m_Y_h_i_s');?>"></script>
+		<script type="text/javascript" src="../../js/JQuery/jquery-2.1.4.min.js"></script>
 
 		<script>
 			function continuar()
-			{parent.despliegamodalm("hidden");}
+            {
+                parent.despliegamodalm('hidden');
+            }
+
 			var tecla01 = 13;
-			$(document).keydown(function(e){if (e.keyCode == tecla01){continuar();}})
+            
+            $(document).keydown(function(e) {
+                if (e.keyCode == tecla01)
+                    continuar();
+            });
 		</script>
 	</head>
-	<body style="overflow:hidden"></br></br>
-		<table id='ventanamensaje1' class='inicio'>
+	<body style="overflow: hidden;"></br></br>
+        <table id="ventanamensaje1" class="inicio">
+            <tr>
+                <td class="saludo1" style="text-align: center;">Se ha modificado con Exito<img src="imagenes\confirm.png"></td>
+            </tr>
+        </table>
+		<table>
 			<tr>
-				<td style="padding:15px;text-align:center">
-					<em name="continuar" id="continuar" class="botonflecha" onclick="continuar()">Continuar</em>
+				<td style="padding: 15px; text-align: center;">
+					<em name="continuar" id="continuar" class="botonflecha" onclick="continuar();">Continuar</em>
 				</td>
 			</tr>
 		</table>
 	</body>
 
-    <script>document.getElementById('continuar').focus();</script>
+    <script>
+        document.getElementById('continuar').focus();
+    </script>
 
 </html>
