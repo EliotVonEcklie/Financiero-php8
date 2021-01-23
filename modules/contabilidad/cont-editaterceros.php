@@ -135,7 +135,7 @@
                     despliegamodalm('visible', '2', 'Falta informacion para modificar el Tercero');
                 }
  			}
-			function despliegamodalm(_valor,_tip,mensa,pregunta)
+			function despliegamodalm(_valor, _tip, mensa, pregunta)
 			{
 				document.getElementById('bgventanamodalm').style.visibility = _valor;
                 
@@ -229,7 +229,7 @@
 					document.getElementById('entidad').value = '';
 				}
 				
-                var idcta=document.getElementById('idtercero').value;
+                var idcta = document.getElementById('idtercero').value;
                 
                 totreg--;
                 
@@ -342,21 +342,23 @@
 
                 $_POST['maximo'] = $r['id_tercero'];
 
-                if(!isset($_POST['oculto']))
+                if(!isset($_POST['oculto']) || (isset($_POST['oculto']) && $_POST['oculto'] != '2'))
                 {
 
-                    if (isset($_POST['codrec']))
-                        $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_POST['codrec'].'\'';
-                    else if(isset($_GET['idter']))
-                        $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_GET['idter'].'\'';
-                    else
-                        $sqlr = 'SELECT id_tercero FROM terceros ORDER BY id_tercero DESC';
+                    //if (isset($_POST['codrec']))
+                    //    $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_POST['codrec'].'\'';
+                    /*else*/ if(isset($_GET['idcta']))
+                        $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_GET['idcta'].'\'';
+                    //else
+                        //$sqlr = 'SELECT id_tercero FROM terceros ORDER BY id_tercero DESC';
 
-                    $res = mysqli_query($linkbd, $sqlr);
-                    $row = mysqli_fetch_assoc($res);
+                    if(isset($sqlr))
+                    {
+                        $res = mysqli_query($linkbd, $sqlr);
+                        $row = mysqli_fetch_assoc($res);
 
-                    $_POST['idtercero'] = $row['id_tercero'];
-
+                        $_POST['idtercero'] = $row['id_tercero'];
+                    }
 
                     //if($_POST['oculto'] != '2' && $_POST['oculto'] != '7')
                     $sqlr = 'SELECT * FROM terceros WHERE id_tercero=\''.$_POST['idtercero'].'\'';
@@ -391,41 +393,41 @@
                 //NEXT
                 if(isset($_POST['apellido1']))
                 {
-                    $sqln = 'SELECT * FROM terceros WHERE apellido1 > \''.$_POST['apellido1'].'\' ORDER BY apellido1 ASC LIMIT 1';
+                    $sqln = 'SELECT id_tercero FROM terceros WHERE apellido1 > \''.$_POST['apellido1'].'\' AND NOT id_tercero = '.$_POST['idtercero'].' ORDER BY apellido1 ASC LIMIT 1';
 
                     $resn = mysqli_query($linkbd, $sqln);
-                    $row = mysqli_fetch_row($resn);
+                    $row = mysqli_fetch_assoc($resn);
 
-                    $next = $row[0];
+                    $next = $row['id_tercero'];
                 }
                 else if(isset($_POST['razonsocial']))
                 {
-                    $sqln = 'SELECT * FROM terceros WHERE razonsocial > \''.$_POST['razonsocial'].'\' ORDER BY razonsocial ASC LIMIT 1';
+                    $sqln = 'SELECT id_tercero FROM terceros WHERE razonsocial > \''.$_POST['razonsocial'].'\' AND NOT id_tercero = '.$_POST['idtercero'].' ORDER BY razonsocial ASC LIMIT 1';
 
                     $resn = mysqli_query($linkbd, $sqln);
-                    $row = mysqli_fetch_row($resn);
+                    $row = mysqli_fetch_assoc($resn);
 
-                    $next = $row[0];
+                    $next = $row['id_tercero'];
                 }
 
                 //PREV
                 if(isset($_POST['apellido1']))
                 {
-                    $sqlp = 'SELECT * FROM terceros WHERE apellido1 < \''.$_POST['apellido1'].'\' ORDER BY apellido1 DESC LIMIT 1';
+                    $sqlp = 'SELECT id_tercero FROM terceros WHERE apellido1 < \''.$_POST['apellido1'].'\' AND NOT id_tercero = '.$_POST['idtercero'].' ORDER BY apellido1 DESC LIMIT 1';
 
                     $resp = mysqli_query($linkbd, $sqln);
-                    $row = mysqli_fetch_row($resp);
+                    $row = mysqli_fetch_assoc($resp);
 
-                    $prev = $row[0];
+                    $prev = $row['id_tercero'];
                 }
                 else if(isset($_POST['razonsocial']))
                 {
-                    $sqlp = 'SELECT * FROM terceros WHERE razonsocial < \''.$_POST['razonsocial'].'\' ORDER BY  razonsocial DESC LIMIT 1';
+                    $sqlp = 'SELECT id_tercero FROM terceros WHERE razonsocial < \''.$_POST['razonsocial'].'\' AND NOT id_tercero = '.$_POST['idtercero'].' ORDER BY razonsocial DESC LIMIT 1';
 
                     $resp = mysqli_query($linkbd, $sqln);
-                    $row = mysqli_fetch_row($resp);
+                    $row = mysqli_fetch_assoc($resp);
 
-                    $prev = $row[0];
+                    $prev = $row['id_tercero'];
                 }
 
                 //if(isset($_POST['documento']))
@@ -493,17 +495,17 @@
 				    			    {
                                         if(isset($_POST['regimen']) && $row['id_regimen'] == $_POST['regimen'])
                                         {
-                                            echo '<option value=\''.$row['id_regimen'].'\' selected>'.$row['nombre'].'</option>';
+                                            echo '<option value="'.$row['id_regimen'].'" selected>'.$row['nombre'].'</option>';
                                         }
                                         else
                                         {
-                                            echo '<option value=\''.$row['id_regimen'].'\'>'.$row['nombre'].'</option>';
+                                            echo '<option value="'.$row['id_regimen'].'">'.$row['nombre'].'</option>';
                                         }	  
 								    } 
 		  					?>
 						</select>
                   	</td>
-             		<td rowspan="10" colspan="2"  style="background:url(imagenes/useradd02.png); background-repeat:no-repeat; background-position:right; background-size: 80% 80%"> </td>
+             		<td rowspan="10" colspan="2"  style="background: url(imagenes/useradd02.png); background-repeat: no-repeat; background-position: right; background-size: 80% 80%"> </td>
            		</tr>
 		   		<tr>
         			<td class="saludo1">.: Tipo Doc:</td>
@@ -571,7 +573,7 @@
                     <td class="saludo1">.: Segundo Apellido:</td>
         			
                     <td>
-                        <input type="text" name="apellido2" id="apellido2"  value="<?php if(isset($_POST['apellido2']))echo $_POST['apellido2']?>" style="width:100%;" onKeyUp="return tabular(event,this)"/>
+                        <input type="text" name="apellido2" id="apellido2"  value="<?php if(isset($_POST['apellido2'])) echo $_POST['apellido2']?>" style="width:100%;" onKeyUp="return tabular(event,this)"/>
                     </td>
         		</tr>
 				<tr>
@@ -768,20 +770,133 @@
                 
 				if(isset($_POST['oculto']) && $_POST['oculto'] == '2')
 				{
-					$sqlr = 'UPDATE terceros SET nombre1=\''.$_POST['nombre1'].'\',nombre2=\''.$_POST['nombre2'].'\',apellido1=\''.$_POST['apellido1'].'\', apellido2=\''.$_POST['apellido2'].'\', razonsocial=\''.$_POST['razonsocial'].'\', direccion=\''.$_POST['direccion'].'\', telefono=\''.$_POST['telefono'].'\', celular=\''.$_POST['celular'].'\',email=\''.$_POST['email'].'\', web=\''.$_POST['web'].'\', tipodoc=\''.$_POST['tipodoc'].'\', cedulanit=\''.$_POST['documento'].'\', codver=\''.$_POST['codver'].'\', depto=\''.$_POST['dpto'].'\', mnpio=\''.$_POST['mnpio'].'\', persona=\''.$_POST['persona'].'\', regimen=\''.$_POST['regimen'].'\', contribuyente=\''.$_POST['contribuyente'].'\', proveedor=\''.$_POST['proveedor'].'\', empleado=\''.$_POST['empleado'].'\',estado=\''.$_POST['estado'].'\' WHERE id_tercero=\''.$_POST['idtercero'].'\'';
-                    
-                    if (!mysqli_query($linkbd, $sqlr))
+
+            
+                    $nombre1        = '';
+                    $nombre2        = '';
+                    $apellido1      = '';
+                    $apellido2      = '';
+                    $razonsocial    = '';
+                    $direccion      = '';
+                    $telefono       = '';
+                    $celular        = '';
+                    $email          = '';
+                    $web            = '';
+                    $tipodoc        = '';
+                    $documento      = '';
+                    $codver         = '';
+                    $dpto           = '';
+                    $mnpio          = '';
+                    $persona        = '';
+                    $regimen        = '';
+                    $contribuyente  = '';
+                    $proveedor      = '';
+                    $empleado       = '';
+                    $estado         = '';
+
+                    if(isset($_POST['nombre1'])) {
+                        $nombre1 = $_POST['nombre1'];
+                    }
+
+                    if(isset($_POST['nombre2'])) {
+                        $nombre2 = $_POST['nombre2'];
+                    }
+
+                    if(isset($_POST['apellido1'])) {
+                        $apellido1 = $_POST['apellido1'];
+                    }
+
+                    if(isset($_POST['apellido2'])) {
+                        $apellido2 = $_POST['apellido2'];
+                    }
+
+                    if(isset($_POST['razonsocial'])) {
+                        $razonsocial = $_POST['razonsocial'];
+                    }
+
+                    if(isset($_POST['direccion'])) {
+                        $direccion = $_POST['direccion'];
+                    }
+
+                    if(isset($_POST['telefono'])) {
+                        $telefono = $_POST['telefono'];
+                    }
+
+                    if(isset($_POST['celular'])) {
+                        $celular = $_POST['celular'];
+                    }
+
+                    if(isset($_POST['email'])) {
+                        $email = $_POST['email'];
+                    }
+
+                    if(isset($_POST['web'])) {
+                        $web = $_POST['web'];
+                    }
+
+                    if(isset($_POST['tipodoc'])) {
+                        $tipodoc = $_POST['tipodoc'];
+                    }
+
+                    if(isset($_POST['documento'])) {
+                        $documento = $_POST['documento'];
+                    }
+
+                    if(isset($_POST['codver'])) {
+                        $codver = $_POST['codver'];
+                    }
+
+                    if(isset($_POST['dpto'])) {
+                        $dpto = $_POST['dpto'];
+                    }
+
+                    if(isset($_POST['mnpio'])) {
+                        $mnpio = $_POST['mnpio'];
+                    }
+
+                    if(isset($_POST['persona'])) {
+                        $persona = $_POST['persona'];
+                    }
+
+                    if(isset($_POST['regimen'])) {
+                        $regimen = $_POST['regimen'];
+                    }
+
+                    if(isset($_POST['contribuyente'])) {
+                        $contribuyente = $_POST['contribuyente'];
+                    }
+
+                    if(isset($_POST['proveedor'])) {
+                        $proveedor = $_POST['proveedor'];
+                    }
+
+                    if(isset($_POST['empleado'])) {
+                        $empleado = $_POST['empleado'];
+                    }
+
+                    if(isset($_POST['estado'])) {
+                        $estado = $_POST['estado'];
+                    }
+
+                    $sqlr = 'UPDATE terceros SET nombre1=\''.$nombre1.'\', nombre2=\''.$nombre2.'\', apellido1=\''.$apellido1.'\', apellido2=\''.$apellido2.'\', razonsocial=\''.$razonsocial.'\', direccion=\''.$direccion.'\', telefono=\''.$telefono.'\', celular=\''.$celular.'\', email=\''.$email.'\', web=\''.$web.'\', tipodoc=\''.$tipodoc.'\', cedulanit=\''.$documento.'\', codver=\''.$codver.'\', depto=\''.$dpto.'\', mnpio=\''.$mnpio.'\', persona=\''.$persona.'\', regimen=\''.$regimen.'\', contribuyente=\''.$contribuyente.'\', proveedor=\''.$proveedor.'\', empleado=\''.$empleado.'\', estado=\''.$estado.'\' WHERE id_tercero=\''.$_POST['idtercero'].'\'';
+
+                    $res = mysqli_query($linkbd, $sqlr);
+
+                    if (!$res)
                     {
                         echo '<script>despliegamodalm(\'visible\', \'2\', \'No se pudo ejecutar la petición\');</script>';
                     }
 					else
 					{
-						$sqlr = 'DELETE FROM entidadreciprocatercero WHERE tercero = \''.$_POST['documento'].'\'';
-						mysqli_query($linkbd, $sqlr);
+                        if(isset($_POST['idEntidad']))
+                        {
+						    $sqlr = 'DELETE FROM entidadreciprocatercero WHERE tercero = \''.$_POST['documento'].'\'';
+						    mysqli_query($linkbd, $sqlr);
 						
-						$sqlrInsert = 'INSERT INTO entidadreciprocatercero (id_entidad, tercero) VALUES (\''.$_POST['idEntidad'].'\', \''.$_POST['documento'].'\')';
-                        mysqli_query($linkbd, $sqlrInsert);
-                        
+						    $sqlrInsert = 'INSERT INTO entidadreciprocatercero (id_entidad, tercero) VALUES (\''.$_POST['idEntidad'].'\', \''.$_POST['documento'].'\')';
+                            mysqli_query($linkbd, $sqlrInsert);
+                        }
+
 						echo '<script>despliegamodalm(\'visible\', \'3\', \'Se ha modificado con Exito\');</script>';
 					}
                 }
