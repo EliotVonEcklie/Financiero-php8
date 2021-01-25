@@ -342,22 +342,10 @@
 
                 $_POST['maximo'] = $r['id_tercero'];
 
-                if(!isset($_POST['oculto']) || (isset($_POST['oculto']) && $_POST['oculto'] != '2'))
-                {
+                if(!isset($_POST['oculto']) || (isset($_POST['oculto']) && $_POST['oculto'] != '2')) {
 
-                    //if (isset($_POST['codrec']))
-                    //    $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_POST['codrec'].'\'';
-                    /*else*/ if(isset($_GET['idcta']))
-                        $sqlr = 'SELECT id_tercero FROM terceros WHERE id_tercero=\''.$_GET['idcta'].'\'';
-                    //else
-                        //$sqlr = 'SELECT id_tercero FROM terceros ORDER BY id_tercero DESC';
-
-                    if(isset($sqlr))
-                    {
-                        $res = mysqli_query($linkbd, $sqlr);
-                        $row = mysqli_fetch_assoc($res);
-
-                        $_POST['idtercero'] = $row['id_tercero'];
+                    if(isset($_GET['idcta'])) {
+                        $_POST['idtercero'] = $_GET['idcta'];
                     }
 
                     //if($_POST['oculto'] != '2' && $_POST['oculto'] != '7')
@@ -770,7 +758,6 @@
                 
 				if(isset($_POST['oculto']) && $_POST['oculto'] == '2')
 				{
-
             
                     $nombre1        = '';
                     $nombre2        = '';
